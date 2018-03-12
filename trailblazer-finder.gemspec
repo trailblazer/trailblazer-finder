@@ -5,7 +5,7 @@ require 'trailblazer/finder/version'
 Gem::Specification.new do |spec|
   spec.name           = 'trailblazer-finder'
   spec.version        = Trailblazer::Finder::VERSION
-  spec.date           = '2018-03-11'
+  spec.date           = '2018-03-12'
   spec.description    = %q{Trailblazer Finder object DSL}
   spec.summary        = %q{Provides DSL for creating trailblazer based finder objects}
   spec.authors        = ["Nick Sutterer", "Marc Tich"]

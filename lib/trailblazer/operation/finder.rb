@@ -20,6 +20,7 @@ module Trailblazer
       def call(options, params:, **)
         builder                   = Finder::Builder.new
         options[:finder]          = finder = builder.call(options, params)
+        options[:model]           = finder # Don't like it, but somehow it's needed if contracts are loaded
         options['result.finder']  = result = Result.new(!finder.nil?, {})
 
         result.success?
