@@ -7,13 +7,14 @@ module Trailblazer
       class Parse
         # Need a replacement for this
         def self.date(value)
-          return if value.nil?
-          return if [true, false].include? value
-          return if value.is_a? Integer
-          return if value =~ /[[:alpha:]]/
+          return unless is_datetime(value)
           Date.parse(value).strftime('%Y-%m-%d')
         rescue ArgumentError
           nil
+        end
+
+        def self.is_datetime(d)
+          %w[Date Time DateTime Timezone].any? { |t| d.class.name == t }
         end
 
         def self.term(value)
