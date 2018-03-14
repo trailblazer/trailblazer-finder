@@ -237,6 +237,11 @@ Coming soon!
 ## Features
 Aside of the default filtering behavior, it offers the following optional features as well.
 
+Just for the record, you can comma seperate features and load multiple by doing
+```ruby
+features Sorting, Paging, Predicate
+```
+
 NOTE: FEATURES NEED TO BE SPECIFIED ON TOP OF YOUR CLASS
 
 ### Predicate
