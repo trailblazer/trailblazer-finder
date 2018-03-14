@@ -3,18 +3,7 @@ module Trailblazer
     module Utils
       module DeepLocate
         def self.deep_locate(comparator, object)
-          comparator = _construct_key_comparator(comparator, object) unless comparator.respond_to?(:call)
-
           _deep_locate(comparator, object)
-        end
-
-        def self._construct_key_comparator(search_key, object)
-          search_key = search_key.to_s if defined?(::ActiveSupport::HashWithIndifferentAccess) && object.is_a?(::ActiveSupport::HashWithIndifferentAccess)
-          search_key = search_key.to_s if object.respond_to?(:indifferent_access?) && object.indifferent_access?
-
-          lambda do |non_callable_object|
-            ->(key, _, _) { key == non_callable_object }
-          end.call(search_key)
         end
 
         def self._deep_locate(comparator, object, result = [])
