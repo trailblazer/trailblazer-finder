@@ -12,7 +12,7 @@ module Trailblazer
         end
 
         module ClassMethods
-          def do_filters(attribute, predicate)
+          def predicate_filter(attribute, predicate)
             filter_by "#{attribute}_#{predicate}" do |entity_type, value|
               splitter = Utils::Splitter.new "#{attribute}_#{predicate}", value
               splitter.split_key predicate.to_sym
@@ -22,7 +22,7 @@ module Trailblazer
 
           def predicates_for(*attributes)
             attributes.each do |attribute|
-              PREDICATES.each { |predicate| do_filters(attribute, predicate) }
+              PREDICATES.each { |predicate| predicate_filter(attribute, predicate) }
             end
           end
         end
