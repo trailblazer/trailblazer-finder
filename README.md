@@ -60,7 +60,7 @@ Or install it yourself as:
 
     $ gem install trailblazer-finder
 
-###
+### Dependencies
 * [Trailblazer](https://github.com/trailblazer/trailblazer) - [actually optional, but requires 2.1+](https://github.com/trailblazer/trailblazer-finder#usable-without-trailblazer)
 
 ## Usage
