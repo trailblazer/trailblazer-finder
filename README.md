@@ -263,7 +263,7 @@ class Post::Finder < Trailblazer::Finder
   predicates_for :name, :category_name
 
   filter_by :name
-	filter_by :published
+  filter_by :published
   filter_by :category_name
 
   # per page defaults to 25 (so not required)
