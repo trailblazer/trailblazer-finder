@@ -13,8 +13,8 @@ module Trailblazer
           nil
         end
 
-        def self.valid_date(d)
-          date_hash = Date._parse(d.to_s)
+        def self.valid_date(date)
+          date_hash = Date._parse(date.to_s)
           Date.valid_date?(date_hash[:year].to_i, date_hash[:mon].to_i, date_hash[:mday].to_i)
         end
 
