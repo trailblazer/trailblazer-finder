@@ -257,10 +257,10 @@ NOTE: PREDICATES CURRENTLY DO NOT WORK FOR THE OLD DATAMAPPER ADAPTER
 #### Predicate Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-	features Predicate
+  features Predicate
 
-	# Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity_type
-	predicates_for :name, :category_name
+  # Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity_type
+  predicates_for :name, :category_name
 
   filter_by :name
 	filter_by :published
@@ -280,36 +280,36 @@ end
 This feature extends the result[:finder] object with the following methods
 ```ruby
 # accessing filters
-.name                                    # => name filter
-.created_at                              # => created at filter
+.name							# => name filter
+.created_at						# => created at filter
 
 # Predicate filters
-.name_eq																 # => name equals filter
-.name_not_eq														 # => name not equals filter
-.name_blank 														 # => name blank filter
-.name_not_blank													 # => name not blank filter
-.name_lt																 # => name less than filter (converts value to float)
-.name_lte																 # => name less than or equal to filter (converts value to float)
-.name_gt																 # => name greater than filter (converts value to float)
-.name_gte																 # => name greater than or equal to filter (converts value to float)
-.category_name_eq												 # => category name equals filter
-.category_name_not_eq										 # => category name not equals filter
-.category_name_blank 										 # => category name blank filter
-.category_name_not_blank								 # => category name not blank filter
-.category_name_lt												 # => category name less than filter (converts value to float)
-.category_name_lte											 # => category name less than or equal to filter (converts value to float)
-.category_name_gt												 # => category name greater than filter (converts value to float)
-.category_name_gte											 # => category name greater than or equal to filter (converts value to float)
+.name_eq						# => name equals filter
+.name_not_eq					# => name not equals filter
+.name_blank 					# => name blank filter
+.name_not_blank					# => name not blank filter
+.name_lt						# => name less than filter (converts value to float)
+.name_lte						# => name less than or equal to filter (converts value to float)
+.name_gt						# => name greater than filter (converts value to float)
+.name_gte						# => name greater than or equal to filter (converts value to float)
+.category_name_eq				# => category name equals filter
+.category_name_not_eq			# => category name not equals filter
+.category_name_blank 			# => category name blank filter
+.category_name_not_blank		# => category name not blank filter
+.category_name_lt				# => category name less than filter (converts value to float)
+.category_name_lte				# => category name less than or equal to filter (converts value to float)
+.category_name_gt				# => category name greater than filter (converts value to float)
+.category_name_gte				# => category name greater than or equal to filter (converts value to float)
 
 # accessing results
-.count                                   # => number of found results
-.results?                                # => are there any results found
-.results                                 # => fetched results
-.all 																		 # => if needed, use it to get dataset (sequel for example requires you use it in some cases)
+.count							# => number of found results
+.results?						# => are there any results found
+.results						# => fetched results
+.all 							# => if needed, use it to get dataset (sequel for example requires you use it in some cases)
 
 # params for url generations
-.params                                  # => filter values
-.params published: false                 # => overwrites the 'published' filter
+.params							# => filter values
+.params published: false 		# => overwrites the 'published' filter
 ```
 
 ### Paging
@@ -318,7 +318,7 @@ Really simple pagination feature, which uses the plain ```.limit``` and ```.offs
 #### Paging Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-	features Paging
+  features Paging
 
   filter_by :name
   filter_by :category_name
@@ -347,7 +347,7 @@ Really simple sorting feature, fixing the pain of dealing with sorting attribute
 #### Sorting Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-	features Sorting
+  features Sorting
 
   sortable_by :name, :body
 end
