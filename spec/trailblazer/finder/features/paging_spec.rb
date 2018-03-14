@@ -20,7 +20,7 @@ module Trailblazer
           end
         end
 
-        def finder_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def finder_class
           define_finder_class do
             entity_type do
               [

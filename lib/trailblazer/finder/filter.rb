@@ -21,7 +21,7 @@ module Trailblazer
       module Handler
         module_function
 
-        def build(name, defined_bys) # rubocop:disable Metrics/MethodLength
+        def build(name, defined_bys) 
           defined_bys = defined_bys.map(&:to_s)
           handler = self
           lambda do |entity_type, value|
@@ -35,7 +35,7 @@ module Trailblazer
           end
         end
 
-        def apply_filter(object:, filter_by:, defined_bys:, entity_type:, value:) # rubocop:disable Metrics/MethodLength
+        def apply_filter(object:, filter_by:, defined_bys:, entity_type:, value:) 
           return if value.nil? || value == ''
 
           unless defined_bys.include? value

@@ -31,6 +31,10 @@ module Trailblazer
           end
 
           describe 'sorting' do
+            before do
+              Product.delete_all
+            end
+
             after do
               Product.delete_all
             end

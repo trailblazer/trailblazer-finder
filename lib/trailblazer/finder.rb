@@ -9,11 +9,14 @@ require 'trailblazer/finder/utils/params'
 require 'trailblazer/finder/utils/parse'
 require 'trailblazer/finder/utils/string'
 require 'trailblazer/finder/utils/extra'
+require 'trailblazer/finder/utils/splitter'
+require 'trailblazer/finder/utils/deep_locate'
 require 'trailblazer/finder/base'
 require 'trailblazer/finder/find'
 require 'trailblazer/finder/filter'
 require 'trailblazer/finder/features'
 require 'trailblazer/finder/adapters'
+require 'trailblazer/finder/predicates'
 
 # :nocov:
 require 'trailblazer/operation/finder' if Gem.loaded_specs.key?('trailblazer')

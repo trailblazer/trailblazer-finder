@@ -9,10 +9,9 @@ module Trailblazer
           true
         end
 
-        def finder_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-          Class.new do
-            include Trailblazer::Finder::Base
-            include Trailblazer::Finder::Features::Sorting
+        def finder_class
+          Class.new(Trailblazer::Finder) do
+            features Sorting
 
             entity_type do
               [

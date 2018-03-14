@@ -1,5 +1,6 @@
 require 'trailblazer/finder/adapters/active_record/paging'
 require 'trailblazer/finder/adapters/active_record/sorting'
+require 'trailblazer/finder/adapters/active_record/predicates'
 
 module Trailblazer
   class Finder
@@ -8,6 +9,9 @@ module Trailblazer
       module ActiveRecord
         def self.included(base)
           base.extend ClassMethods
+          base.instance_eval do
+            include ActiveRecord::Predicates if defined?(Features::Predicate::ClassMethods)
+          end
         end
 
         module ClassMethods
