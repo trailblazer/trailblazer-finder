@@ -9,8 +9,6 @@ module Trailblazer
         def self.date(value)
           return unless valid_date(value)
           Date.parse(value).strftime('%Y-%m-%d')
-        rescue ArgumentError
-          nil
         end
 
         def self.valid_date(date)
