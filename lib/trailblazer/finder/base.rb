@@ -4,6 +4,8 @@ module Trailblazer
   class Finder
     # Base module
     module Base
+      PREDICATES = %w[eq not_eq].freeze
+
       def self.included(base)
         base.extend ClassMethods
         base.instance_eval do

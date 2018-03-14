@@ -16,7 +16,7 @@ module Trailblazer
           end
         end
 
-        def finder_class(&block) # rubocop:disable Metrics/MethodLength
+        def finder_class(&block) 
           define_finder_class do
             adapters ActiveRecord
 

@@ -31,6 +31,10 @@ module Trailblazer
           end
 
           describe 'sorting' do
+            before do
+              SProduct.order(:id).delete
+            end
+
             after do
               SProduct.order(:id).delete
             end

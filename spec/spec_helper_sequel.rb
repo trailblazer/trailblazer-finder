@@ -3,6 +3,7 @@ require_relative 'support/paging_shared_example'
 require_relative 'support/sorting_shared_example'
 require 'sequel'
 Sequel::Model.plugin :timestamps
+
 DB = Sequel.sqlite
 
 DB.create_table :s_products do

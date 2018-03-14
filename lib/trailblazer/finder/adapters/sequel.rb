@@ -1,5 +1,6 @@
 require 'trailblazer/finder/adapters/sequel/paging'
 require 'trailblazer/finder/adapters/sequel/sorting'
+require 'trailblazer/finder/adapters/sequel/predicates'
 
 module Trailblazer
   class Finder
@@ -8,6 +9,10 @@ module Trailblazer
       module Sequel
         def self.included(base)
           base.extend ClassMethods
+          base.instance_eval do
+            include Sequel::Predicates if defined?(Features::Predicate::ClassMethods)
+          end
+          # require 'trailblazer/finder/adapters/sequel/predicates' if defined?(Features::Predicates::ClassMethods)
         end
 
         module ClassMethods

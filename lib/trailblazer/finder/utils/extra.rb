@@ -11,7 +11,7 @@ module Trailblazer
           end
         end
 
-        def self.deep_copy(object) # rubocop:disable Metrics/MethodLength
+        def self.deep_copy(object)
           case object
           when Array
             object.map { |element| deep_copy(element) }

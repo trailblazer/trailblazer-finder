@@ -18,25 +18,27 @@ Description should come here
     * [Example without Trailblazer](#example-without-trailblazer)
   * [Example Project](#example-project)
   * [Features](#features)
-	* [Paging](#paging)
-      * [Paging Example](#paging-example)
-	* [Sorting](#sorting)
-  	  * [Sorting Example](#sorting-example)
+		* [Predicate](#predicate)
+			* [Predicate Example](#predicate-example)
+		* [Paging](#paging)
+    	* [Paging Example](#paging-example)
+		* [Sorting](#sorting)
+	  	* [Sorting Example](#sorting-example)
   * [Adapters](#adapters)
-	* [Adapters Example](#adapters-example)
-	* [ActiveRecord](#active_record)
+		* [Adapters Example](#adapters-example)
+		* [ActiveRecord](#active_record)
   	  * [Active Record Example](#active-record-example)
-	* [DataMapper](#data_mapper)
+		* [DataMapper](#data_mapper)
   	  * [Data Mapper Example](#data-mapper-example)
-	* [Sequel](#sequel)
+		* [Sequel](#sequel)
   	  * [Sequel Example](#sequel-example)
-	* [Kaminari](#kaminari)
+		* [Kaminari](#kaminari)
   	  * [Kaminari Example](#kaminari-example)
-	* [WillPaginate](#will_paginate)
+		* [WillPaginate](#will_paginate)
   	  * [Will Paginate Example](#will-paginate-example)
-	* [FriendlyId](#friendly_id)
+		* [FriendlyId](#friendly_id)
       * [Friendly Id Example](#friendly-id-example)
-* [Tips & Tricks](#tips--tricks)
+	* [Tips & Tricks](#tips--tricks)
 	* [ORM's are not required](#results-shortcut)
   	* [Passing Entity Type as Argument](#passing-entity_type-as-argument)
 * [Contributing](#contributing)
@@ -201,7 +203,7 @@ When using this, result[:finder] will be extended with (not available for :singl
 
 # params for url generations
 .params                                  # => filter values
-.params active: false                    # => overwrites the 'active' filter
+.params published: false                 # => overwrites the 'published' filter
 ```
 
 
@@ -227,20 +229,92 @@ When using this, result will be extended with (not available for :single row)
 
 # params for url generations
 .params                                  # => filter values
-.params active: false                    # => overwrites the 'active' filter
+.params published: false                 # => overwrites the 'published' filter
 ```
 
 ### Example Project
 Coming soon!
 
 ## Features
-Aside of the default filtering behaviour, it offers the following optional features as well.
+Aside of the default filtering behavior, it offers the following optional features as well.
 
 NOTE: FEATURES NEED TO BE SPECIFIED ON TOP OF YOUR CLASS
 
-### Paging
+### Predicate
+Simple predicate feature, that enables you to have default predicate filters available for the specified fields.
 
-Really simple pagination plugin, which uses the plain ```.limit``` and ```.offset``` methods.
+At the moment we support:
+- eq: equals to
+- not_eq: not equals to
+- blank: blank (empty/nil/nul)
+- not_blank: not blank (empty/nil/null)
+- lt: less than (value converts to float)
+- lte: less than or equal to (value converts to float)
+- gt: greater than (value converts to float)
+- gte: greater than or equal to (value converts to float)
+
+NOTE: PREDICATES CURRENTLY DO NOT WORK FOR THE OLD DATAMAPPER ADAPTER
+
+#### Predicate Example
+```ruby
+class Post::Finder < Trailblazer::Finder
+	features Predicate
+
+	# Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity_type
+	predicates_for :name, :category_name
+
+  filter_by :name
+	filter_by :published
+  filter_by :category_name
+
+  # per page defaults to 25 (so not required)
+  per_page 10
+
+  # Minimum items per page (not required)
+  min_per_page 5
+
+  # Maximum items per page (not required)
+  max_per_page 100
+end
+```
+
+This feature extends the result[:finder] object with the following methods
+```ruby
+# accessing filters
+.name                                    # => name filter
+.created_at                              # => created at filter
+
+# Predicate filters
+.name_eq																 # => name equals filter
+.name_not_eq														 # => name not equals filter
+.name_blank 														 # => name blank filter
+.name_not_blank													 # => name not blank filter
+.name_lt																 # => name less than filter (converts value to float)
+.name_lte																 # => name less than or equal to filter (converts value to float)
+.name_gt																 # => name greater than filter (converts value to float)
+.name_gte																 # => name greater than or equal to filter (converts value to float)
+.category_name_eq												 # => category name equals filter
+.category_name_not_eq										 # => category name not equals filter
+.category_name_blank 										 # => category name blank filter
+.category_name_not_blank								 # => category name not blank filter
+.category_name_lt												 # => category name less than filter (converts value to float)
+.category_name_lte											 # => category name less than or equal to filter (converts value to float)
+.category_name_gt												 # => category name greater than filter (converts value to float)
+.category_name_gte											 # => category name greater than or equal to filter (converts value to float)
+
+# accessing results
+.count                                   # => number of found results
+.results?                                # => are there any results found
+.results                                 # => fetched results
+.all 																		 # => if needed, use it to get dataset (sequel for example requires you use it in some cases)
+
+# params for url generations
+.params                                  # => filter values
+.params published: false                 # => overwrites the 'published' filter
+```
+
+### Paging
+Really simple pagination feature, which uses the plain ```.limit``` and ```.offset``` methods.
 
 #### Paging Example
 ```ruby
@@ -268,10 +342,8 @@ This feature extends the result[:finder] object with the following methods
 .results                                 # => paginated page results
 ```
 
-### Sorting Plugin
-
-Fixing the pain of dealing with sorting attributes and directions.
-
+### Sorting
+Really simple sorting feature, fixing the pain of dealing with sorting attributes and directions. For the moment only sorting by a single attribute works, we're working on making it possible to sort by multiple attributes.
 
 #### Sorting Example
 ```ruby
