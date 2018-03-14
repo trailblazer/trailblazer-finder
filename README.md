@@ -61,7 +61,6 @@ Or install it yourself as:
     $ gem install trailblazer-finder
 
 ###
-* [Hashie](https://github.com/intridea/hashie) - used to search deep within hashes/arrays
 * [Trailblazer](https://github.com/trailblazer/trailblazer) - [actually optional, but requires 2.1+](https://github.com/trailblazer/trailblazer-finder#usable-without-trailblazer)
 
 ## Usage

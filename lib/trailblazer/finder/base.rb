@@ -1,5 +1,3 @@
-require 'hashie/extensions/deep_locate'
-
 module Trailblazer
   class Finder
     # Base module
@@ -90,7 +88,7 @@ module Trailblazer
           else
             lambda do |entity_type, value|
               return if Utils::String.blank?(value)
-              Hashie::Extensions::DeepLocate.deep_locate ->(k, v, _object) { k == key.to_sym && v == value }, entity_type
+              Utils::DeepLocate.deep_locate ->(k, v, _object) { k == key.to_sym && v == value }, entity_type
             end
           end
         end
