@@ -12,7 +12,6 @@ module Trailblazer
           base.instance_eval do
             include Sequel::Predicates if defined?(Features::Predicate::ClassMethods)
           end
-          # require 'trailblazer/finder/adapters/sequel/predicates' if defined?(Features::Predicates::ClassMethods)
         end
 
         module ClassMethods
