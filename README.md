@@ -257,8 +257,6 @@ At the moment we support:
 - gt: greater than (value converts to float)
 - gte: greater than or equal to (value converts to float)
 
-NOTE: PREDICATES CURRENTLY DO NOT WORK FOR THE OLD DATAMAPPER ADAPTER
-
 #### Predicate Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
@@ -348,8 +346,6 @@ This feature extends the result[:finder] object with the following methods
 
 ### Sorting
 Really simple sorting feature, fixing the pain of dealing with sorting attributes and directions. Can sort by multiple columns/directions.
-
-NOTE: AS OF 0.1.3 TEMPORARY NOT WORKING FOR DATAMAPPER ADAPTER, WE ARE WORKING ON FIXING IT
 
 #### Sorting Example
 ```ruby
