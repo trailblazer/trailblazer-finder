@@ -2,7 +2,7 @@ require 'spec_helper_sequel'
 # require 'spec_helper'
 
       describe "Trailblazer::Finder::Adapters::Sequel::Predicates" do
-        class TestFinder < Trailblazer::Finder
+        class TestSequelFinder < Trailblazer::Finder
             features Predicate
             adapters Sequel
 
@@ -14,7 +14,7 @@ require 'spec_helper_sequel'
         end
 
         def finder_with_predicate(filter = nil, value = nil, filters = {})
-          TestFinder.new filter: { filter => value }.merge(filters)
+          TestSequelFinder.new filter: { filter => value }.merge(filters)
         end
 
         describe 'equals' do

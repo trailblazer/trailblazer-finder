@@ -10,8 +10,12 @@ module Trailblazer
 
           private
 
-          def sort_it(entity_type, sort_attribute, sort_direction)
-            entity_type.order sort_attribute.to_s => sort_direction
+          def sort_it(entity_type, sort_attributes)
+            entity_type.order(sort_attributes)
+          end
+
+          def sort_orders(sort_attr, sort_dir)
+            { sort_attr.to_s => sort_dir }
           end
         end
       end

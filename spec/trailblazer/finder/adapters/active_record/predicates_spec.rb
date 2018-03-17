@@ -6,6 +6,11 @@ module Trailblazer
     module Adapters
       module ActiveRecord
         describe Predicates do
+          after do
+            Product.delete_all
+            Product.reset_pk_sequence
+          end
+
           class TestFinder < Trailblazer::Finder
             features Predicate
             adapters ActiveRecord
@@ -23,8 +28,6 @@ module Trailblazer
 
           describe 'equals' do
             before do
-              Product.delete_all
-              Product.reset_pk_sequence
               10.times do |i|
                 next Product.create name: "", price: "1#{i}" if i == 7
                 next Product.create name: nil, price: "1#{i}" if i == 8

@@ -10,13 +10,15 @@ module Trailblazer
 
           private
 
-          def sort_it(entity_type, sort_attribute, sort_direction)
-            case sort_direction
-            when 'asc', 'ascending'
-              entity_type.order(sort_attribute.to_sym)
-            when 'desc', 'descending'
-              entity_type.reverse(sort_attribute.to_sym)
-            end
+          def sort_orders(sort_attr, sort_dir)
+            ::Sequel.send sort_dir, sort_attr.to_sym
+          end
+
+          def sort_it(entity_type, sort_attributes)
+            result = []
+            result << [:order, sort_attributes.first] if sort_attributes.is_a? Array
+            sort_attributes.drop(1).each { |x| result << [:order_append, x] }
+            result.inject(entity_type) { |obj, method_and_args| obj.send(*method_and_args) }
           end
         end
       end

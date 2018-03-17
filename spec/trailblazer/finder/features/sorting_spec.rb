@@ -1,94 +1,91 @@
+# require 'spec_helper_sequel'
 require 'spec_helper'
-require 'support/sorting_shared_example'
 
 module Trailblazer
   class Finder
     module Features
-      describe Sorting do
-        it 'uses a pre-defined Hash entity_type instead of any ORM' do
-          true
-        end
+      describe Sorting, :sorting do
+        class TestSortingFinder < Trailblazer::Finder
+          features Sorting
 
-        def finder_class
-          Class.new(Trailblazer::Finder) do
-            features Sorting
-
-            entity_type do
-              [
-                {
-                  id: 1,
-                  name: 'product_1',
-                  price: '11',
-                  created_at: Time.now,
-                  updated_at: Time.now
-                },
-                {
-                  id: 2,
-                  name: 'product_2',
-                  price: '12',
-                  created_at: Time.now,
-                  updated_at: Time.now
-                },
-                {
-                  id: 3,
-                  name: 'product_3',
-                  price: '13',
-                  created_at: Time.now,
-                  updated_at: Time.now
-                },
-                {
-                  id: 4,
-                  name: 'product_4',
-                  price: '14',
-                  created_at: Time.now,
-                  updated_at: Time.now
-                },
-                {
-                  id: 5,
-                  name: 'product_5',
-                  price: '15',
-                  created_at: Time.now,
-                  updated_at: Time.now
-                }
-              ]
-            end
-
-            sortable_by :name, :price, :created_at
-
-            filter_by :name
-            filter_by :price
-            filter_by(:category) { |entity_type, _| entity_type.joins(:category) }
+          def create_product(id, name, price)
+            {
+              id: id,
+              name: name,
+              price: price,
+              created_at: Time.now,
+              updated_at: Time.now
+            }
           end
+
+          entity_type do
+            Array.new(5) do |i|
+              next create_product(i + 1, '', "1#{i}".to_i) if i == 7
+              next create_product(i + 1, 'Name4', "1#{i}".to_i) if i == 9
+              create_product(i + 1, "Name#{i}", "1#{i}".to_i)
+            end.push(create_product(6, 'Name3', 8))
+          end
+
+          sortable_by :name, :price, :created_at, :id
+
+          filter_by :name
+          filter_by :price
+          filter_by(:category) { |entity_type, _| entity_type.joins(:category) }
         end
 
         def finder_with_sort(sort = nil, filters = {})
-          finder_class.new filter: { sort: sort }.merge(filters)
+          TestSortingFinder.new filter: (sort.nil? ? {} : { sort: sort }).merge(filters)
         end
 
-        it 'can be inherited' do
-          child_class = Class.new(finder_class)
-          expect(child_class.new.sort_attribute).to eq 'name'
+        def finder_with_nil_sort
+          TestSortingFinder.new filter: { sort: nil }
         end
 
         describe 'sorting' do
+          it 'loads results if no sort options are supplied in the params' do
+            finder = finder_with_nil_sort
+            expect(finder.results.map { |n| n[:price] }).to eq [14, 13, 8, 12, 11, 10]
+          end
+
           it 'sorts results based on the sort option desc' do
             finder = finder_with_sort 'price desc'
-            expect(finder.results.map { |n| n[:price] }).to eq %w[15 14 13 12 11]
+            expect(finder.results.map { |n| n[:price] }).to eq [14, 13, 12, 11, 10, 8]
           end
 
           it 'sorts results based on the sort option asc' do
             finder = finder_with_sort 'price asc'
-            expect(finder.results.map { |n| n[:price] }).to eq %w[11 12 13 14 15]
+            expect(finder.results.map { |n| n[:price] }).to eq [8, 10, 11, 12, 13, 14]
           end
 
-          it 'defaults to first sort by option' do
+          it 'defaults to original sorted hash' do
             finder = finder_with_sort
-            expect(finder.results.map { |n| n[:name] }).to eq %w[product_5 product_4 product_3 product_2 product_1]
+            expect(finder.results.map { |n| n[:name] }).to eq ['Name0', 'Name1', 'Name2', 'Name3', 'Name4', 'Name3']
           end
 
           it 'ignores invalid sort values' do
             finder = finder_with_sort 'invalid attribute'
             expect { finder.results.to_a }.not_to raise_error
+          end
+        end
+
+        describe 'sorting by multiple' do
+
+          it 'sorts by multiple columns name asc and price asc' do
+            finder = finder_with_sort 'name asc, price asc'
+            expect(finder.results.map { |n| n[:name] }).to eq ['Name0', 'Name1', 'Name2', 'Name3', 'Name3', 'Name4']
+            expect(finder.results.map { |n| n[:price] }).to eq [10, 11, 12, 8, 13, 14]
+          end
+
+          it 'sorts by multiple columns name asc and price desc' do
+            finder = finder_with_sort 'name asc, price desc'
+            expect(finder.results.map { |n| n[:name] }).to eq ['Name0', 'Name1', 'Name2', 'Name3', 'Name3', 'Name4']
+            expect(finder.results.map { |n| n[:price] }).to eq [10, 11, 12, 13, 8, 14]
+          end
+
+          it 'sorts by multiple columns name desc and price desc' do
+            finder = finder_with_sort 'name desc, price desc'
+            expect(finder.results.map { |n| n[:name] }).to eq ['Name4', 'Name3', 'Name3', 'Name2', 'Name1', 'Name0']
+            expect(finder.results.map { |n| n[:price] }).to eq [14, 13, 8, 12, 11, 10]
           end
         end
 
