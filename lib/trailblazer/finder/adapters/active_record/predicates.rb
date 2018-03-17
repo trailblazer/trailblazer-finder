@@ -35,6 +35,30 @@ module Trailblazer
           def lte(attribute, value, entity_type)
             entity_type.where(["#{attribute} <= ?", value.to_f])
           end
+
+          def sw(attribute, value, entity_type)
+            entity_type.where("#{attribute} LIKE ?", "#{value}%")
+          end
+
+          def not_sw(attribute, value, entity_type)
+            entity_type.where.not("#{attribute} LIKE ?", "#{value}%")
+          end
+
+          def ew(attribute, value, entity_type)
+            entity_type.where("#{attribute} LIKE ?", "%#{value}")
+          end
+
+          def not_ew(attribute, value, entity_type)
+            entity_type.where.not("#{attribute} LIKE ?", "%#{value}")
+          end
+
+          def cont(attribute, value, entity_type)
+            entity_type.where("#{attribute} LIKE ?", "%#{value}%")
+          end
+
+          def not_cont(attribute, value, entity_type)
+            entity_type.where.not("#{attribute} LIKE ?", "%#{value}%")
+          end
         end
       end
     end
