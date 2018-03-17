@@ -17,13 +17,16 @@ describe 'Trailblazer::Finder::Adapters::Sequel::Sorting', :sorting do
 
     sortable_by :name, :price, :created_at
 
-    filter_by :name
+    filter_by :name, with: :apply_name_filter
     filter_by :price
     filter_by(:s_category) { |entity_type, _| entity_type.association_join(:s_category) }
+
+    def apply_name_filter(entity_type, value)
+    end
   end
 
   def finder_with_sort(sort = nil, filters = {})
-    TestSequelSortFinder.new filter: (sort.nil? ? {} : { sort: sort }).merge(filters)
+    TestSequelSortFinder.new filter: (sort.nil? ? {} : { name: 'test', sort: sort }).merge(filters)
   end
 
   def finder_with_nil_sort

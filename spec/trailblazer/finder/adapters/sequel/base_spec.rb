@@ -16,7 +16,7 @@ module Trailblazer
           end
         end
 
-        def finder_class(&block) 
+        def finder_class(&block)
           define_finder_class do
             adapters ActiveRecord
 
@@ -25,6 +25,12 @@ module Trailblazer
             filter_by :id
             filter_by :name
             filter_by :slug
+            filter_by :escaped_name, with: :apply_escaped_name
+
+            def apply_escaped_name(entity_type, value)
+              return unless value.present?
+              entity_type.where slug: value
+            end
 
             if block.nil?
               filter_by :value do |entity_type, value|
@@ -104,6 +110,13 @@ module Trailblazer
           it 'does not include invalid filters' do
             finder = finder_with_filter invalid: 'option'
             expect { finder.invalid }.to raise_error NoMethodError
+          end
+
+          it 'can filter by symbol specified filters' do
+            10.times { |i| SProduct.create slug: "product_#{i}" }
+            finder = finder_with_filter :escaped_name, 'product_2'
+
+            expect(finder.results.first.slug).to eq 'product_2'
           end
         end
       end
