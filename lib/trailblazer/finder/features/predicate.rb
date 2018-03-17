@@ -2,7 +2,7 @@ module Trailblazer
   class Finder
     module Features
       module Predicate
-        PREDICATES = %w[eq not_eq blank not_blank lt lte gt gte].freeze
+        PREDICATES = %w[eq not_eq blank not_blank lt lte gt gte sw not_sw ew not_ew cont not_cont].freeze
 
         def self.included(base)
           base.extend ClassMethods

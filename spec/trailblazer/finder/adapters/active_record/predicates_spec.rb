@@ -41,7 +41,7 @@ module Trailblazer
               expect(finder.results.map(&:price)).to eq [15]
             end
 
-            it 'it finds multiple rows with name equal to product_4' do
+            it 'it finds rows with name equal to product_4' do
               finder = finder_with_predicate 'name_eq', 'product_4'
               expect(finder.results.map(&:price)).to eq [14, 19]
             end
@@ -52,35 +52,35 @@ module Trailblazer
               expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 15, 16, 17]
             end
 
-            it 'it finds multiple rows with name blank (empty/nil)' do
+            it 'it finds rows with name blank (empty/nil)' do
               finder = finder_with_predicate 'name_blank', ''
               expect(finder.results.map(&:price)).to eq [17, 18]
             end
 
-            it 'it finds multiple rows with name not blank (empty/nil)' do
+            it 'it finds rows with name not blank (empty/nil)' do
               finder = finder_with_predicate 'name_not_blank', ''
               expect(finder.results.map(&:name)).to eq ["product_0", "product_1", "product_2", "product_3", "product_4", "product_5", "product_6", "product_4"]
             end
 
-            it 'it finds multiple rows with price less than 15' do
+            it 'it finds rows with price less than 15' do
               finder = finder_with_predicate 'price_lt', 15
               expect(finder.results.map(&:name)).to eq ["product_0", "product_1", "product_2", "product_3", "product_4"]
               expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 14]
             end
 
-            it 'it finds multiple rows with price equal to and less than 15' do
+            it 'it finds rows with price equal to and less than 15' do
               finder = finder_with_predicate 'price_lte', 15
               expect(finder.results.map(&:name)).to eq ["product_0", "product_1", "product_2", "product_3", "product_4", "product_5"]
               expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 14, 15]
             end
 
-            it 'it finds multiple rows with price greater than 15' do
+            it 'it finds rows with price greater than 15' do
               finder = finder_with_predicate 'price_gt', 15
               expect(finder.results.map(&:name)).to eq ["product_6", "", nil, "product_4"]
               expect(finder.results.map(&:price)).to eq [16, 17, 18, 19]
             end
 
-            it 'it finds multiple rows with price equal to and greater than 15' do
+            it 'it finds rows with price equal to and greater than 15' do
               finder = finder_with_predicate 'price_gte', 15
               expect(finder.results.map(&:name)).to eq ["product_5", "product_6", "", nil, "product_4"]
               expect(finder.results.map(&:price)).to eq [15, 16, 17, 18, 19]
@@ -92,6 +92,72 @@ module Trailblazer
 
               expect(finder.results.map(&:name)).to eq ["product_5", "product_6"]
               expect(finder.results.map(&:price)).to eq [15, 16]
+            end
+
+            it 'it finds rows with name starting with product' do
+              finder = finder_with_predicate 'name_sw', 'product'
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 14, 15, 16, 19]
+            end
+
+            it 'it finds rows name starting with product with product name does not equal product_4' do
+              params = { name_not_eq: 'product_4' }
+              finder = finder_with_predicate 'name_sw', 'product', params
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 15, 16]
+            end
+
+            it 'it finds rows with name starting with product' do
+              finder = finder_with_predicate 'name_not_sw', 'product'
+              expect(finder.results.map(&:price)).to eq [17]
+            end
+
+            it 'it finds rows with name NOT starting with product where product name does not equal product_4' do
+              params = { name_not_eq: 'product_4' }
+              finder = finder_with_predicate 'name_not_sw', 'product', params
+              expect(finder.results.map(&:price)).to eq [17]
+            end
+
+            it 'it finds rows with name ending with product' do
+              finder = finder_with_predicate 'name_ew', '4'
+              expect(finder.results.map(&:price)).to eq [14, 19]
+            end
+
+            it 'it finds rows with name ending with product with product name does not equal product_5' do
+              params = { name_not_eq: 'product_5' }
+              finder = finder_with_predicate 'name_ew', '4', params
+              expect(finder.results.map(&:price)).to eq [14, 19]
+            end
+
+            it 'it finds rows with name not ending with 4' do
+              finder = finder_with_predicate 'name_not_ew', '4'
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 15, 16, 17]
+            end
+
+            it 'it finds rows with name NOT ending with 4 where product name does not equal product_4' do
+              params = { name_not_eq: 'product_5' }
+              finder = finder_with_predicate 'name_not_ew', '4', params
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 16, 17]
+            end
+
+            it 'it finds rows, name contains _' do
+              finder = finder_with_predicate 'name_cont', '_'
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 14, 15, 16, 19   ]
+            end
+
+            it 'it finds rows with name containing t_4 with product name does not equal product_5' do
+              params = { name_not_eq: 'product_5' }
+              finder = finder_with_predicate 'name_cont', 't_4', params
+              expect(finder.results.map(&:price)).to eq [14, 19]
+            end
+
+            it 'it finds rows with name not containing t_4' do
+              finder = finder_with_predicate 'name_not_cont', 't_4'
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 15, 16, 17]
+            end
+
+            it 'it finds rows with not containing t_4 where product name does not equal product_5' do
+              params = { name_not_eq: 'product_5' }
+              finder = finder_with_predicate 'name_not_cont', 't_4', params
+              expect(finder.results.map(&:price)).to eq [10, 11, 12, 13, 16, 17]
             end
           end
         end
