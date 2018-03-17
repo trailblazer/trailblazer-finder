@@ -1,5 +1,6 @@
 require 'trailblazer/finder/adapters/data_mapper/paging'
-# require 'trailblazer/finder/adapters/data_mapper/sorting'
+require 'trailblazer/finder/adapters/data_mapper/sorting'
+require 'trailblazer/finder/adapters/data_mapper/predicates'
 
 module Trailblazer
   class Finder
@@ -8,6 +9,9 @@ module Trailblazer
       module DataMapper
         def self.included(base)
           base.extend ClassMethods
+          base.instance_eval do
+            include DataMapper::Predicates if defined?(Features::Predicate::ClassMethods)
+          end
         end
 
         module ClassMethods
@@ -21,7 +25,7 @@ module Trailblazer
         end
 
         include Paging if defined?(Features::Paging::ClassMethods)
-        # include Sorting if defined?(Features::Sorting::ClassMethods)
+        include Sorting if defined?(Features::Sorting::ClassMethods)
       end
     end
   end
