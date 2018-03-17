@@ -347,7 +347,7 @@ This feature extends the result[:finder] object with the following methods
 ```
 
 ### Sorting
-Really simple sorting feature, fixing the pain of dealing with sorting attributes and directions. For the moment only sorting by a single attribute works, we're working on making it possible to sort by multiple attributes.
+Really simple sorting feature, fixing the pain of dealing with sorting attributes and directions. Can sort by multiple columns/directions.
 
 #### Sorting Example
 ```ruby
@@ -361,21 +361,26 @@ end
 This feature extends the result[:finder] object with the following methods
 ```ruby
 .results                                # => Posts sorted by title DESC
-.sort_attribute                         # => 'title'
-.sort_direction                         # => 'desc'
 
 # Smart sort checking
 .sort?('title')                         # => true
-.sort?('title desc')                    # => true
-.sort?('title asc')                     # => false
 
-# Helpers for dealing with reversing sort direction
-.reverted_sort_direction                # => 'asc'
+# Helpers for seeing current sort direction
 .sort_direction_for('title')            # => 'asc'
-.sort_direction_for('body')             # => 'desc'
+.sort_direction_for('body')           # => 'desc'
 
-# Params for sorting links
+# Helpers for seeing reversing sort direction
+.reverse_sort_direction_for('title')            # => 'desc'
+.reverse_sort_direction_for('body')          # => 'asc'
+
+# Params for sorting links (new if none exists, existing params if exists)
 .sort_params_for('title')
+
+# Add Params for sorting links (add to existing / replace with different direction)
+.add_sort_params_for('title')
+
+# New Params for sorting links (reset)
+.new_sort_params_for('title')
 ```
 
 ## Adapters

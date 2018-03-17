@@ -1,5 +1,5 @@
 require 'trailblazer/finder/adapters/data_mapper/paging'
-require 'trailblazer/finder/adapters/data_mapper/sorting'
+# require 'trailblazer/finder/adapters/data_mapper/sorting'
 
 module Trailblazer
   class Finder
@@ -23,7 +23,7 @@ module Trailblazer
         end
 
         include Paging if defined?(Features::Paging::ClassMethods)
-        include Sorting if defined?(Features::Sorting::ClassMethods)
+        # include Sorting if defined?(Features::Sorting::ClassMethods)
       end
     end
   end
