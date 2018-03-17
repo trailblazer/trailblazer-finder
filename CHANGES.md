@@ -1,3 +1,6 @@
+# 0.1.4
+* Updated DataMapper Adapter to include sorting by multiple columns/directions and the predicate feature.
+
 # 0.1.3
 * Added sorting by multiple columns/directions for Hash, ActiveRecord and Sequel. Temporarily disabled sorting for DataMapper Adapter until i can find the time this weekend to update that Adapter as well.
 * Due to the above, a big change in the way sorting works, and which methods are available for it
