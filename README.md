@@ -76,13 +76,15 @@ An Entity Type is required, but can:
 * be defined in the inherited Finder class
 * be given as an option in the call
 
+Be sure to specify features you wish to use in your finder, before specifying adapters.
+
 Basically for most use cases, Entity Type is the entity/model/array of hashes you wish to use finder on
 
 #### Finder Example
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-	# Optional features
+  # Optional features (be sure to specify these before adapters)
   features Paging, Sorting
 
   # Optional if you use it as option in the caller, Model/Entity or Array with Hashes

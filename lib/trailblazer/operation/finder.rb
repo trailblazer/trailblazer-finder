@@ -3,7 +3,7 @@
 module Trailblazer
   class Operation
     def self.Finder(finder_class, action = nil, entity_type = nil)
-      task = Trailblazer::Activity::TaskBuilder::Binary.call(Finder.new)
+      task = Trailblazer::Activity::TaskBuilder::Binary(Finder.new)
 
       extension = Trailblazer::Activity::TaskWrap::Merge.new(
         Wrap::Inject::Defaults(
