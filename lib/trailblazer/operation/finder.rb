@@ -13,7 +13,7 @@ module Trailblazer
         )
       )
 
-      { task: task, id: 'finder.build', extension: [extension] }
+      { task: task, id: 'finder.build', Trailblazer::Activity::DSL::Extension.new(extension) => true}
     end
 
     class Finder
