@@ -5,16 +5,14 @@ require 'trailblazer/finder/version'
 Gem::Specification.new do |spec|
   spec.name           = 'trailblazer-finder'
   spec.version        = Trailblazer::Finder::VERSION
-  spec.date           = '2018-03-12'
   spec.description    = 'Trailblazer Finder object DSL'
   spec.summary        = 'Provides DSL for creating trailblazer based finder objects. It is designed to be used on its own as a separate gem.  It was influenced by popular Ransack gem, but in addition to ActiveRecord, it can be used with DataMapper or Sequel. It also integrates with Kaminari or Will Paginate, as well as FriendlyId'
   spec.authors        = ['Nick Sutterer', 'Marc Tich']
   spec.email          = ['apotonick@gmail.com', 'marc@mudsu.com']
   spec.homepage       = 'http://trailblazer.to'
-  spec.license        = 'MIT'
+  spec.license        = "LGPL-3.0"
   spec.files          = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
-  spec.executables    = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files     = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files     = spec.files.grep(%r{^(test)/})
   spec.require_paths  = ['lib']
 
   spec.add_development_dependency 'activerecord'
