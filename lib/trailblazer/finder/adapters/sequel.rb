@@ -1,6 +1,6 @@
-require 'trailblazer/finder/adapters/sequel/paging'
-require 'trailblazer/finder/adapters/sequel/sorting'
-require 'trailblazer/finder/adapters/sequel/predicates'
+require "trailblazer/finder/adapters/sequel/paging"
+require "trailblazer/finder/adapters/sequel/sorting"
+require "trailblazer/finder/adapters/sequel/predicates"
 
 module Trailblazer
   class Finder
@@ -17,9 +17,9 @@ module Trailblazer
         module ClassMethods
           def normalize_find_handler(handler, key)
             case handler
-            when Symbol then ->(entity_type, value) { method(handler).call entity_type, value }
-            when Proc then handler
-            else ->(entity_type, value) { entity_type.where(key.to_sym => value) unless Utils::String.blank?(value) }
+              when Symbol then ->(entity_type, value) { method(handler).call entity_type, value }
+              when Proc then handler
+              else ->(entity_type, value) { entity_type.where(key.to_sym => value) unless Utils::String.blank?(value) }
             end
           end
         end

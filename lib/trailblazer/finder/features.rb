@@ -1,6 +1,6 @@
-require 'trailblazer/finder/features/paging'
-require 'trailblazer/finder/features/sorting'
-require 'trailblazer/finder/features/predicate'
+require "trailblazer/finder/features/paging"
+require "trailblazer/finder/features/sorting"
+require "trailblazer/finder/features/predicate"
 
 module Trailblazer
   class Finder

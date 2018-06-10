@@ -13,11 +13,11 @@ module Trailblazer
           end
 
           def blank(attribute, _value, entity_type)
-            entity_type.where(attribute.to_sym => [nil, ''])
+            entity_type.where(attribute.to_sym => [nil, ""])
           end
 
           def not_blank(attribute, _value, entity_type)
-            entity_type.where.not(attribute.to_sym => [nil, ''])
+            entity_type.where.not(attribute.to_sym => [nil, ""])
           end
 
           def gt(attribute, value, entity_type)

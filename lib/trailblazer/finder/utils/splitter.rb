@@ -3,7 +3,7 @@ module Trailblazer
     # Helper module
     module Utils
       class Splitter
-        def initialize( key, value )
+        def initialize(key, value)
           @key, @value = key, value
         end
 
@@ -11,7 +11,7 @@ module Trailblazer
 
         # split suffix from the key and store the two values as name and op
         # return truthy if successful
-        def split_key( suffix )
+        def split_key(suffix)
           rv = @key =~ /\A(?:(.*?)_)?(#{suffix})\z/
           @field, @op = $1, $2
           rv
