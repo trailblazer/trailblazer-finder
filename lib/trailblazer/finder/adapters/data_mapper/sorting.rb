@@ -21,10 +21,10 @@ module Trailblazer
 
           def sort_orders(sort_attr, sort_dir)
             case sort_dir
-            when 'asc', 'ascending'
-              sort_attr.to_sym.asc
-            when 'desc', 'descending'
-              sort_attr.to_sym.desc
+              when "asc", "ascending"
+                sort_attr.to_sym.asc
+              when "desc", "descending"
+                sort_attr.to_sym.desc
             end
           end
 

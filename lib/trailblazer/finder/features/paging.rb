@@ -28,17 +28,17 @@ module Trailblazer
 
         module ClassMethods
           def per_page(number)
-            raise Error::InvalidNumber.new('Per page', number) unless number > 0
+            raise Error::InvalidNumber.new("Per page", number) unless number > 0
             config[:per_page] = number
           end
 
           def min_per_page(number)
-            raise Error::InvalidNumber.new('Min per page', number) unless number > 0
+            raise Error::InvalidNumber.new("Min per page", number) unless number > 0
             config[:min_per_page] = number
           end
 
           def max_per_page(number)
-            raise Error::InvalidNumber.new('Max per page', number) unless number > 0
+            raise Error::InvalidNumber.new("Max per page", number) unless number > 0
             config[:max_per_page] = number
           end
 
