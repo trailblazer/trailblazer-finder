@@ -13,11 +13,11 @@ module Trailblazer
           end
 
           def blank(attribute, _value, entity_type)
-            entity_type.all(conditions: ["#{attribute} IS NULL OR #{attribute} = ?", ''])
+            entity_type.all(conditions: ["#{attribute} IS NULL OR #{attribute} = ?", ""])
           end
 
           def not_blank(attribute, _value, entity_type)
-            entity_type.all(conditions: ["#{attribute} IS NOT NULL AND #{attribute} != ?", ''])
+            entity_type.all(conditions: ["#{attribute} IS NOT NULL AND #{attribute} != ?", ""])
           end
 
           def gt(attribute, value, entity_type)

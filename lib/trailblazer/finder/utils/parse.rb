@@ -1,4 +1,4 @@
-require 'date'
+require "date"
 
 module Trailblazer
   class Finder
@@ -8,7 +8,7 @@ module Trailblazer
         # Need a replacement for this
         def self.date(value)
           return unless valid_date(value)
-          Date.parse(value).strftime('%Y-%m-%d')
+          Date.parse(value).strftime("%Y-%m-%d")
         end
 
         def self.valid_date(date)
@@ -17,7 +17,7 @@ module Trailblazer
         end
 
         def self.term(value)
-          "%#{value.gsub(/\s+/, '%')}%"
+          "%#{value.gsub(/\s+/, "%")}%"
         end
       end
     end

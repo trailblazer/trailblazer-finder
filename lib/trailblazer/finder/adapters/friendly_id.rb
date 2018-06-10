@@ -12,7 +12,7 @@ module Trailblazer
 
         def apply_slug_filter(entity_type, value)
           return if value.nil?
-          return if value == ''
+          return if value == ""
           if num?(value)
             entity_type.where(id: value)
           else
