@@ -55,7 +55,7 @@ module Trailblazer
         attr_reader :config
 
         def inherited(base)
-          base.instance_variable_set '@config', Utils::Extra.deep_copy(config)
+          base.instance_variable_set "@config", Utils::Extra.deep_copy(config)
         end
 
         def entity_type(&block)
@@ -63,7 +63,7 @@ module Trailblazer
         end
 
         def filter_by(name, options = nil, &block)
-          options = { default: options } unless options.is_a?(Hash)
+          options = {default: options} unless options.is_a?(Hash)
 
           name    = name.to_s
           default = options[:default]
@@ -81,13 +81,13 @@ module Trailblazer
 
         def normalize_find_handler(handler, key)
           case handler
-          when Symbol then ->(entity_type, value) { method(handler).call entity_type, value }
-          when Proc then handler
-          else
-            lambda do |entity_type, value|
-              return if Utils::String.blank?(value)
-              Utils::DeepLocate.deep_locate ->(k, v, _object) { k == key.to_sym && v == value }, entity_type
-            end
+            when Symbol then ->(entity_type, value) { method(handler).call entity_type, value }
+            when Proc then handler
+            else
+              lambda do |entity_type, value|
+                return if Utils::String.blank?(value)
+                Utils::DeepLocate.deep_locate ->(k, v, _object) { k == key.to_sym && v == value }, entity_type
+              end
           end
         end
       end

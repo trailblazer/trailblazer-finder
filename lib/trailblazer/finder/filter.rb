@@ -21,7 +21,7 @@ module Trailblazer
       module Handler
         module_function
 
-        def build(name, defined_bys) 
+        def build(name, defined_bys)
           defined_bys = defined_bys.map(&:to_s)
           handler = self
           lambda do |entity_type, value|
@@ -35,8 +35,8 @@ module Trailblazer
           end
         end
 
-        def apply_filter(object:, filter_by:, defined_bys:, entity_type:, value:) 
-          return if value.nil? || value == ''
+        def apply_filter(object:, filter_by:, defined_bys:, entity_type:, value:)
+          return if value.nil? || value == ""
 
           unless defined_bys.include? value
             return handle_invalid_value(
@@ -55,7 +55,7 @@ module Trailblazer
           specific = "handle_invalid_#{filter_by}"
           return object.send(specific, entity_type, value) if object.respond_to? specific, true
 
-          catch_all = 'handle_invalid_defined_by'
+          catch_all = "handle_invalid_defined_by"
           return object.send(catch_all, filter_by, entity_type, value) if object.respond_to? catch_all, true
 
           raise Error::InvalidDefinedByValue.new(filter_by, defined_bys, value)
