@@ -77,6 +77,7 @@ module Trailblazer
           end.not_to raise_error
         end
       end
+
       describe FriendlyId do
         it 'can load FriendlyId adapter' do
           expect do
