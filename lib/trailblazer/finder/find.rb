@@ -15,7 +15,6 @@ module Trailblazer
 
       def query(context)
         @params.inject(@entity_type) do |entity_type, (name, value)|
-          value = Utils::Parse.date(value) if Utils::Parse.date(value)
           new_entity_type = context.instance_exec entity_type, value, &@actions[name]
           new_entity_type || entity_type
         end
