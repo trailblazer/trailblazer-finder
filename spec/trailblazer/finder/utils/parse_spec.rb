@@ -16,6 +16,10 @@ module Trailblazer
           it 'returns nil value is not date worthy' do
             expect(Finder::Utils::Parse.date('Unknown')).to eq nil
           end
+
+          it 'returns nil value is ambiguous like 1215' do
+            expect(Finder::Utils::Parse.date('1215')).to eq nil
+          end
         end
 
         describe '.escape_term' do
