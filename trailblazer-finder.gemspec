@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'dm-sqlite-adapter'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'trailblazer', '>= 2.1.0.beta4'
+  spec.add_development_dependency 'trailblazer-activity', '~> 0.4.3'
   spec.add_development_dependency 'rspec_junit_formatter'
 
   spec.required_ruby_version = '>= 2.2.0'
