@@ -43,8 +43,8 @@ module Trailblazer
           end
 
           step method(:check_for_adapters),
-               Output(:success) => Track(:valid),
-               Output(:failure) => Track(:invalid_adapters)
+            Output(:success) => Track(:valid),
+            Output(:failure) => Track(:invalid_adapters)
           step method(:validate_adapters), magnetic_to: [:valid],
             Output(:success) => Track(:valid),
             Output(:failure) => Track(:multiple_orm)
