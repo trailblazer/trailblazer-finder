@@ -1,7 +1,5 @@
-require_relative 'spec_helper'
-require_relative 'support/paging_shared_example'
-require_relative 'support/sorting_shared_example'
-require 'sequel'
+require_relative "spec_helper"
+require "sequel"
 Sequel::Model.plugin :timestamps
 
 DB = Sequel.sqlite

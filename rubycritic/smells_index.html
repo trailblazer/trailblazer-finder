@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ruby Critic - Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- StyleSheets -->
+    <link href="assets/stylesheets/bootstrap.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/font-awesome.min.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <a href="#menu-toggle" class="btn btn-default hidden-lg visible-sm-* hidden-md visible-xs-* pull-left" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      <a href="overview.html"><img src="assets/images/logo.png" title="Ruby Critic Logo" width="55"><span class="logo">RUBYCRITIC</span></a>
+    </header>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="overview.html" class="project-nav-item overview-nav"><i class="fa fa-dashboard"></i>Overview</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="code_index.html" class="project-nav-item code-index-nav"><i class="fa fa-code"></i>Code</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="smells_index.html" class="project-nav-item smells-index-nav"><i class="fa fa-warning"></i>Smells</a>
+          </li>
+        </ul>
+      </aside>
+      <!-- /#sidebar-wrapper -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!--Page Title -->
+      <div class="Page_Title">
+        <h3>Smells</h3>
+      </div>
+      <!--End Page Title -->
+      <div class="Content_Wrapper">
+        <table id="js-index-table" class="table smells-index-table index-table sortable-table">
+          <thead>
+            <tr>
+              <th width="30%" class="table-header">Smell<span class="sort-type"></span></th>
+              <th width="65%" class="table-header">Locations<span class="sort-type"></span></th>
+              <th width="5%" class="table-header">Status<span class="sort-type"></span></th>
+            </tr>
+          </thead>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/predicates.html#L69">Trailblazer::Finder::Adapters::Sequel::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/predicates.html#L81">Trailblazer::Finder::Adapters::Sequel::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/sorting.html#L12">Trailblazer::Finder::Adapters::Sequel::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/sorting.html#L12">Trailblazer::Finder::Adapters::Sequel::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/sorting.html#L21">Trailblazer::Finder::Adapters::Sequel::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/active_record/paging.html#L4">Trailblazer::Finder::Adapters::ActiveRecord::Paging</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/sequel/paging.html#L4">Trailblazer::Finder::Adapters::Sequel::Paging</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/active_record/sorting.html#L12">Trailblazer::Finder::Adapters::ActiveRecord::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L12">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L62">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L76">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L90">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L38">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L44">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L50">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L56">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L69">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L83">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L97">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L69">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L83">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L97">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L65">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L15">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L93">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L72">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L22">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L100">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L86">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L79">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L28">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L28">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L65">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L65">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L15">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L15">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L93">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L93">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L40">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L40">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L46">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L46">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L52">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L52">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L58">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L58">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L34">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L34">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L72">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L72">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L22">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L22">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L100">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L100">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L86">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L86">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L79">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/predicates.html#L79">Trailblazer::Finder::Adapters::Basic::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/sorting.html#L12">Trailblazer::Finder::Adapters::Basic::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/sorting.html#L24">Trailblazer::Finder::Adapters::Basic::Sorting</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/sorting.html#L25">Trailblazer::Finder::Adapters::Basic::Sorting</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/sorting.html#L26">Trailblazer::Finder::Adapters::Basic::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/adapters/basic/sorting.html#L12">Trailblazer::Finder::Adapters::Basic::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ControlParameter</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/find.html#L12">Trailblazer::Finder::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ControlParameter</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/find.html#L13">Trailblazer::Finder::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/find.html#L33">Trailblazer::Finder::Find</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/find.html#L34">Trailblazer::Finder::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyInstanceVariables</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/find.html#L5">Trailblazer::Finder::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ModuleInitialize</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/base.html#L7">Trailblazer::Finder::Base</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UncommunicativeVariableName</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/base.html#L24">Trailblazer::Finder::Base</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ControlParameter</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/dsl.html#L34">Trailblazer::Finder::Dsl</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/string.html#L10">Trailblazer::Finder::Utils::String</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/string.html#L14">Trailblazer::Finder::Utils::String</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ManualDispatch</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/hash.html#L13">Trailblazer::Finder::Utils::Hash</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/hash.html#L10">Trailblazer::Finder::Utils::Hash</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>InstanceVariableAssumption</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/splitter.html#L7">Trailblazer::Finder::Utils::Splitter</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>InstanceVariableAssumption</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/splitter.html#L7">Trailblazer::Finder::Utils::Splitter</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/utils/splitter.html#L21">Trailblazer::Finder::Utils::Splitter</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>LongParameterList</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/find.html#L21">Trailblazer::Finder::Activity::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/find.html#L21">Trailblazer::Finder::Activity::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/find.html#L31">Trailblazer::Finder::Activity::Find</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/predicates.html#L13">Trailblazer::Finder::Activity::Process::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/predicates.html#L14">Trailblazer::Finder::Activity::Process::Predicates</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/predicates.html#L16">Trailblazer::Finder::Activity::Process::Predicates</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/filters.html#L16">Trailblazer::Finder::Activity::Process::Filters</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/adapters.html#L13">Trailblazer::Finder::Activity::Process::Adapters</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/paging.html#L4">Trailblazer::Finder::Activity::Process::Paging</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/sorting.html#L4">Trailblazer::Finder::Activity::Process::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/sorting.html#L14">Trailblazer::Finder::Activity::Process::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/process/paging.html#L14">Trailblazer::Finder::Activity::Process::Paging</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/filters.html#L16">Trailblazer::Finder::Activity::Prepare::Filters</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/properties.html#L17">Trailblazer::Finder::Activity::Prepare::Properties</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>DuplicateCode</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/paging.html#L32">Trailblazer::Finder::Activity::Prepare::Paging</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/paging.html#L35">Trailblazer::Finder::Activity::Prepare::Paging</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L45">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L48">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>HighComplexity</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L18">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>ControlParameter</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L30">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L15">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L38">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L30">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L19">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>TooManyStatements</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/sorting.html#L18">Trailblazer::Finder::Activity::Prepare::Sorting</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>UnusedParameters</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/params.html#L18">Trailblazer::Finder::Activity::Prepare::Params</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/paging.html#L15">Trailblazer::Finder::Activity::Prepare::Paging</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <td>NilCheck</td>
+              <td>
+                <ul class="nav nav-pills">
+                  
+                    <li role="presentation">
+                      <a href="lib/trailblazer/finder/activity/prepare/paging.html#L25">Trailblazer::Finder::Activity::Prepare::Paging</a>
+                    </li>
+                  
+                </ul>
+              </td>
+              <td>
+                
+                  <ul class="nav nav-pills">
+                    <li role="presentation">
+                      <td class="centered-cell"><span class="status- circled-text circle"></span></td>
+                    </li>
+                  </ul>
+                
+              </td>
+            </tr>
+          
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src='assets/javascripts/jquery.min.js'></script>
+    <script src='assets/javascripts/jquery.tablesorter.min.js'></script>
+    <script src='assets/javascripts/jquery.scrollTo.min.js'></script>
+    <script src='assets/javascripts/jquery.timeago.js'></script>
+    <script src='assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='assets/javascripts/prettify.js'></script>
+    <script src='assets/javascripts/bootstrap.min.js'></script>
+    <script src='assets/javascripts/application.js'></script>
+    <script src='assets/javascripts/jquery.filtertable.min.js'></script>
+  </body>
+</html>

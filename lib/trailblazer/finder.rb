@@ -1,32 +1,45 @@
-require "trailblazer/finder/version"
-require "trailblazer/finder/errors/block_ignored"
-require "trailblazer/finder/errors/invalid_defined_by_value"
-require "trailblazer/finder/errors/invalid_number"
-require "trailblazer/finder/errors/missing_entity_type"
-require "trailblazer/finder/errors/with_ignored"
-require "trailblazer/finder"
-require "trailblazer/finder/utils/params"
-require "trailblazer/finder/utils/parse"
-require "trailblazer/finder/utils/string"
-require "trailblazer/finder/utils/extra"
-require "trailblazer/finder/utils/splitter"
-require "trailblazer/finder/utils/deep_locate"
-require "trailblazer/finder/base"
-require "trailblazer/finder/find"
-require "trailblazer/finder/filter"
-require "trailblazer/finder/features"
-require "trailblazer/finder/adapters"
-require "trailblazer/finder/predicates"
+require "forwardable"
+require "trailblazer-activity"
+require "dry-types"
 
-# :nocov:
-require "trailblazer/operation/finder" if Gem.loaded_specs.key?("trailblazer")
-# :nocov:
+require "trailblazer/finder/utils/hash"
+require "trailblazer/finder/utils/string"
+require "trailblazer/finder/utils/splitter"
+require "trailblazer/finder/utils/extra"
+require "trailblazer/finder/adapters/active_record/predicates"
+require "trailblazer/finder/adapters/active_record/paging"
+require "trailblazer/finder/adapters/active_record/sorting"
+require "trailblazer/finder/adapters/sequel/predicates"
+require "trailblazer/finder/adapters/sequel/paging"
+require "trailblazer/finder/adapters/sequel/sorting"
+require "trailblazer/finder/adapters/basic/predicates"
+require "trailblazer/finder/adapters/basic/paging"
+require "trailblazer/finder/adapters/basic/sorting"
+require "trailblazer/finder/activity/prepare/entity"
+require "trailblazer/finder/activity/prepare/properties"
+require "trailblazer/finder/activity/prepare/filters"
+require "trailblazer/finder/activity/prepare/params"
+require "trailblazer/finder/activity/prepare/adapters"
+require "trailblazer/finder/activity/prepare/paging"
+require "trailblazer/finder/activity/prepare/sorting"
+require "trailblazer/finder/activity/prepare"
+require "trailblazer/finder/activity/process/adapters"
+require "trailblazer/finder/activity/process/predicates"
+require "trailblazer/finder/activity/process/paging"
+require "trailblazer/finder/activity/process/sorting"
+require "trailblazer/finder/activity/process/filters"
+require "trailblazer/finder/activity/process"
+require "trailblazer/finder/activity/find"
+require "trailblazer/finder/dsl"
+require "trailblazer/finder/find"
+require "trailblazer/finder/base"
 
 module Trailblazer
   class Finder
+    module Types
+      include Dry::Types.module
+    end
+
     include Base
-    include Filter
-    include Features
-    include Adapters
   end
 end

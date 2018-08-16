@@ -1,28 +1,18 @@
+# frozen_string_literal: true
+
 module Trailblazer
   class Finder
     # Helper module
     module Utils
-      class Extra
-        def self.ensure_included(item, collection)
-          if collection.include? item
-            item
-          else
-            collection.first
-          end
-        end
+      module Extra
+        module_function
 
-        def self.deep_copy(object)
-          case object
-            when Array
-              object.map { |element| deep_copy(element) }
-            when Hash
-              object.each_with_object({}) do |(key, value), result|
-                result[key] = deep_copy(value)
-              end
-            when NilClass, FalseClass, TrueClass, Symbol, Method, Numeric
-              object
+        def apply_handler(handler, predicate_handler = "Trailblazer::Finder::Adapters::Basic::Predicates")
+          case handler
+            when Symbol then ->(entity, attribute, value) { method(handler).call entity, attribute, value }
+            when Proc then handler
             else
-              object.dup
+              Object.const_get(predicate_handler).__send__ :set_eq_handler
           end
         end
       end

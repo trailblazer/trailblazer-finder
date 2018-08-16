@@ -1,18 +1,18 @@
-require "date"
+# frozen_string_literal: true
 
 module Trailblazer
   class Finder
     # Helper module
     module Utils
       class String
-        def self.blank?(value)
-          return false if num?(value)
-          value.nil? || value.strip.empty?
+        def self.blank?(string)
+          return false if numeric?(string)
+          string.nil? || string.strip.empty?
         end
 
-        def self.num?(str)
-          Integer(str)
-        rescue ArgumentError, TypeError
+        def self.numeric?(string)
+          !Float(string).nil?
+        rescue StandardError
           false
         end
 
@@ -28,6 +28,15 @@ module Trailblazer
             .tr("-", "_")
             .tr(" ", "_")
             .downcase
+        end
+
+        def self.to_date(value)
+          Date.parse(value).strftime("%Y-%m-%d") if date?(value)
+        end
+
+        def self.date?(date)
+          date_hash = Date._parse(date.to_s)
+          Date.valid_date?(date_hash[:year].to_i, date_hash[:mon].to_i, date_hash[:mday].to_i)
         end
       end
     end

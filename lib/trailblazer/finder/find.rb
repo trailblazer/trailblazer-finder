@@ -1,28 +1,40 @@
+# frozen_string_literal: true
+
 module Trailblazer
   class Finder
     class Find
-      attr_reader :params
+      attr_reader :params, :paging, :sorting, :filters, :config
 
-      def initialize(entity_type, params, actions)
-        @entity_type  = entity_type
-        @actions      = actions
-        @params       = params
+      def initialize(entity, params, filters, paging = nil, sorting = nil, config = nil)
+        @entity   = entity
+        @filters  = filters
+        @params   = params
+        @paging   = paging || {}
+        @sorting = sorting || {}
+        @config = config || {}
       end
 
-      def param(name)
-        @params[name]
-      end
-
-      def query(context)
-        @params.inject(@entity_type) do |entity_type, (name, value)|
-          value = Utils::Parse.date(value) if Utils::Parse.date(value)
-          new_entity_type = context.instance_exec entity_type, value, &@actions[name]
-          new_entity_type || entity_type
+      def process_filters(ctx)
+        @params.reduce(@entity) do |entity, (name, value)|
+          value = Utils::String.date(value) if Utils::String.date?(value)
+          new_entity = ctx.instance_exec entity, @filters[name.to_sym][:name], value, &@filters[name.to_sym][:handler]
+          new_entity || entity
         end
       end
 
-      def count(context)
-        query(context).count
+      def process_paging(ctx)
+        ctx.instance_exec @paging[:current_page], @paging[:per_page], (process_filters ctx), &@paging[:handler]
+      end
+
+      def process_sorting(ctx)
+        ctx.instance_exec @sorting, (@paging.empty? ? (process_filters ctx) : (process_paging ctx)), &@sorting[:handler]
+      end
+
+      def query(ctx)
+        return process_sorting ctx unless @sorting.empty? || @sorting.nil?
+        return process_paging ctx unless @paging.empty? || @paging.nil?
+
+        process_filters ctx
       end
     end
   end
