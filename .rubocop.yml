@@ -1,6 +1,5 @@
+require: rubocop-rspec
+
 inherit_from:
   - https://raw.githubusercontent.com/trailblazer/meta/master/rubocop.yml
-
-Style/Send:
-  Exclude:
-    - 'lib/trailblazer/finder/adapters/sequel/sorting.rb'
+  - .rubocop_todo.yml
