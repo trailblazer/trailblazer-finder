@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 module Trailblazer
   class Finder
     module Adapters
+      # ActiveRecord Adapter
       module Sequel
-        # Sequel - Sorting Adapter
+        # ActiveRecord Paging Adapter
         module Sorting
-          def self.included(base)
-            base.extend Features::Sorting::ClassMethods
-          end
+          module_function
 
-          private
-
-          def sort_orders(sort_attr, sort_dir)
-            ::Sequel.send sort_dir, sort_attr.to_sym
-          end
-
-          def sort_it(entity_type, sort_attributes)
-            result = []
-            result << [:order, sort_attributes.first] if sort_attributes.is_a? Array
-            sort_attributes.drop(1).each { |x| result << [:order_append, x] }
-            result.inject(entity_type) { |obj, method_and_args| obj.send(*method_and_args) }
+          def set_sorting_handler
+            lambda do |sort_attributes, entity|
+              sort_attributes.delete(:handler)
+              attributes = []
+              sort_attributes.each do |attr|
+                attributes << (::Sequel.send attr[1], attr[0].to_sym)
+              end
+              result = []
+              result << [:order, attributes.first] if attributes.is_a? Array
+              attributes.drop(1).each { |x| result << [:order_append, x] }
+              result.reduce(entity) { |obj, method_and_args| obj.send(*method_and_args) }
+            end
           end
         end
       end

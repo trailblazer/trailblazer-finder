@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 module Trailblazer
   class Finder
     module Adapters
+      # ActiveRecord Adapter
       module ActiveRecord
-        # ActiveRecord - Sorting Adapter
+        # ActiveRecord Paging Adapter
         module Sorting
-          def self.included(base)
-            base.extend Features::Sorting::ClassMethods
-          end
+          module_function
 
-          private
-
-          def sort_it(entity_type, sort_attributes)
-            entity_type.order(sort_attributes)
-          end
-
-          def sort_orders(sort_attr, sort_dir)
-            { sort_attr.to_s => sort_dir }
+          def set_sorting_handler
+            lambda do |sort_attributes, entity|
+              sort_attributes.delete(:handler)
+              attributes = []
+              sort_attributes.each do |attr|
+                attributes << {attr[0].to_s => attr[1]}
+              end
+              entity.order(attributes)
+            end
           end
         end
       end
