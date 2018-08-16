@@ -1,4 +1,4 @@
-# THIS IS ALL OLD
+
 # Trailblazer Finder
 
 Provides DSL for creating [Trailblazer](https://github.com/trailblazer/trailblazer) based Finder Objects. But it is designed to be used on its own as a separate gem. It was influenced by popular [Ransack](https://github.com/activerecord-hackery/ransack) gem, but in addition to [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord), it can be used with [DataMapper](https://github.com/datamapper) or [Sequel](https://github.com/jeremyevans/sequel). It also integrates with [Kaminari](https://github.com/kaminari/kaminari) or [Will Paginate](https://github.com/mislav/will_paginate), as well as [FriendlyId](https://github.com/norman/friendly_id)
@@ -8,31 +8,39 @@ Provides DSL for creating [Trailblazer](https://github.com/trailblazer/trailblaz
 ## Table of Contents
 
 * [Installation](#installation)
-  * [Dependencies](#dependencies)
+	* [Dependencies](#dependencies)
 * [Usage](#usage)
-  * [Finder](#finder)
-    * [Finder Example](#finder-example)
-  * [Operation](#operation)
-    * [Operation Example](#operation-example)
-  * [Usable without Trailblazer](#usable-without-trailblazer)
-    * [Example without Trailblazer](#example-without-trailblazer)
-  * [Example Project](#example-project)
-  * [Features](#features)
-    * [Predicates](#predicate)
-      * [Predicates Example](#predicates-example)
-    * [Paging](#paging)
-      * [Paging Example](#paging-example)
-    * [Sorting](#sorting)
-      * [Sorting Example](#sorting-example)
-  * [Adapters](#adapters)
-    * [Adapters Example](#adapters-example)
-    * [ActiveRecord](#active_record)
-      * [Active Record Example](#active-record-example)
-    * [Sequel](#sequel)
-      * [Sequel Example](#sequel-example)
-  * [Tips & Tricks](#tips--tricks)
-  * [ORM's are not required](#results-shortcut)
-  * [Passing Entity as Argument](#passing-entity-as-argument)
+	* [Finder](#finder)
+		* [Finder Example](#finder-example)
+	* [Operation](#operation)
+		* [Operation Example](#operation-example)
+	* [Usable without Trailblazer](#usable-without-trailblazer)
+		* [Example without Trailblazer](#example-without-trailblazer)
+	* [Example Project](#example-project)
+	* [Features](#features)
+		* [Predicate](#predicate)
+			* [Predicate Example](#predicate-example)
+		* [Paging](#paging)
+			* [Paging Example](#paging-example)
+		* [Sorting](#sorting)
+			* [Sorting Example](#sorting-example)
+	* [Adapters](#adapters)
+		* [Adapters Example](#adapters-example)
+		* [ActiveRecord](#active_record)
+			* [Active Record Example](#active-record-example)
+		* [DataMapper](#data_mapper)
+			* [Data Mapper Example](#data-mapper-example)
+		* [Sequel](#sequel)
+			* [Sequel Example](#sequel-example)
+		* [Kaminari](#kaminari)
+			* [Kaminari Example](#kaminari-example)
+		* [WillPaginate](#will_paginate)
+			* [Will Paginate Example](#will-paginate-example)
+		* [FriendlyId](#friendly_id)
+			* [Friendly Id Example](#friendly-id-example)
+	* [Tips & Tricks](#tips--tricks)
+	* [ORM's are not required](#results-shortcut)
+	* [Passing Entity Type as Argument](#passing-entity_type-as-argument)
 * [Contributing](#contributing)
 * [License](LICENSE.txt)
 
@@ -62,60 +70,79 @@ Just inherit from the ```Trailblazer::Finder``` class.
 
 Features and adapters are optional. However.
 
-NOTE: features are only applied if their options are specified in your finder
+NOTE: features only work if they're specified on top of your Finder class
 
-An Entity (model) is required, but can:
+An Entity Type is required, but can:
 * be defined in the inherited Finder class
 * be given as an option in the call
 
 Be sure to specify features you wish to use in your finder, before specifying adapters.
 
-Basically for most use cases, Entity is the entity/model/array of hashes you wish to use finder on
+Basically for most use cases, Entity Type is the entity/model/array of hashes you wish to use finder on
 
 #### Finder Example
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Without defining an ORM everything defaults to dealing with hash objects
-  adapters ActiveRecord
+  # Optional features (be sure to specify these before adapters)
+  features Paging, Sorting
 
   # Optional if you use it as option in the caller, Model/Entity or Array with Hashes
-  entity { Post }
+  entity_type { Post }
 
-  # Pagination settings (don't use it if you don't wish to use paging)
-  paging per_page: 5, min_per_page: 1, max_per_page: 100
+  # Without defining an ORM everything defaults to dealing with an
+  # array with Hashes
+  adapters ActiveRecord, Kaminari
 
-  # Property
-  # Set the properties with their respective options
+  # Pagination settings (remove if not using the Paging feature)
+  per_page 25
+  min_per_page 10
+  max_per_page 100
+
+  # Sortable attributes (remove if not using the Sorting feature)
+  sortable_by :id, :title, :created_at
+
+  # Runs filter_by to filter results
   #
   # Params:
-  #  * +name+::         The property name (attribute /column / field - name) (required)
-  #  * +type:+::         Dry Types type, for future validations (required)
-  #
-  #  * Following is optional (don't use it if you do not wish to use sorting)
-  #    * +sortable:+::       Can this property be sorted on? (default: false)
-  #    * +sort_direction:+:: Specify default sort direction (only usable if sortable is true)
-  #                          (default: :desc)
-  property :id, type: Types::Integer
-  property :body, type: Types::String, sortable: true
-  property :title, type: Types::String, sortable: true, sort_direction: :asc
-
-  # Filter By
-  # A simple way to make custom filter methods
-  #
-  # Params:
-  #  * +parameter+::     The parameter to use to call this filter (required)
+  #  * +attribute+::     The attribute to be filtered on
   #
   #  * Following is optional, matches exact value if not specified
   #    * +with:+::       Filter method defined in Finder class
+  #    * +defined_by:+:: Array of filter Methods defined in Finder class
+  #                      method name: apply_filter_name_with_array_value
   #    * block::         A block can be given with the code to filter with
+  filter_by :id
+  filter_by :body,              with: :apply_body_filter
   filter_by :created_after,     with: :apply_created_after
-  filter_by(:created_before)    { |entity, _attribute, value| entity.where('DATE(created_at) <= ?', value) if value.present? }
+  filter_by :created_before,    with: :apply_created_before
+  filter_by :is_hot,            defined_by: %i[true false]
+  filter_by(:title)             { |entity_type, value| entity_type.where title: value }
+  filter_by(:published, false)  do |entity_type, value|
+     value ? entity_type.where('published = false') : entity_type.where('published = true')
+  end
 
   private
 
-  def apply_created_after(entity, _attribute, value)
-    entity.where('DATE(created_at) >= ?', value) if value.present?
+  def apply_body_filter(entity_type, value)
+    return unless value.present?
+    entity_type.where 'lower(body) LIKE ?', Utils::Parse.term(value.downcase)
+  end
+
+  def apply_created_after(entity_type, value)
+    entity_type.where('DATE(created_at) >= ?', value) if value.present?
+  end
+
+  def apply_created_before(entity_type, value)
+    entity_type.where('DATE(created_at) <= ?', value) if value.present?
+  end
+
+  def apply_is_hot_with_true(entity_type)
+    entity_type.where 'views > 100'
+  end
+
+  def apply_is_hot_with_false(entity_type)
+    entity_type.where 'views < 100'
   end
 end
 ```
@@ -130,7 +157,7 @@ class Post::Index < Trailblazer::Operation
   # Params:
   # +finder_class+:: Finder class to be used
   # +action+:: :all, :single (optional, defaults to :all)
-  # +entity+:: Entity/Model or array (optional if specified in Finder Class, overwrites Finder class entity)
+  # +entity_type+:: Entity/Model or array (optional if specified in Finder Class, overwrites Finder class entity_type)
   step Finder(Post::Finder, :all, Post)
 end
 ```
@@ -219,7 +246,7 @@ features Sorting, Paging, Predicate
 
 NOTE: FEATURES NEED TO BE SPECIFIED ON TOP OF YOUR CLASS
 
-### Predicates
+### Predicate
 Simple predicate feature, that enables you to have default predicate filters available for the specified fields.
 
 At the moment we support:
@@ -232,12 +259,12 @@ At the moment we support:
 - gt: greater than (value converts to float)
 - gte: greater than or equal to (value converts to float)
 
-#### Predicates Example
+#### Predicate Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
   features Predicate
 
-  # Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity
+  # Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity_type
   predicates_for :name, :category_name
 
   filter_by :name
@@ -258,36 +285,36 @@ end
 This feature extends the result[:finder] object with the following methods
 ```ruby
 # accessing filters
-.name             # => name filter
-.created_at           # => created at filter
+.name							# => name filter
+.created_at						# => created at filter
 
 # Predicate filters
-.name_eq            # => name equals filter
-.name_not_eq          # => name not equals filter
-.name_blank           # => name blank filter
-.name_not_blank         # => name not blank filter
-.name_lt            # => name less than filter (converts value to float)
-.name_lte           # => name less than or equal to filter (converts value to float)
-.name_gt            # => name greater than filter (converts value to float)
-.name_gte           # => name greater than or equal to filter (converts value to float)
-.category_name_eq       # => category name equals filter
-.category_name_not_eq     # => category name not equals filter
-.category_name_blank      # => category name blank filter
-.category_name_not_blank    # => category name not blank filter
-.category_name_lt       # => category name less than filter (converts value to float)
-.category_name_lte        # => category name less than or equal to filter (converts value to float)
-.category_name_gt       # => category name greater than filter (converts value to float)
-.category_name_gte        # => category name greater than or equal to filter (converts value to float)
+.name_eq						# => name equals filter
+.name_not_eq					# => name not equals filter
+.name_blank 					# => name blank filter
+.name_not_blank					# => name not blank filter
+.name_lt						# => name less than filter (converts value to float)
+.name_lte						# => name less than or equal to filter (converts value to float)
+.name_gt						# => name greater than filter (converts value to float)
+.name_gte						# => name greater than or equal to filter (converts value to float)
+.category_name_eq				# => category name equals filter
+.category_name_not_eq			# => category name not equals filter
+.category_name_blank 			# => category name blank filter
+.category_name_not_blank		# => category name not blank filter
+.category_name_lt				# => category name less than filter (converts value to float)
+.category_name_lte				# => category name less than or equal to filter (converts value to float)
+.category_name_gt				# => category name greater than filter (converts value to float)
+.category_name_gte				# => category name greater than or equal to filter (converts value to float)
 
 # accessing results
-.count              # => number of found results
-.results?           # => are there any results found
-.results            # => fetched results
-.all              # => if needed, use it to get dataset (sequel for example requires you use it in some cases)
+.count							# => number of found results
+.results?						# => are there any results found
+.results						# => fetched results
+.all 							# => if needed, use it to get dataset (sequel for example requires you use it in some cases)
 
 # params for url generations
-.params             # => filter values
-.params published: false    # => overwrites the 'published' filter
+.params							# => filter values
+.params published: false 		# => overwrites the 'published' filter
 ```
 
 ### Paging
@@ -369,7 +396,7 @@ You can specify the adapters you wish to use inside your enherited Finder class.
 ### Adapters Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
+	# Features, in case you use any, need to be specified before adapters
   adapters ActiveRecord, Kaminari, FriendlyId
 end
 ```
@@ -380,8 +407,19 @@ The only thing the [ActiveRecord](https://github.com/rails/rails/tree/master/act
 #### Active Record Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
+	# Features, in case you use any, need to be specified before adapters
   adapters ActiveRecord
+end
+```
+
+### DataMapper
+The only thing the [DataMapper](https://github.com/datamapper) adapter does, is overwrite one specific method for Paging (limit/offset) and Sorting (order) each, as well as change the default filter behaviour (from select to where). These are overwritten by the adapter to match the specific use case of [DataMapper](https://github.com/datamapper).
+
+#### Data Mapper Example
+```ruby
+class Post::Finder < Trailblazer::Finder
+	# Features, in case you use any, need to be specified before adapters
+  adapters DataMapper
 end
 ```
 
@@ -391,37 +429,96 @@ The only thing the [Sequel](https://github.com/jeremyevans/sequel) adapter does,
 #### Sequel Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
+	# Features, in case you use any, need to be specified before adapters
   adapters Sequel
+end
+```
+
+### Kaminari
+The only thing the [Kaminari](https://github.com/kaminari/kaminari) adapter does, is overwrite one specific method for Paging (limit/offset). These are overwritten by the adapter to match the specific use case of [Kaminari](https://github.com/kaminari/kaminari).
+
+**Note**
+Not usable without the Paging feature enabled, and requires an ORM that's supported by [Kaminari](https://github.com/kaminari/kaminari), directly or by using additional gems.
+
+#### Kaminari Example
+```ruby
+class Post::Finder < Trailblazer::Finder
+  features Paging
+  adapters ActiveRecord, Kaminari
+end
+```
+**Note**
+To use [Kaminari](https://github.com/kaminari/kaminari) in combination with [Cells](https://github.com/trailblazer/cells), you'll currently have to use [kaminari-cells](https://github.com/apotonick/kaminari-cells) and monkey-patch Kaminari by using in an initiliazer:
+```ruby
+Kaminari::Helpers::Paginator.class_eval do
+  def render(&block)
+    instance_eval(&block) if @options[:total_pages] > 1
+  end
+end
+```
+
+### WillPaginate
+The only thing the [WillPaginate](https://github.com/mislav/will_paginate/) adapter does, is overwrite one specific method for Paging (limit/offset). These are overwritten by the adapter to match the specific use case of [WillPaginate](https://github.com/mislav/will_paginate/).
+
+**Note**
+Not usable without the Paging feature enabled, and requires an ORM that's supported by [WillPaginate](https://github.com/mislav/will_paginate/), directly or by using additional gems.
+
+#### Will Paginate Example
+```ruby
+class Post::Finder < Trailblazer::Finder
+  features Paging
+  adapters ActiveRecord, WillPaginate
+end
+```
+
+### FriendlyId
+The [FriendlyId](https://github.com/norman/friendly_id) adapter was written cause I personally use it a lot, as well as to show an example of what kind of adapters we could potentially write in the future to compliment the filters with.
+
+Basically the [FriendlyId](https://github.com/norman/friendly_id) adapter adds the following filter, which automatically checks wether the id is an integer or slug and makes sure the right filter is applied on the row set:
+```ruby
+filter_by :id, with: :apply_slug_filter
+```
+
+**Note**
+Currently only tested with ActiveRecord.
+
+**Note**
+Do not set a filter_by for id or slug when using this adapter.
+
+#### Friendly Id Example
+```ruby
+class Post::Finder < Trailblazer::Finder
+	# Features, in case you use any, need to be specified before adapters
+  adapters ActiveRecord, FriendlyId
 end
 ```
 
 ## Tips & Tricks
 ### ORM's are not required
-Not even for the Paging, Predicates and Sorting features.
+Not even for the Paging and Sorting features, however using additional adapters such as Kaminari, WillPaginate and FriendlyId won't work well with this.
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
-  entity { fetch_product_as_hashes }
+	# Features, in case you use any, need to be specified before adapters
+  entity_type { fetch_product_as_hashes }
 
-  filter_by(:name)     { |entity, value| entity.select { |product| product[:name] == value } }
-  filter_by(:category) { |entity, value| entity.select { |product| product[:category] == value } }
+  filter_by(:name)     { |entity_type, value| entity_type.select { |product| product[:name] == value } }
+  filter_by(:category) { |entity_type, value| entity_type.select { |product| product[:category] == value } }
 end
 ```
 
 ### Overwriting Methods
-You can have fine grained entity, by overwriting ```initialize``` method:
+You can have fine grained entity_type, by overwriting ```initialize``` method:
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
+	# Features, in case you use any, need to be specified before adapters
 
   filter_by :name
   filter_by :category_name
 
   def initialize(user, options = {})
-    super options.merge(entity: Product.visible_to(user))
+    super options.merge(entity_type: Product.visible_to(user))
   end
 end
 ```

@@ -1,95 +1,95 @@
-# frozen_string_literal: true
-
 module Trailblazer
   class Finder
-    ORM_ADAPTERS = %w[ActiveRecord Sequel].freeze
-
+    # Base module
     module Base
       def self.included(base)
-        base.extend Finder::Dsl
-      end
-
-      attr_reader :signal, :errors, :result, :filters
-
-      def initialize(options = {}) # rubocop:disable Style/OptionHash
-        config = self.class.config
-        ctx = {config: config, options: options}
-        @signal, (ctx, *) = Activity::Find.call([ctx, {}])
-
-        @errors = ctx[:errors] || {}
-        @find = ctx[:finder]
-        @result = @errors.empty? ? fetch_result : {errors: @errors}
-        @filters = @find.filters if @errors.empty?
-      end
-
-      def paging
-        return if @find.paging.empty?
-        result = @find.paging
-        result = Utils::Hash.remove_keys_from_hash(result, %i[handler max_per_page min_per_page])
-        result[:page] = result.delete(:current_page) || 1
-        result
-      end
-
-      def params
-        result = {}
-        result = result.merge paging
-        result = result.merge @find.params
-        result[:sort] = sorting
-        result
-      end
-
-      def result?
-        result.any?
-      end
-
-      def fetch_result
-        @find.query self
-      end
-
-      def count
-        @count ||= result.count
-      end
-
-      def sorting
-        return if @find.sorting.empty?
-        result = @find.sorting
-        result = Utils::Hash.remove_keys_from_hash(result, [:handler])
-        result.map { |r| r.join(" ") }.join(", ")
-      end
-
-      def sort?(attribute)
-        sorting.include?(attribute.to_s)
-      end
-
-      def sort_direction_for(attribute)
-        return "asc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
-        "desc"
-      end
-
-      def reverse_sort_direction_for(attribute)
-        return "desc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
-        "asc"
-      end
-
-      def sort_params_for(attribute)
-        if sorting.nil?
-          params.merge! sort: "#{attribute} #{sort_direction_for(attribute)}"
-        elsif sorting.include?(attribute.to_s)
-          params.merge! sort: sorting.gsub(/#{attribute} #{sort_direction_for(attribute)}/, "#{attribute} #{reverse_sort_direction_for(attribute)}")
-        else
-          params.merge! sort: "#{sorting}, #{attribute} #{sort_direction_for(attribute)}"
+        base.extend ClassMethods
+        base.instance_eval do
+          @config = {
+            defaults:  {},
+            actions:   {},
+            entity_type:     nil
+          }
         end
       end
 
-      def remove_sort_params_for(attribute)
-        return unless sorting.include?(attribute.to_s)
-        sort = sorting.gsub(/#{attribute} #{sort_direction_for(attribute)}/, "").split(",")
-        sort.delete_if(&:blank?)
-        params.merge! sort: sort.join(",")
+      def initialize(options = {})
+        config      = self.class.config
+        entity_type = options[:entity_type] || (config[:entity_type] && instance_eval(&config[:entity_type]))
+        actions     = config[:actions] || {}
+        params      = Utils::Params.normalize_params(config[:defaults], options[:filter], actions.keys)
+
+        raise Error::MissingEntityType unless entity_type
+
+        @find = Find.new(entity_type, params, actions)
       end
 
-      def new_sort_params_for(attribute)
-        params.merge! sort: "#{attribute} #{sort_direction_for(attribute)}"
+      def results
+        @results ||= fetch_results
+      end
+
+      def results?
+        results.any?
+      end
+
+      def count
+        @count ||= @find.count self
+      end
+
+      def params(additions = {})
+        if additions.empty?
+          @find.params
+        else
+          @find.params.merge Utils::Params.stringify_keys(additions)
+        end
+      end
+
+      private
+
+      def fetch_results
+        @find.query self
+      end
+
+      # ClassMethods
+      module ClassMethods
+        attr_reader :config
+
+        def inherited(base)
+          base.instance_variable_set "@config", Utils::Extra.deep_copy(config)
+        end
+
+        def entity_type(&block)
+          config[:entity_type] = block
+        end
+
+        def filter_by(name, options = nil, &block)
+          options = {default: options} unless options.is_a?(Hash)
+
+          name    = name.to_s
+          default = options[:default]
+          handler = options[:with] || block
+
+          config[:defaults][name] = default unless default.nil?
+          config[:actions][name]  = normalize_find_handler(handler, name)
+
+          define_method(name) { @find.param name }
+        end
+
+        def results(*args)
+          new(*args).results
+        end
+
+        def normalize_find_handler(handler, key)
+          case handler
+            when Symbol then ->(entity_type, value) { method(handler).call entity_type, value }
+            when Proc then handler
+            else
+              lambda do |entity_type, value|
+                return if Utils::String.blank?(value)
+                Utils::DeepLocate.deep_locate ->(k, v, _object) { k == key.to_sym && v == value }, entity_type
+              end
+          end
+        end
       end
     end
   end
