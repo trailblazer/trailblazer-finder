@@ -185,7 +185,11 @@ If Trailblazer isn't loaded, the ties to [Trailblazer](https://github.com/trailb
 
 #### Example without Trailblazer
 ```ruby
-result = Post::Finder.new(filter: params[:f], page: params[:page], per_page: params[:per_page])
+# If entity is specified in your finder
+result = Post::Finder.new(params: params)
+
+# If entity ism't specified in your finder
+result = Post::Finder.new(entity: Post, params: params)
 ```
 
 When using this, result will be extended with (not available for :single row)
