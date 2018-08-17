@@ -145,7 +145,7 @@ class Post::Index < Trailblazer::Operation
 
   # Find all matching results and extend model object with required methods
   def finder!(options, params:, **)
-    options[:finder] = Post::Finder.new(filter: params['f'], page: params['page'], per_page: params['per_page'])
+    options[:finder] = Post::Finder.new(params: params)
   end
 
   # Find first matching row, no method extension on model object
@@ -155,32 +155,26 @@ class Post::Index < Trailblazer::Operation
     apply_id(params)
 
     # No paging, sorting, no methods and only returns the first matched result
-    options[:finder] = Post::Finder.new(filter: params['f']).results.first
+    options[:finder] = Post::Finder.new(params: params).result.first
   end
 
   # Since ID's are usually given directly, patch it into filter
   def apply_id(params)
     return if params[:id].nil?
-    params[:f] = {} unless params.key?('f')
-    params[:f][:id] = params[:id] unless params[:f].key?('id')
+    params[:id_eq] = params[:id] unless params.key?("id")
   end
 end
 ```
 
 When using this, result[:finder] will be extended with (not available for :single row)
 ```ruby
-# accessing filters
-.name                                    # => name filter
-.created_at                              # => created at filter
-
 # accessing results
 .count                                   # => number of found results
-.results?                                # => are there any results found
-.results                                 # => fetched results
+.result?                                # => are there any results found
+.result                                 # => fetched results
 
 # params for url generations
 .params                                  # => filter values
-.params published: false                 # => overwrites the 'published' filter
 ```
 
 
@@ -195,18 +189,13 @@ result = Post::Finder.new(filter: params[:f], page: params[:page], per_page: par
 
 When using this, result will be extended with (not available for :single row)
 ```ruby
-# accessing filters
-.name                                    # => name filter
-.created_at                              # => created at filter
-
 # accessing results
 .count                                   # => number of found results
-.results?                                # => are there any results found
-.results                                 # => fetched results
+.result?                                # => are there any results found
+.result                                 # => fetched results
 
 # params for url generations
 .params                                  # => filter values
-.params published: false                 # => overwrites the 'published' filter
 ```
 
 ### Example Project
@@ -214,11 +203,6 @@ Coming soon!
 
 ## Features
 Aside of the default filtering behavior, it offers the following optional features as well.
-
-Just for the record, you can comma seperate features and load multiple by doing
-```ruby
-features Sorting, Paging, Predicate
-```
 
 NOTE: FEATURES NEED TO BE SPECIFIED ON TOP OF YOUR CLASS
 
@@ -234,63 +218,71 @@ At the moment we support:
 - lte: less than or equal to (value converts to float)
 - gt: greater than (value converts to float)
 - gte: greater than or equal to (value converts to float)
+- cont: contains specified value
+- not_cont: does not contain specified value
+- sw: starts with specified value
+- not_sw: does not start with specified value
+- ew: end with specified value
+- not_ew: does not end with specified value
 
 #### Predicates Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  features Predicate
+  entity { Post }
 
-  # Specify the fields you want predicates enabled for, mind you these fields need to exist on your entity
-  predicates_for :name, :category_name
-
-  filter_by :name
-  filter_by :published
-  filter_by :category_name
-
-  # per page defaults to 25 (so not required)
-  per_page 10
-
-  # Minimum items per page (not required)
-  min_per_page 5
-
-  # Maximum items per page (not required)
-  max_per_page 100
+  property :id, type: Types::Integer
+  property :body, type: Types::String
+  property :title, type: Types::String
 end
 ```
 
 This feature extends the result[:finder] object with the following methods
 ```ruby
-# accessing filters
-.name             # => name filter
-.created_at           # => created at filter
+# Available Predicate filters with the above example
+id_eq            # => id equals value
+id_not_eq        # => id not equals value
+id_blank         # => id blank value
+id_not_blank     # => id not blank value
+id_lt            # => id less than value (converts value to float)
+id_lte           # => id less than or equal to value (converts value to float)
+id_gt            # => id greater than value (converts value to float)
+id_gte           # => id greater than or equal to value (converts value to float)
+id_cont          # => id contains value
+id_not_cont      # => id does not contain value
+id_sw            # => id starts with
+id_not_sw        # => id does not start with
+id_ew            # => id ends with
+id_not_ew        # => id does not end with
 
-# Predicate filters
-.name_eq            # => name equals filter
-.name_not_eq          # => name not equals filter
-.name_blank           # => name blank filter
-.name_not_blank         # => name not blank filter
-.name_lt            # => name less than filter (converts value to float)
-.name_lte           # => name less than or equal to filter (converts value to float)
-.name_gt            # => name greater than filter (converts value to float)
-.name_gte           # => name greater than or equal to filter (converts value to float)
-.category_name_eq       # => category name equals filter
-.category_name_not_eq     # => category name not equals filter
-.category_name_blank      # => category name blank filter
-.category_name_not_blank    # => category name not blank filter
-.category_name_lt       # => category name less than filter (converts value to float)
-.category_name_lte        # => category name less than or equal to filter (converts value to float)
-.category_name_gt       # => category name greater than filter (converts value to float)
-.category_name_gte        # => category name greater than or equal to filter (converts value to float)
+body_eq            # => body equals value
+body_not_eq        # => body not equals value
+body_blank         # => body blank value
+body_not_blank     # => body not blank value
+body_lt            # => body less than value (converts value to float)
+body_lte           # => body less than or equal to value (converts value to float)
+body_gt            # => body greater than value (converts value to float)
+body_gte           # => body greater than or equal to value (converts value to float)
+body_cont          # => body contains value
+body_not_cont      # => body does not contain value
+body_sw            # => body starts with
+body_not_sw        # => body does not start with
+body_ew            # => body ends with
+body_not_ew        # => body does not end with
 
-# accessing results
-.count              # => number of found results
-.results?           # => are there any results found
-.results            # => fetched results
-.all              # => if needed, use it to get dataset (sequel for example requires you use it in some cases)
-
-# params for url generations
-.params             # => filter values
-.params published: false    # => overwrites the 'published' filter
+title_eq            # => title equals value
+title_not_eq        # => title not equals value
+title_blank         # => title blank value
+title_not_blank     # => title not blank value
+title_lt            # => title less than value (converts value to float)
+title_lte           # => title less than or equal to value (converts value to float)
+title_gt            # => title greater than value (converts value to float)
+title_gte           # => title greater than or equal to value (converts value to float)
+title_cont          # => title contains value
+title_not_cont      # => title does not contain value
+title_sw            # => title starts with
+title_not_sw        # => title does not start with
+title_ew            # => title ends with
+title_not_ew        # => title does not end with
 ```
 
 ### Paging
@@ -299,27 +291,10 @@ Really simple pagination feature, which uses the plain ```.limit``` and ```.offs
 #### Paging Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  features Paging
+  entity { Post }
 
-  filter_by :name
-  filter_by :category_name
-
-  # per page defaults to 25 (so not required)
-  per_page 10
-
-  # Minimum items per page (not required)
-  min_per_page 5
-
-  # Maximum items per page (not required)
-  max_per_page 100
+  paging per_page: 5, min_per_page: 1, max_per_page: 100
 end
-```
-
-This feature extends the result[:finder] object with the following methods
-```ruby
-.page                                    # => page number
-.per_page                                # => per page (10)
-.results                                 # => paginated page results
 ```
 
 ### Sorting
@@ -328,15 +303,28 @@ Really simple sorting feature, fixing the pain of dealing with sorting attribute
 #### Sorting Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  features Sorting
+  entity { Post }
 
-  sortable_by :name, :body
+  # Property
+  # Set the properties with their respective options
+  #
+  # Params:
+  #  * +name+::         The property name (attribute /column / field - name) (required)
+  #  * +type:+::         Dry Types type, for future validations (required)
+  #
+  #  * Following is optional (don't use it if you do not wish to use sorting)
+  #    * +sortable:+::       Can this property be sorted on? (default: false)
+  #    * +sort_direction:+:: Specify default sort direction (only usable if sortable is true)
+  #                          (default: :desc)
+  property :id, type: Types::Integer
+  property :body, type: Types::String, sortable: true
+  property :title, type: Types::String, sortable: true, sort_direction: :asc
 end
 ```
 
 This feature extends the result[:finder] object with the following methods
 ```ruby
-.results                                # => Posts sorted by title DESC
+.result                                # => Posts sorted by title DESC
 
 # Smart sort checking
 .sort?('title')                         # => true
@@ -352,19 +340,21 @@ This feature extends the result[:finder] object with the following methods
 # Params for sorting links (new if none exists, existing params if exists)
 .sort_params_for('title')
 
-# Add Params for sorting links (add to existing / replace with different direction)
+# Add Params for sorting links (add to existing / replace with different direction if exists)
 .add_sort_params_for('title')
+
+# Remove Params for sorting links (remove from existing)
+.remove_sort_params_for('title')
 
 # New Params for sorting links (reset)
 .new_sort_params_for('title')
 ```
 
 ## Adapters
-By default, everything works with an array of hashes. You can change the default behaviour by using adapters. Adapters are not just tied to the ORM's, we also have a few adapters included that make it easier to work along with existing gems such as [Kaminari](https://github.com/kaminari/kaminari), [WillPaginate](https://github.com/mislav/will_paginate/) and [FriendlyId](https://github.com/norman/friendly_id).
+By default, everything works with an array of hashes. You can change the default behaviour by using adapters.
 
 Currently supported ORM's:
 * [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord)
-* [DataMapper](https://github.com/datamapper)
 * [Sequel](https://github.com/jeremyevans/sequel)
 
 You can specify the adapters you wish to use inside your enherited Finder class.
@@ -372,8 +362,7 @@ You can specify the adapters you wish to use inside your enherited Finder class.
 ### Adapters Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
-  adapters ActiveRecord, Kaminari, FriendlyId
+  adapters ActiveRecord
 end
 ```
 
@@ -383,7 +372,6 @@ The only thing the [ActiveRecord](https://github.com/rails/rails/tree/master/act
 #### Active Record Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
   adapters ActiveRecord
 end
 ```
@@ -394,7 +382,6 @@ The only thing the [Sequel](https://github.com/jeremyevans/sequel) adapter does,
 #### Sequel Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
   adapters Sequel
 end
 ```
@@ -405,11 +392,10 @@ Not even for the Paging, Predicates and Sorting features.
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
   entity { fetch_product_as_hashes }
 
-  filter_by(:name)     { |entity, value| entity.select { |product| product[:name] == value } }
-  filter_by(:category) { |entity, value| entity.select { |product| product[:category] == value } }
+  filter_by(:name)     { |entity, _attribute, value| entity.select { |product| product[:name] == value } }
+  filter_by(:category) { |entity, _attribute, value| entity.select { |product| product[:category] == value } }
 end
 ```
 
@@ -418,13 +404,23 @@ You can have fine grained entity, by overwriting ```initialize``` method:
 
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  # Features, in case you use any, need to be specified before adapters
+  property :name, type: Types::String
 
-  filter_by :name
-  filter_by :category_name
-
-  def initialize(user, options = {})
+  def initialize(options = {})
     super options.merge(entity: Product.visible_to(user))
+  end
+end
+```
+
+You can have fine grained result set, by overwriting ```fetch_result``` method:
+
+```ruby
+class Post::Finder < Trailblazer::Finder
+  property :name, type: Types::String
+
+  def fetch_result
+    super
+    result.merge! test: "I added this"
   end
 end
 ```

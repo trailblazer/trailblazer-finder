@@ -43,7 +43,8 @@ module Trailblazer
       end
 
       def fetch_result
-        @find.query self
+        result = @find.query self
+        result
       end
 
       def count
