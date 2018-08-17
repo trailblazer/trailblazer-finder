@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sequel"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "trailblazer", "~> 2.1.0.rc1"
 
   spec.required_ruby_version = ">= 2.2.0"
 end
