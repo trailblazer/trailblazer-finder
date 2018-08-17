@@ -34,6 +34,10 @@ require "trailblazer/finder/dsl"
 require "trailblazer/finder/find"
 require "trailblazer/finder/base"
 
+# :nocov:
+require "trailblazer/operation/finder" if Gem.loaded_specs.key?("trailblazer")
+# :nocov:
+
 module Trailblazer
   class Finder
     module Types
