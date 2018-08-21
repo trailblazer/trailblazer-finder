@@ -193,7 +193,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.result.map { |n| n[:id] }).to eq [5]
+          expect(finder.result.map { |n| n[:id] }).to eq [1]
           expect(finder.params).to eq value_eq: "Test 1", sort: "id desc", page: 2, per_page: 2
         end
       end

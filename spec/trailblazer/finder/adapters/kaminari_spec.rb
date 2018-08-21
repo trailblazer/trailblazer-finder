@@ -13,7 +13,7 @@ module Trailblazer
 
         def define_finder_class(&block)
           Class.new(Trailblazer::Finder) do
-            adapters ActiveRecord, Kaminari
+            # adapters ActiveRecord, Kaminari
             entity { Product }
 
             class_eval(&block)
@@ -30,10 +30,23 @@ module Trailblazer
           finder_class(&block).new params: filter
         end
 
+        describe "#adapters" do
+          it "cannot use kaminari without an actual orm" do
+            10.times { |i| Product.create name: "product_#{i}" }
+            finder = new_finder do
+              adapters Kaminari
+              paging per_page: 2, min_per_page: 1, max_per_page: 5
+            end
+
+            expect(finder.errors).to eq [{adapters: "Can't use paging adapters like Kaminari without using an ORM like ActiveRecord or Sequel"}]
+          end
+        end
+
         describe "#paging" do
           it "sets the paging values and shows only the first page results" do
             10.times { |i| Product.create name: "product_#{i}" }
             finder = new_finder do
+              adapters ActiveRecord, Kaminari
               paging per_page: 2, min_per_page: 1, max_per_page: 5
             end
 
@@ -46,12 +59,14 @@ module Trailblazer
             5.times { |i| Product.create name: "product_#{i}" }
             5.times { |_i| Product.create name: "product" }
             finder = new_finder name_eq: "product", sort: "id desc", page: 2 do
+              adapters ActiveRecord, Kaminari
               paging per_page: 2, min_per_page: 1, max_per_page: 5
               property :name, type: Types::String
               property :id, type: Types::Integer, sortable: true
             end
 
             expect(finder.result.map(&:id)).to eq [8, 7]
+            expect(finder.count).to eq 2
           end
         end
       end

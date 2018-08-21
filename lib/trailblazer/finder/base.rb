@@ -53,7 +53,7 @@ module Trailblazer
 
       def count
         return if @errors.any?
-        @count ||= result.count
+        @count ||= result.length
       end
 
       def sorting

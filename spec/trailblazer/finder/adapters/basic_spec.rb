@@ -209,7 +209,7 @@ module Trailblazer
               property :id, type: Types::Integer, sortable: true
             end
 
-            expect(finder.result.map { |n| n[:id] }).to eq [5]
+            expect(finder.result.map { |n| n[:id] }).to eq [1]
             expect(finder.count).to eq 1
           end
         end
