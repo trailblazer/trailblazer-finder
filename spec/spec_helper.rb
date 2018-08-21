@@ -9,7 +9,7 @@ RSpec.configure do |config|
   config.expect_with(:rspec) { |c| c.syntax = :expect }
 end
 
-# require "coveralls"
-# Coveralls.wear!
+require "coveralls"
+Coveralls.wear!
 
 require "trailblazer/finder"
