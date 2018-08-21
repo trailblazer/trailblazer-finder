@@ -24,7 +24,7 @@ module Trailblazer
             return true if adapters.empty?
             adapters.each do |adapter|
               if ORM_ADAPTERS.include?(adapter)
-                return false if (adapters & (ORM_ADAPTERS - [adapter])).present?
+                return false if (adapters & (ORM_ADAPTERS - [adapter])).any?
               end
             end
           end
@@ -39,7 +39,7 @@ module Trailblazer
 
           def set_adapters(ctx, **)
             adapters = ctx[:config][:adapters]
-            ctx[:adapters] = adapters.empty? ? ["Basic"] : adapters
+            ctx[:adapters] = (ORM_ADAPTERS & adapters).any? ? adapters : ["Basic"] + adapters
           end
 
           step method(:check_for_adapters),

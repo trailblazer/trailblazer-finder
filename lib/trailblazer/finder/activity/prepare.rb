@@ -15,11 +15,11 @@ module Trailblazer
           [Trailblazer::Activity::Right, [ctx, flow_options]]
         end
 
+        step Subprocess(Prepare::Adapters), id: :prepare_adapters
         step Subprocess(Prepare::Entity), id: :prepare_entity
         step Subprocess(Prepare::Properties), id: :prepare_properties
         step Subprocess(Prepare::Filters), id: :prepare_filters
         step Subprocess(Prepare::Params), id: :prepare_params
-        step Subprocess(Prepare::Adapters), id: :prepare_adapters
         step Subprocess(Prepare::Paging), id: :prepare_paging
         step Subprocess(Prepare::Sorting), id: :prepare_sorting
         step method(:clean_ctx), id: :clean_ctx
