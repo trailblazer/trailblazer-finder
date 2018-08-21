@@ -226,7 +226,7 @@ module Trailblazer
             end
 
             expect(finder.result.first.id).to eq 8
-            expect(finder.result.count).to eq 2
+            expect(finder.result.map(&:id)).to eq [8, 7]
           end
         end
       end

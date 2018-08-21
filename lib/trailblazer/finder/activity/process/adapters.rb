@@ -10,7 +10,7 @@ module Trailblazer
 
           module_function
 
-          def set_orm(ctx, **)
+          def set_orm_adapters(ctx, **)
             ctx[:adapters].each do |adapter|
               next unless (ORM_ADAPTERS + ["Basic"]).include?(adapter)
               ctx[:orm] = {}
@@ -22,7 +22,23 @@ module Trailblazer
             end
           end
 
-          step method(:set_orm)
+          def set_paging_adapters(ctx, **)
+            ctx[:adapters].each do |adapter|
+              next unless PAGING_ADAPTERS.include?(adapter)
+              return false if ctx[:adapters].include?("Basic")
+              ctx[:orm][:paging] = "Trailblazer::Finder::Adapters::#{adapter}::Paging"
+              return true
+            end
+            true
+          end
+
+          def invalid_paging_adapter_error(ctx, **)
+            (ctx[:errors] ||= []) << {adapters: "Can't use paging adapters like Kaminari without using an ORM like ActiveRecord or Sequel"}
+          end
+
+          step method(:set_orm_adapters)
+          step method(:set_paging_adapters)
+          fail method(:invalid_paging_adapter_error)
         end
       end
     end

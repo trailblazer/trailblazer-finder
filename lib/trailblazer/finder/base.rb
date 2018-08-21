@@ -3,6 +3,7 @@
 module Trailblazer
   class Finder
     ORM_ADAPTERS = %w[ActiveRecord Sequel].freeze
+    PAGING_ADAPTERS = %w[Kaminari WillPaginate].freeze
 
     module Base
       def self.included(base)
@@ -15,7 +16,7 @@ module Trailblazer
         config = self.class.config
         ctx = {config: config, options: options}
         @signal, (ctx, *) = Activity::Find.call([ctx, {}])
-
+        @options = options
         @errors = ctx[:errors] || {}
         @find = ctx[:finder]
         @result = @errors.empty? ? fetch_result : {errors: @errors}
@@ -23,14 +24,16 @@ module Trailblazer
       end
 
       def paging
+        return if @errors.any?
         return if @find.paging.empty?
         result = @find.paging
         result = Utils::Hash.remove_keys_from_hash(result, %i[handler max_per_page min_per_page])
-        result[:page] = result.delete(:current_page) || 1
+        result[:page] = result[:page] || result.delete(:current_page) || result[:current_page]
         result
       end
 
       def params
+        return @options[:params] if @errors.any?
         result = {}
         result = result.merge paging
         result = result.merge @find.params
@@ -39,6 +42,7 @@ module Trailblazer
       end
 
       def result?
+        return false if @errors.any?
         result.any?
       end
 
@@ -48,10 +52,12 @@ module Trailblazer
       end
 
       def count
+        return if @errors.any?
         @count ||= result.count
       end
 
       def sorting
+        return if @errors.any?
         return if @find.sorting.empty?
         result = @find.sorting
         result = Utils::Hash.remove_keys_from_hash(result, [:handler])

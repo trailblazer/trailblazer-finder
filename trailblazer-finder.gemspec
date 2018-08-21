@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "activerecord"
   spec.add_development_dependency "bundler"
+  spec.add_development_dependency "kaminari"
+  spec.add_development_dependency "kaminari-activerecord"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.5"
   spec.add_development_dependency "rspec-mocks", "~> 3.5"
@@ -30,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "trailblazer", "~> 2.1.0.rc1"
+  spec.add_development_dependency "will_paginate"
 
   spec.required_ruby_version = ">= 2.2.0"
 end
