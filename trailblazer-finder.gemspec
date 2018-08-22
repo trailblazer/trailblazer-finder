@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name           = "trailblazer-finder"
   spec.version        = Trailblazer::Finder::VERSION
   spec.description    = "Trailblazer Finder Objects"
-  spec.summary        = "Trailblazer based finder objects. It is designed to be used on its own as a separate gem. It was influenced by popular Ransack gem, but in addition to ActiveRecord, it can be used with Sequel, Hash objects, and RomRB." # rubocop:disable Metrics/LineLength
+  spec.summary        = "Trailblazer based finder objects. It is designed to be used on its own as a separate gem. It was influenced by popular Ransack gem, but in addition to ActiveRecord, it can be used with Sequel, Hash objects, and RomRB."
   spec.authors        = ["Nick Sutterer", "Marc Tich"]
   spec.email          = ["apotonick@gmail.com", "marc@mudsu.com"]
   spec.homepage       = "http://trailblazer.to"

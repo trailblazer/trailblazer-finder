@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "pp"
 module Trailblazer
   class Finder
     ORM_ADAPTERS = %w[ActiveRecord Sequel].freeze
@@ -13,8 +14,8 @@ module Trailblazer
       attr_reader :signal, :errors, :result, :filters
 
       def initialize(options = {}) # rubocop:disable Style/OptionHash
-        config = self.class.config
-        ctx = {config: config, options: options}
+        @config = self.class.config
+        ctx = {config: @config, options: options}
         @signal, (ctx, *) = Activity::Find.call([ctx, {}])
         @options = options
         @errors = ctx[:errors] || {}
@@ -48,6 +49,15 @@ module Trailblazer
 
       def fetch_result
         result = @find.query self
+        result = convert_hash_to_struct(result) if result.first.is_a?(Hash)
+        result
+      end
+
+      def convert_hash_to_struct(hash)
+        result = []
+        hash.each do |h|
+          result << (OpenStruct.new h)
+        end
         result
       end
 
