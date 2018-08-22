@@ -100,7 +100,7 @@ module Trailblazer
             property :value, type: Base
           end
 
-          expect(finder.class.config[:properties]).to eq value: {type: Trailblazer::Finder::Base, with: nil, block: nil}
+          expect(finder.class.config[:properties]).to eq value: {type: Trailblazer::Finder::Base}
         end
       end
 
