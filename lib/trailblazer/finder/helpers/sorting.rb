@@ -7,9 +7,7 @@ module Trailblazer
         def sorting
           return if @errors.any?
           return if @find.sorting.empty?
-          result = @find.sorting
-          result = Utils::Hash.remove_keys_from_hash(result, [:handler])
-          result.map { |r| r.join(" ") }.join(", ")
+          @sorting ||= Utils::Hash.remove_keys_from_hash(@find.sorting, [:handler]).map { |r| r.join(" ") }.join(", ")
         end
 
         def sort?(attribute)
