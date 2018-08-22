@@ -54,6 +54,39 @@ module Trailblazer
 
             expect(finder.result.map { |n| n[:name] }).to eq %w[product_0 product_1]
           end
+
+          it "accepts per_page as a parameter" do
+            10.times { |i| Product.create name: "product_#{i}" }
+            finder = new_finder page: 2, per_page: 4 do
+              adapters ActiveRecord, WillPaginate
+              paging per_page: 5, min_per_page: 2, max_per_page: 8
+            end
+
+            expect(finder.result.first.id).to eq 5
+            expect(finder.result.map(&:id)).to eq [5, 6, 7, 8]
+          end
+
+          it "uses max_per_page in finder as maximum per_page" do
+            10.times { |i| Product.create name: "product_#{i}" }
+            finder = new_finder page: 2, per_page: 9 do
+              adapters ActiveRecord, WillPaginate
+              paging per_page: 5, min_per_page: 2, max_per_page: 8
+            end
+
+            expect(finder.result.first.id).to eq 9
+            expect(finder.result.map(&:id)).to eq [9, 10]
+          end
+
+          it "uses min_per_page in finder as minimum per_page" do
+            10.times { |i| Product.create name: "product_#{i}" }
+            finder = new_finder page: 2, per_page: 1 do
+              adapters ActiveRecord, WillPaginate
+              paging per_page: 5, min_per_page: 2, max_per_page: 8
+            end
+
+            expect(finder.result.first.id).to eq 3
+            expect(finder.result.map(&:id)).to eq [3, 4]
+          end
         end
 
         describe "Predicates, Paging and Sorting together" do
