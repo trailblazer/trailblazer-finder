@@ -9,7 +9,7 @@ module Trailblazer
         module Sorting
           module_function
 
-          def set_sorting_handler # rubocop:disable Metrics/CyclomaticComplexity
+          def set_sorting_handler
             lambda do |sort_attributes, entity|
               sort_attributes.delete(:handler)
               attributes = []

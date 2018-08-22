@@ -1,6 +1,7 @@
 require "forwardable"
 require "trailblazer-activity"
 require "dry-types"
+require "ostruct"
 
 require "trailblazer/finder/utils/hash"
 require "trailblazer/finder/utils/string"
