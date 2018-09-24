@@ -81,7 +81,7 @@ Basically for most use cases, Entity is the entity/model/array of hashes you wis
 ```ruby
 class Post::Finder < Trailblazer::Finder
   # Without defining an ORM everything defaults to dealing with hash objects
-  adapters ActiveRecord
+  adapters :ActiveRecord
 
   # Optional if you use it as option in the caller, Model/Entity or Array with Hashes
   entity { Post }
@@ -367,7 +367,7 @@ You can specify the adapters you wish to use inside your enherited Finder class.
 ### Adapters Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  adapters ActiveRecord
+  adapters :ActiveRecord
 end
 ```
 
@@ -377,7 +377,7 @@ The only thing the [ActiveRecord](https://github.com/rails/rails/tree/master/act
 #### Active Record Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  adapters ActiveRecord
+  adapters :ActiveRecord
 end
 ```
 
@@ -387,7 +387,7 @@ The only thing the [Sequel](https://github.com/jeremyevans/sequel) adapter does,
 #### Sequel Example
 ```ruby
 class Post::Finder < Trailblazer::Finder
-  adapters Sequel
+  adapters :Sequel
 end
 ```
 
