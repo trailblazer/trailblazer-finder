@@ -1,3 +1,6 @@
+# 0.10.0
+* Support Trailblazer 2.1.0 wiring api, drop old api
+
 # 0.3.0
 * Change internal context argument to symbols to match trailblazer 2.1 convention.
 

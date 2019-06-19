@@ -1,7 +1,3 @@
-# THIS IS MOSTLY OUT OF DATE
-
-# NEW README AND RELEASE COMING NEXT WEEK
-
 # Trailblazer Finder
 
 Provides DSL for creating [Trailblazer](https://github.com/trailblazer/trailblazer) based Finder Objects. But it is designed to be used on its own as a separate gem. It was influenced by popular [Ransack](https://github.com/activerecord-hackery/ransack) gem, but in addition to [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord), it can be used with [DataMapper](https://github.com/datamapper) or [Sequel](https://github.com/jeremyevans/sequel). It also integrates with [Kaminari](https://github.com/kaminari/kaminari) or [Will Paginate](https://github.com/mislav/will_paginate), as well as [FriendlyId](https://github.com/norman/friendly_id)
@@ -430,9 +426,6 @@ class Post::Finder < Trailblazer::Finder
   end
 end
 ```
-
-### Utils / Helpers
-Coming soon
 
 ## Contributing
 1. Fork it

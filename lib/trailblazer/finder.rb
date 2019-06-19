@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "forwardable"
-require "trailblazer-activity"
+require "trailblazer"
 require "dry-types"
 require "ostruct"
 
@@ -21,19 +21,7 @@ require "trailblazer/finder/adapters/sequel/sorting"
 require "trailblazer/finder/adapters/basic/predicates"
 require "trailblazer/finder/adapters/basic/paging"
 require "trailblazer/finder/adapters/basic/sorting"
-require "trailblazer/finder/activity/prepare/entity"
-require "trailblazer/finder/activity/prepare/properties"
-require "trailblazer/finder/activity/prepare/filters"
-require "trailblazer/finder/activity/prepare/params"
-require "trailblazer/finder/activity/prepare/adapters"
-require "trailblazer/finder/activity/prepare/paging"
-require "trailblazer/finder/activity/prepare/sorting"
 require "trailblazer/finder/activity/prepare"
-require "trailblazer/finder/activity/process/adapters"
-require "trailblazer/finder/activity/process/predicates"
-require "trailblazer/finder/activity/process/paging"
-require "trailblazer/finder/activity/process/sorting"
-require "trailblazer/finder/activity/process/filters"
 require "trailblazer/finder/activity/process"
 require "trailblazer/finder/activity/find"
 require "trailblazer/finder/helpers/basic"
@@ -41,15 +29,18 @@ require "trailblazer/finder/helpers/sorting"
 require "trailblazer/finder/dsl"
 require "trailblazer/finder/find"
 require "trailblazer/finder/base"
-
-# :nocov:
-require "trailblazer/operation/finder" if Gem.loaded_specs.key?("trailblazer")
-# :nocov:
+require "trailblazer/operation/finder"
 
 module Trailblazer
   class Finder
+    DRY_TYPES_VERSION = Gem::Version.new(Dry::Types::VERSION)
+    LEGACY_DRY_TYPES = DRY_TYPES_VERSION <= Gem::Version.new('1')
     module Types
-      include Dry::Types.module
+      if LEGACY_DRY_TYPES
+        include Dry::Types.module
+      else
+        include Dry.Types(default: :nominal)
+      end
     end
 
     include Base
