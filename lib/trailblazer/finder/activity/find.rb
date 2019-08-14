@@ -23,6 +23,7 @@ module Trailblazer
           PREDICATES.each do |predicate|
             next unless splitter.split_key predicate
             next unless properties.include?(splitter.field.to_sym)
+
             result[:name] = splitter.field
             result[:predicate] = predicate
           end
@@ -35,6 +36,7 @@ module Trailblazer
             fetch_filters(ctx, result, attribute) || result if ctx[:filters].include?(attribute)
             fetch_properties(result, attribute, value, ctx[:properties]) || result
             next ctx[:params].delete(attribute) if result.empty?
+
             ctx[:process] ||= {}
             ctx[:process][attribute] = result.merge!(value: value)
           end

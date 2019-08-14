@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "forwardable"
 require "trailblazer-activity"
 require "dry-types"

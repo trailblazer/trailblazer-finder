@@ -7,6 +7,7 @@ module Trailblazer
         def sorting
           return if @errors.any?
           return if @find.sorting.empty?
+
           @sorting ||= Utils::Hash.remove_keys_from_hash(@find.sorting, [:handler]).map { |r| r.join(" ") }.join(", ")
         end
 
@@ -16,11 +17,13 @@ module Trailblazer
 
         def sort_direction_for(attribute)
           return "asc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
+
           "desc"
         end
 
         def reverse_sort_direction_for(attribute)
           return "desc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
+
           "asc"
         end
 
@@ -36,6 +39,7 @@ module Trailblazer
 
         def remove_sort_params_for(attribute)
           return unless sorting.include?(attribute.to_s)
+
           sort = sorting.gsub(/#{attribute} #{sort_direction_for(attribute)}/, "").split(",")
           sort.delete_if(&:blank?)
           params.merge! sort: sort.join(",")

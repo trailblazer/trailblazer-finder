@@ -12,6 +12,7 @@ module Trailblazer
 
           def set_sorting_handler(ctx, **)
             return true if ctx[:sorting].nil?
+
             ctx[:sorting][:handler] = Utils::Extra.apply_handler(
               (Object.const_get(ctx[:orm][:sorting]).__send__ :set_sorting_handler)
             )
