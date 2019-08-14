@@ -12,6 +12,7 @@ module Trailblazer
           def set_eq_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && v.to_s == value.to_s && !v.nil? }, entity
             end
           end
@@ -19,6 +20,7 @@ module Trailblazer
           def set_not_eq_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && v.to_s != value.to_s && !v.nil? }, entity
             end
           end
@@ -62,6 +64,7 @@ module Trailblazer
           def set_cont_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && v.to_s.include?(value.to_s) && !v.nil? }, entity
             end
           end
@@ -69,6 +72,7 @@ module Trailblazer
           def set_not_cont_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !v.to_s.include?(value.to_s) && !v.nil? }, entity
             end
           end
@@ -76,6 +80,7 @@ module Trailblazer
           def set_sw_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && v.to_s.start_with?(value.to_s) && !v.nil? }, entity
             end
           end
@@ -83,6 +88,7 @@ module Trailblazer
           def set_not_sw_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !v.to_s.start_with?(value.to_s) && !v.nil? }, entity
             end
           end
@@ -90,6 +96,7 @@ module Trailblazer
           def set_ew_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && v.to_s.end_with?(value.to_s) && !v.nil? }, entity
             end
           end
@@ -97,6 +104,7 @@ module Trailblazer
           def set_not_ew_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !v.to_s.end_with?(value.to_s) && !v.nil? }, entity
             end
           end

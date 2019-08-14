@@ -73,3 +73,6 @@ Style/Send:
   Exclude:
     - 'lib/trailblazer/finder/adapters/sequel/sorting.rb'
     - 'lib/trailblazer/operation/finder.rb'
+
+RSpec/DescribedClass:
+  SkipBlocks: true

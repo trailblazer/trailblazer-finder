@@ -7,6 +7,7 @@ module Trailblazer
       class String
         def self.blank?(string)
           return false if numeric?(string)
+
           string.nil? || string.strip.empty?
         end
 

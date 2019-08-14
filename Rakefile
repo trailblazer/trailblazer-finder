@@ -26,4 +26,4 @@ task :gem do
 end
 
 desc "Running Tests"
-task default: %i[spec rubocop]
+task default: %i[spec]

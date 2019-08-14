@@ -13,6 +13,7 @@ module Trailblazer
           def check_paging(ctx, **)
             paging = ctx[:config][:paging] || nil
             return false if ctx[:config][:paging].empty? || paging.nil?
+
             true
           end
 
@@ -20,6 +21,7 @@ module Trailblazer
             ctx[:paging] = ctx[:config][:paging] || {}
             ctx[:paging][:current_page] = ctx[:params][:page] || 1
             return true unless ctx[:params][:per_page]
+
             ctx[:paging][:per_page] = ctx[:params][:per_page].to_i || ctx[:paging][:per_page]
             ctx[:paging][:per_page] = ctx[:paging][:max_per_page] if ctx[:params][:per_page] > ctx[:paging][:max_per_page]
             ctx[:paging][:per_page] = ctx[:paging][:min_per_page] if ctx[:params][:per_page] < ctx[:paging][:min_per_page]

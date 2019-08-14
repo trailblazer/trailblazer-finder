@@ -13,6 +13,7 @@ module Trailblazer
           def check_property_types(ctx, **)
             properties = ctx[:config][:properties] || {}
             return true if properties.empty?
+
             properties.each do |key, _value|
               return !properties[key][:type].nil?
             end
@@ -21,6 +22,7 @@ module Trailblazer
           def validate_property_types(ctx, **)
             properties = ctx[:config][:properties] || {}
             return true if properties.empty?
+
             properties.each do |key, _value|
               return properties[key][:type].class.ancestors.include?(Dry::Types::Definition)
             end
