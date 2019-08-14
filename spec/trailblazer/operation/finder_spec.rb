@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "delegate"
 require "trailblazer"
 require "spec_helper_active_record"
@@ -11,6 +13,7 @@ class Product::FinderNoEntity < Trailblazer::Finder
 
   def apply_escaped_name(entity, _attribute, value)
     return unless value.present?
+
     entity.where "lower(name) LIKE ?", "%#{value.downcase}%"
   end
 end
@@ -26,6 +29,7 @@ class Product::FinderWithEntity < Trailblazer::Finder
 
   def apply_escaped_name(entity, _attribute, value)
     return unless value.present?
+
     entity.where "lower(name) LIKE ?", "%#{value.downcase}%"
   end
 end

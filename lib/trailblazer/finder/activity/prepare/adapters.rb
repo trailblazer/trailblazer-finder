@@ -13,6 +13,7 @@ module Trailblazer
           def check_for_adapters(ctx, **)
             adapters = ctx[:config][:adapters]
             return true if adapters.empty?
+
             adapters.each do |adapter|
               return true if Finder::Adapters.constants.include?(adapter.to_sym)
             end
@@ -22,6 +23,7 @@ module Trailblazer
           def validate_adapters(ctx, **)
             adapters = ctx[:config][:adapters]
             return true if adapters.empty?
+
             adapters.each do |adapter|
               if ORM_ADAPTERS.include?(adapter)
                 return false if (adapters & (ORM_ADAPTERS - [adapter])).any?

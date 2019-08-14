@@ -40,6 +40,7 @@ module Trailblazer
 
       def apply_config(options, **)
         return @config = options unless options.empty?
+
         @config = {
           actions:    {},
           entity:     nil,

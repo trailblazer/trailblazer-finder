@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   spec.test_files     = spec.files.grep(%r{^(test)/})
   spec.require_paths  = ["lib"]
 
-  spec.add_dependency "dry-types"
-  spec.add_dependency "trailblazer-activity"
+  spec.add_dependency "dry-types", "~> 0.14.1"
+  spec.add_dependency "trailblazer-activity", "~> 0.7.1"
 
   spec.add_development_dependency "activerecord"
   spec.add_development_dependency "bundler"
@@ -31,8 +31,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sequel"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "trailblazer", "~> 2.1.0.rc1"
+  spec.add_development_dependency "trailblazer", "~> 2.1.0.rc1", "< 2.1.0.rc11"
+  spec.add_development_dependency "trailblazer-macro", "~> 2.1.0.rc1", "< 2.1.0.rc11"
+  spec.add_development_dependency "trailblazer-operation", "~> 0.4.1"
   spec.add_development_dependency "will_paginate"
 
-  spec.required_ruby_version = ">= 2.2.0"
+  spec.required_ruby_version = ">= 2.3.8"
 end

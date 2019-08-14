@@ -12,6 +12,7 @@ module Trailblazer
           def set_eq_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s)
+
               entity.where { ::Sequel[attribute.to_sym] =~ value }
             end
           end
@@ -19,6 +20,7 @@ module Trailblazer
           def set_not_eq_handler
             lambda do |entity, attribute, value|
               return if Utils::String.blank?(value.to_s)
+
               entity.where { ::Sequel[attribute.to_sym] !~ value }
             end
           end

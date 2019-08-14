@@ -13,6 +13,7 @@ module Trailblazer
           def set_orm_adapters(ctx, **)
             ctx[:adapters].each do |adapter|
               next unless (ORM_ADAPTERS + ["Basic"]).include?(adapter)
+
               ctx[:orm] = {}
               ctx[:orm][:adapter] = adapter
               ctx[:orm][:predicates] = "Trailblazer::Finder::Adapters::#{adapter}::Predicates"
@@ -26,6 +27,7 @@ module Trailblazer
             ctx[:adapters].each do |adapter|
               next unless PAGING_ADAPTERS.include?(adapter)
               return false if ctx[:adapters].include?("Basic")
+
               ctx[:orm][:paging] = "Trailblazer::Finder::Adapters::#{adapter}::Paging"
               return true
             end
