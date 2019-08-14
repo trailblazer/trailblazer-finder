@@ -17,6 +17,7 @@ module Trailblazer
 
           def set_sorting(ctx, **)
             return true if ctx[:params][:sort].nil?
+
             sorting = ctx[:params][:sort]
             config = ctx[:config][:sorting]
             ctx[:sorting] = ctx[:sorting] || {}
@@ -28,6 +29,7 @@ module Trailblazer
 
           def fetch_sort_direction(config_direction, params_direction = nil)
             return config_direction == :asc ? :asc : :desc if params_direction.nil?
+
             case params_direction
               when ":asc", :asc, "asc" then :asc
               else :desc

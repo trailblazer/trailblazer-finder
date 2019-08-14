@@ -19,11 +19,13 @@ module Trailblazer
               entity.sort do |this, that|
                 attributes.reduce(0) do |diff, order|
                   next diff if diff != 0 # this and that have differed at an earlier order entry
+
                   key, direction = order
                   # deal with nil cases
                   next  0 if this[key].nil? && that[key].nil?
                   next  1 if this[key].nil?
                   next -1 if that[key].nil?
+
                   # do the actual comparison
                   comparison = this[key] <=> that[key]
                   comparison * direction

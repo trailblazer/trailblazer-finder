@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 module Trailblazer
@@ -10,13 +12,13 @@ module Trailblazer
 
         describe ".deep_locate" do
           it "locates enumerables for which the given comparator returns true for at least one element" do
-            expect(Utils::Hash.deep_locate(->(k, v, _) { k == :value && v.to_s == "Test 2" && !v.nil? }, hash))
+            expect(described_class.deep_locate(->(k, v, _) { k == :value && v.to_s == "Test 2" && !v.nil? }, hash))
               .to eq [{id: 2, value: "Test 2"}]
           end
         end
 
         it "returns an empty array if nothing was found" do
-          expect(Utils::Hash.deep_locate(:muff, foo: "bar")).to eq([])
+          expect(described_class.deep_locate(:muff, foo: "bar")).to eq([])
         end
       end
     end

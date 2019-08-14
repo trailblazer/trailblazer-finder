@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Really gotta clean this up, but can't be bothered right now
 module Trailblazer
   class Operation
@@ -52,6 +54,7 @@ module Trailblazer
 
         def apply_id(params)
           return if params[:id].nil?
+
           params[:id_eq] = params[:id] unless params.key?("id")
         end
       end
