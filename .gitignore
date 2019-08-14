@@ -17,3 +17,6 @@ test/tmp
 test/version_tmp
 tmp
 bitbucket-pipelines.yml
+.byebug_history
+.idea/
+.tool-versions
