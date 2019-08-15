@@ -16,7 +16,7 @@ module Trailblazer
 
       def process_filters(ctx)
         @params.reduce(@entity) do |entity, (name, value)|
-          value = Utils::String.date(value) if Utils::String.date?(value)
+          value = Utils::String.to_date(value) if Utils::String.date?(value)
           new_entity = ctx.instance_exec entity, @filters[name.to_sym][:name], value, &@filters[name.to_sym][:handler]
           new_entity || entity
         end
