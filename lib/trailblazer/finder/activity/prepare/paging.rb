@@ -23,8 +23,8 @@ module Trailblazer
             return true unless ctx[:params][:per_page]
 
             ctx[:paging][:per_page] = ctx[:params][:per_page].to_i || ctx[:paging][:per_page]
-            ctx[:paging][:per_page] = ctx[:paging][:max_per_page] if ctx[:params][:per_page] > ctx[:paging][:max_per_page]
-            ctx[:paging][:per_page] = ctx[:paging][:min_per_page] if ctx[:params][:per_page] < ctx[:paging][:min_per_page]
+            ctx[:paging][:per_page] = ctx[:paging][:max_per_page] if ctx[:paging][:per_page] > ctx[:paging][:max_per_page]
+            ctx[:paging][:per_page] = ctx[:paging][:min_per_page] if ctx[:paging][:per_page] < ctx[:paging][:min_per_page]
             true
           end
 
