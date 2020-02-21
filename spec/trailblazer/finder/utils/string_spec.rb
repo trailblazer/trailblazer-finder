@@ -35,6 +35,7 @@ module Trailblazer
             expect(described_class.date?("2018/01/01")).to eq true
             expect(described_class.date?("2018.01.01")).to eq true
             expect(described_class.date?("21-12-2018")).to eq true
+            expect(described_class.date?("0fae2de1-6537-4d36-9cdb-30edf1e37990")).to eq false
           end
         end
 

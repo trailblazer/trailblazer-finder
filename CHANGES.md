@@ -1,3 +1,6 @@
+# 0.2.7
+* Don't cast uuids to dates in the filters
+
 # 0.1.4
 * Updated DataMapper Adapter to include sorting by multiple columns/directions and the predicate feature.
 
