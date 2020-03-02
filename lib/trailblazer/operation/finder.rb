@@ -8,9 +8,9 @@ module Trailblazer
 
       extension = Trailblazer::Activity::TaskWrap::Merge.new(
         Wrap::Inject::Defaults(
-          "finder.class"        => finder_class,
-          "finder.entity"       => entity,
-          "finder.action"       => action
+            :"finder.class" => finder_class,
+            :"finder.entity" => entity,
+            :"finder.action" => action
         )
       )
 
@@ -29,12 +29,12 @@ module Trailblazer
 
       class Builder
         def call(options, params)
-          finder_class  = options["finder.class"]
-          entity        = options["finder.entity"] || nil
-          action        = options["finder.action"] || :all
+          finder_class  = options[:"finder.class"]
+          entity        = options[:"finder.entity"]
+          action        = options[:"finder.action"]
           action        = :all unless %i[all single].include?(action)
 
-          send("#{action}!", finder_class, entity, params, options["finder.action"])
+          send("#{action}!", finder_class, entity, params, options[:"finder.action"])
         end
 
         private

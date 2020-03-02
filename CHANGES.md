@@ -1,3 +1,6 @@
+# 0.3.0
+* Change internal context argument to symbols to match trailblazer 2.1 convention.
+
 # 0.2.7
 * Don't cast uuids to dates in the filters
 
