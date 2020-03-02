@@ -23,7 +23,6 @@ module Trailblazer
       end
 
       def process_paging(ctx)
-        # ctx.instance_exec @paging[:current_page], @paging[:per_page], (process_filters ctx), &@paging[:handler]
         ctx.instance_exec @paging[:current_page], @paging[:per_page], (@sorting.empty? ? (process_filters ctx) : (process_sorting ctx)), &@paging[:handler]
       end
 

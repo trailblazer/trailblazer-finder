@@ -93,7 +93,7 @@ Lint/UnreachableCode:
   Enabled: false
 Lint/Void:
   Enabled: false
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
 Metrics/AbcSize:
   Max: 25
