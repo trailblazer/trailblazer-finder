@@ -37,10 +37,11 @@ module Trailblazer
 
         def self.date?(date)
           return false unless
-              date.kind_of?(::DateTime) ||
-              date.kind_of?(::Date) ||
-              date.kind_of?(::String)
-          return false if date.kind_of?(::String) && date.size == 36 # Ignore uuids that could get casted to dates
+              date.is_a?(::DateTime) ||
+              date.is_a?(::Date) ||
+              date.is_a?(::String)
+          return false if date.is_a?(::String) && date.size == 36 # Ignore uuids that could get casted to dates
+
           date_hash = ::Date._parse(date.to_s)
           Date.valid_date?(date_hash[:year].to_i, date_hash[:mon].to_i, date_hash[:mday].to_i)
         end
