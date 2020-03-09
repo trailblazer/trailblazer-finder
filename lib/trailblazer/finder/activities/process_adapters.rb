@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class ProcessAdapters < Trailblazer::Activity::Railway
         def set_orm_adapters(ctx, **)
           ctx[:adapters].each do |adapter|

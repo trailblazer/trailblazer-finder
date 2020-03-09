@@ -10,12 +10,12 @@ require_relative "prepare_sorting"
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       # Prepare Activity
       class Prepare < Trailblazer::Activity::Railway
         def clean_ctx((ctx, flow_options), **)
           ctx.delete(:options)
-          [Trailblazer::Activity::Right, [ctx, flow_options]]
+          [Activity::Right, [ctx, flow_options]]
         end
 
         step Subprocess(PrepareAdapters)

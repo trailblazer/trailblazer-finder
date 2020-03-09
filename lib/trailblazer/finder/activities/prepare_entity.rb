@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class PrepareEntity < Trailblazer::Activity::Railway
         def validate_entity(ctx, **)
           ctx.dig(:options,:entity) || ctx.dig(:config,:entity)
