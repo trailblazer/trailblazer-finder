@@ -1,62 +1,55 @@
-# frozen_string_literal: true
-
 # Really gotta clean this up, but can't be bothered right now
-module Trailblazer
-  class Operation
-    def self.Finder(finder_class, action = nil, entity = nil)
-      task = Trailblazer::Activity::TaskBuilder::Binary(Finder.new)
+Trailblazer::Operation.instance_eval do
+  def self.Finder(finder_class, action = nil, entity = nil)
+    task = Trailblazer::Activity::TaskBuilder::Binary(Finder.new)
+    injection = Trailblazer::Activity::TaskWrap::Inject::Defaults::Extension(
+      :"finder.class"  => finder_class,
+      :"finder.entity" => entity,
+      :"finder.action" => action
+    )
 
-      extension = Trailblazer::Activity::TaskWrap::Merge.new(
-        Wrap::Inject::Defaults(
-            :"finder.class" => finder_class,
-            :"finder.entity" => entity,
-            :"finder.action" => action
-        )
-      )
+    {task: task, id: "finder.build", extensions: [injection]}
+  end
 
-      {task: task, id: "finder.build", Trailblazer::Activity::DSL::Extension.new(extension) => true}
+  class Finder
+    def call(ctx, options, **)
+      builder                = Finder::Builder.new
+      ctx[:finder]           = finder = builder.call(options, options[:params])
+      ctx[:model]            = finder # Don't like it, but somehow it's needed if contracts are loaded
+      ctx[:"result.finder"]  = Trailblazer::Operation::Result.new(!finder.nil?, {})
+
+
+      ctx[:"result.finder"].success?
     end
 
-    class Finder
-      def call(options, params:, **)
-        builder                   = Finder::Builder.new
-        options[:finder]          = finder = builder.call(options, params)
-        options[:model]           = finder # Don't like it, but somehow it's needed if contracts are loaded
-        options["result.finder"]  = result = Result.new(!finder.nil?, {})
+    class Builder
+      def call(options, params)
+        finder_class  = options[:"finder.class"]
+        entity        = options[:"finder.entity"]
+        action        = options[:"finder.action"]
+        action        = :all unless %i[all single].include?(action)
 
-        result.success?
+        send("#{action}!", finder_class, entity, params, options[:"finder.action"])
       end
 
-      class Builder
-        def call(options, params)
-          finder_class  = options[:"finder.class"]
-          entity        = options[:"finder.entity"]
-          action        = options[:"finder.action"]
-          action        = :all unless %i[all single].include?(action)
+      private
 
-          send("#{action}!", finder_class, entity, params, options[:"finder.action"])
+      def all!(finder_class, entity, params, *)
+        finder_class.new(entity: entity, params: params)
+      end
+
+      def single!(finder_class, entity, params, *)
+        apply_id(params)
+        if entity.nil?
+          finder_class.new(params: params).result.first
+        else
+          finder_class.new(entity: entity, params: params).result.first
         end
+      end
 
-        private
-
-        def all!(finder_class, entity, params, *)
-          finder_class.new(entity: entity, params: params)
-        end
-
-        def single!(finder_class, entity, params, *)
-          apply_id(params)
-          if entity.nil?
-            finder_class.new(params: params).result.first
-          else
-            finder_class.new(entity: entity, params: params).result.first
-          end
-        end
-
-        def apply_id(params)
-          return if params[:id].nil?
-
-          params[:id_eq] = params[:id] unless params.key?("id")
-        end
+      def apply_id(params)
+        return if params[:id].nil?
+        params[:id_eq] = params[:id] unless params.key?("id")
       end
     end
   end
