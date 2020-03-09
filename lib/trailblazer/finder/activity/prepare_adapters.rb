@@ -17,7 +17,7 @@ module Trailblazer
 
         ## Only one ORM can be accepted
         def validate_adapters(ctx, **)
-          adapters = ctx[:config][:adapters]
+          adapters = ctx.dig(:config, :adapters)
           return true if adapters.empty?
 
           adapters.each do |adapter|
@@ -25,11 +25,11 @@ module Trailblazer
               return false if (adapters & (ORM_ADAPTERS - [adapter])).any?
             end
           end
+          true
         end
 
         def invalid_adapters_error((ctx, flow_options), **_circuit_options)
           (ctx[:errors] ||= []) << {adapters: "One or more of the specified adapters are invalid"}
-          true
         end
 
         def multiple_orm_error((ctx, flow_options), **_circuit_options)

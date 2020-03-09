@@ -5,7 +5,7 @@ module Trailblazer
     module Activity
       class PrepareFilters < Trailblazer::Activity::Railway
         def validate_filters(ctx, **)
-          filters = ctx[:config][:filters]
+          filters = ctx.dig(:config, :filters)
           filters.each do |key, _value|
             return false if !filters[key][:with].nil? && !filters[key][:with].is_a?(Symbol)
           end
