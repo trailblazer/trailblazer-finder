@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class PrepareSorting < Trailblazer::Activity::Railway
         def check_sorting(ctx, **)
           sorting = ctx[:config][:sorting] || nil

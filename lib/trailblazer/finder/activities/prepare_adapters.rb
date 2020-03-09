@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       # Adapters Activity
       class PrepareAdapters < Trailblazer::Activity::Railway
         def check_for_adapters(ctx, **)

@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class ProcessPredicates < Trailblazer::Activity::Railway
         def set_properties_handler(ctx, **)
           return true if ctx[:process].nil?
