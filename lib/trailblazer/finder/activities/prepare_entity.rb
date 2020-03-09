@@ -16,9 +16,9 @@ module Trailblazer
           ctx[:entity] = ctx.dig(:options,:entity) || instance_eval(&ctx[:config][:entity])
         end
 
-        step (:validate_entity)
-        fail (:invalid_entity_error)
-        step (:set_entity)
+        step :validate_entity
+        fail :invalid_entity_error
+        step :set_entity
       end
     end
   end

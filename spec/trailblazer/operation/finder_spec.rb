@@ -54,7 +54,7 @@ describe "Trailblazer::Operation - Finder Macro" do
   before do
     Product.destroy_all
     Product.reset_pk_sequence
-    20.times { |i| Product.create name: "product_#{i}" }
+    22.times { |i| Product.create name: "product_#{i}" }
   end
 
   after do
@@ -91,6 +91,13 @@ describe "Trailblazer::Operation - Finder Macro" do
     expect(result[:finder].result.last.name).to eq "product_19"
   end
 
+  it "Can find multiple rows by escaped name if key is string" do
+    params = {"escaped_name" => "product_1"}
+    result = Product::Index.call(params: params)
+
+    expect(result[:finder].result.last.name).to eq "product_19"
+  end
+
   it "Can find a single row by id when no entity type is given in macro" do
     params = {id: 8}
     result = Product::ShowNoEntity.call(params: params)
@@ -109,6 +116,7 @@ describe "Trailblazer::Operation - Finder Macro" do
     params = {escaped_name: "product_1"}
     result = Product::IndexNoEntity.call(params: params)
 
+    expect(result[:finder].result.count).to eq 11
     expect(result[:finder].result.last.name).to eq "product_19"
   end
 end

@@ -27,15 +27,9 @@ module Trailblazer
           true
         end
 
-        step (:check_paging),
-             Output(:failure) => Track(:end_paging)
-        step (:set_paging),
-             Output(:success) => Track(:end_paging),
-             Output(:failure) => Track(:failure)
-        step (:clear_paging),
-             magnetic_to: :end_paging,
-             Output(:success) => Track(:success),
-             Output(:failure) => Track(:failure)
+        step :check_paging, Output(:failure) => Track(:end_paging)
+        step :set_paging
+        step :clear_paging, magnetic_to: :end_paging
       end
     end
   end

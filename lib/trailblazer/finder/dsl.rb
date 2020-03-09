@@ -26,10 +26,11 @@ module Trailblazer
       end
 
       def filter_by(name, options = {}, &block)
-        config[:filters][name] = {}
-        config[:filters][name][:name] = name
-        config[:filters][name][:with] = options[:with] if options.include?(:with)
-        config[:filters][name][:block] = block || nil
+        filter_name = name.to_sym
+        config[:filters][filter_name] = {}
+        config[:filters][filter_name][:name] = name
+        config[:filters][filter_name][:with] = options[:with] if options.include?(:with)
+        config[:filters][filter_name][:block] = block || nil
       end
 
       def adapters(*adapters)

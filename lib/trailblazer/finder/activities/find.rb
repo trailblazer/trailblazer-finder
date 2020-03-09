@@ -11,13 +11,13 @@ module Trailblazer
         def process_params(ctx, params:,  **)
           params.each do |attribute, value|
             result = {}
-
-            fetch_filters(ctx, result, attribute) || result if ctx[:filters].include?(attribute)
-            fetch_properties(result, attribute, value, ctx[:properties]) || result
+            filter_attribute = attribute.to_sym
+            fetch_filters(ctx, result, filter_attribute) || result if ctx[:filters].include?(filter_attribute)
+            fetch_properties(result, filter_attribute, value, ctx[:properties]) || result
             next ctx[:params].delete(attribute) if result.empty?
 
             ctx[:process] ||= {}
-            ctx[:process][attribute] = result.merge!(value: value)
+            ctx[:process][filter_attribute] = result.merge!(value: value)
           end
           true
         end

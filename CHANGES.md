@@ -1,3 +1,6 @@
+# 0.10.3
+* Add support for strings in filters keys.
+
 # 0.10.2
 * Add support for ActiveSupport::Hash as params
 

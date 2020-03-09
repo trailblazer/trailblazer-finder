@@ -18,9 +18,9 @@ module Trailblazer
           ctx[:params] = ctx[:options][:params] || {}
         end
 
-        step (:validate_params)
-        fail (:invalid_params_error)
-        step (:set_params)
+        step :validate_params
+        fail :invalid_params_error
+        step :set_params
       end
     end
   end
