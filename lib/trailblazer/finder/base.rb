@@ -17,7 +17,7 @@ module Trailblazer
       def initialize(options = {}) # rubocop:disable Style/OptionHash
         config = self.class.config
         ctx = {config: config, options: options}
-        @signal, (ctx, *) = Activity::Find.call([ctx, {}])
+        @signal, (ctx, *) = Activities::Find.call([ctx, {}])
         @options = options
         @errors = ctx[:errors] || {}
         @find = ctx[:finder]

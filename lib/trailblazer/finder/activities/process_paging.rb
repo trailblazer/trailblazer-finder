@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class ProcessPaging < Trailblazer::Activity::Railway
         def set_paging_handler(ctx, **)
           return true if ctx[:paging].nil?

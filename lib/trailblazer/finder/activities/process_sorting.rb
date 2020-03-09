@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class ProcessSorting < Trailblazer::Activity::Railway
         def set_sorting_handler(ctx, **)
           return true if ctx[:sorting].nil?

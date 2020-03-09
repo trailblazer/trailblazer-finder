@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class PrepareFilters < Trailblazer::Activity::Railway
         def validate_filters(ctx, **)
           filters = ctx.dig(:config, :filters)

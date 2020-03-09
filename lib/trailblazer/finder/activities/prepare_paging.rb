@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class PreparePaging < Trailblazer::Activity::Railway
         def check_paging(ctx, **)
           paging = ctx[:config][:paging] || nil

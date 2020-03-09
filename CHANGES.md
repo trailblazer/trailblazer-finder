@@ -1,3 +1,6 @@
+# 0.10.1
+* Move activities to Activities folder to avoid conflict with Activity Class.
+
 # 0.10.0
 * Support Trailblazer 2.1.0 wiring api, drop old api
 

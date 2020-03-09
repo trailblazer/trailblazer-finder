@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       # Params Activity
       class PrepareParams < Trailblazer::Activity::Railway
         def validate_params(_ctx, **)

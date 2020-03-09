@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class ProcessFilters < Trailblazer::Activity::Railway
         def set_filter_handlers(ctx, **)
           return true unless ctx[:process]

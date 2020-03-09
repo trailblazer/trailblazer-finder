@@ -2,7 +2,7 @@
 
 module Trailblazer
   class Finder
-    module Activity
+    module Activities
       class PrepareProperties < Trailblazer::Activity::Railway
         def check_property_types(ctx, **)
           properties = ctx[:config][:properties] || {}
