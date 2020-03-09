@@ -37,15 +37,10 @@ module Trailblazer
           true
         end
 
-        step (:check_sorting),
-             Output(:success) => Track(:paging),
+        step :check_sorting,
              Output(:failure) => Track(:end_sorting)
-        step (:set_sorting),
-             magnetic_to: :paging,
-             Output(:success) => Track(:end_sorting),
-             Output(:failure) => Track(:failure)
-        step (:clear_sorting),
-             magnetic_to: :end_sorting
+        step :set_sorting
+        step :clear_sorting, magnetic_to: :end_sorting
       end
     end
   end
