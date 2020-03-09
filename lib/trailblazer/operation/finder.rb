@@ -49,7 +49,7 @@ Trailblazer::Operation.instance_eval do
 
       def apply_id(params)
         return if params[:id].nil?
-        params[:id_eq] = params[:id] unless params.key?("id")
+        params[:id_eq] = params[:id]
       end
     end
   end
