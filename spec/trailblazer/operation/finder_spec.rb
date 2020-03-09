@@ -69,6 +69,14 @@ describe "Trailblazer::Operation - Finder Macro" do
     expect(result[:finder].name).to eq "product_4"
   end
 
+  it "Can find a single row by id from ActiveSupport::HashWithIndifferentAccess" do
+    params = ActiveSupport::HashWithIndifferentAccess.new({id: 6})
+    result = Product::Show.call(params: params)
+
+    expect(result[:finder].name).to eq "product_5"
+  end
+
+
   it "Can find a single row by name" do
     params = {name_eq: "product_2"}
     result = Product::Show.call(params: params)

@@ -1,3 +1,6 @@
+# 0.10.2
+* Add support for ActiveSupport::Hash as params
+
 # 0.10.1
 * Move activities to Activities folder to avoid conflict with Activity Class.
 
