@@ -20,3 +20,5 @@ bitbucket-pipelines.yml
 .byebug_history
 .idea/
 .tool-versions
+*.iml
+.rubocop-https---raw-githubusercontent-com-trailblazer-meta-master-rubocop-yml

@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
+require_relative "process_adapters"
+require_relative "process_predicates"
+require_relative "process_paging"
+require_relative "process_sorting"
+require_relative "process_filters"
+
 module Trailblazer
   class Finder
     module Activity
       # Process Activity
-      module Process
-        extend Trailblazer::Activity::Railway()
-
-        step Subprocess(Process::Adapters), id: :process_adapters
-        step Subprocess(Process::Predicates), id: :process_predicates
-        step Subprocess(Process::Filters), id: :process_filters
-        step Subprocess(Process::Paging), id: :process_paging
-        step Subprocess(Process::Sorting), id: :process_sorting
+      class Process < Trailblazer::Activity::Railway
+        step Subprocess(ProcessAdapters)
+        step Subprocess(ProcessPredicates)
+        step Subprocess(ProcessFilters)
+        step Subprocess(ProcessPaging)
+        step Subprocess(ProcessSorting)
       end
     end
   end
