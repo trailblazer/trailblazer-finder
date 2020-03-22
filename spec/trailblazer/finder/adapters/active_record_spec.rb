@@ -13,7 +13,7 @@ module Trailblazer
 
         def define_finder_class(&block)
           Class.new(Trailblazer::Finder) do
-            adapters ActiveRecord
+            adapter "ActiveRecord"
             entity { Product }
 
             class_eval(&block)

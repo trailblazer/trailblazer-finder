@@ -60,29 +60,20 @@ module Trailblazer
         it "checks for a valid adapter and returns an error" do
           entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}]
           finder = new_finder entity, value_eq: "Test 1" do
-            adapters :NonExisting
+            adapter :NonExisting
           end
 
-          expect(finder.errors).to eq [{adapters: "One or more of the specified adapters are invalid"}]
-        end
-
-        it "checks if multiple orm adapters are requested and returns an error" do
-          entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}]
-          finder = new_finder entity, value_eq: "Test 1" do
-            adapters :ActiveRecord, :Sequel
-          end
-
-          expect(finder.errors).to eq [{adapters: "More then one ORM adapter specified"}]
+          expect(finder.errors).to eq [{adapter: "The specified adapter are invalid"}]
         end
 
         it "sets the adapter in the config" do
           entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}]
           finder = new_finder entity, value_eq: "Test 1" do
-            adapters ActiveRecord
+            adapter "ActiveRecord"
             property :value, type: Base
           end
 
-          expect(finder.class.config[:adapters]).to eq ["ActiveRecord"]
+          expect(finder.class.config[:adapter]).to eq "ActiveRecord"
         end
       end
 

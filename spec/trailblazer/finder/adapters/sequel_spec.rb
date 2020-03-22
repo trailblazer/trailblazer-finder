@@ -13,7 +13,7 @@ module Trailblazer
 
         def define_finder_class(&block)
           Class.new(Trailblazer::Finder) do
-            adapters Sequel
+            adapter "Sequel"
             entity { SProduct }
 
             class_eval(&block)

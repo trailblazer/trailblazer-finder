@@ -3,7 +3,6 @@
 module Trailblazer
   class Finder
     module Activities
-      # Find Activity
       class Find < Trailblazer::Activity::Railway
         PREDICATES = %w[eq not_eq blank not_blank lt lte gt gte sw not_sw ew not_ew cont not_cont].freeze
 

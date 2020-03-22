@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "prepare_adapters"
+require_relative "prepare_adapter"
 require_relative "prepare_entity"
 require_relative "prepare_properties"
 require_relative "prepare_filters"
@@ -11,14 +11,13 @@ require_relative "prepare_sorting"
 module Trailblazer
   class Finder
     module Activities
-      # Prepare Activity
       class Prepare < Trailblazer::Activity::Railway
         def clean_ctx((ctx, flow_options), **)
           ctx.delete(:options)
           [Activity::Right, [ctx, flow_options]]
         end
 
-        step Subprocess(PrepareAdapters)
+        step Subprocess(PrepareAdapter)
         step Subprocess(PrepareEntity)
         step Subprocess(PrepareProperties)
         step Subprocess(PrepareFilters)
