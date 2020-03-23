@@ -3,9 +3,8 @@
 module Trailblazer
   class Finder
     module Adapters
-      # ActiveRecord Adapter
       module Kaminari
-        # Kaminari Paging Adapter
+        # Kaminari Paginator
         module Paging
           module_function
 

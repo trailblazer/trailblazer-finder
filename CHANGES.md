@@ -1,3 +1,6 @@
+# 0.50.0
+* Breaking change: Use adapter and paginator configs instead of mixing them in adapters config.
+
 # 0.10.3
 * Add support for strings in filters keys.
 

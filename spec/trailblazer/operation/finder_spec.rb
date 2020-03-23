@@ -5,7 +5,7 @@ require "trailblazer"
 require "spec_helper_active_record"
 
 class Product::FinderNoEntity < Trailblazer::Finder
-  adapters ActiveRecord
+  adapter "ActiveRecord"
 
   property :id, type: Types::Integer
   property :name, type: Types::String, sortable: true
@@ -19,7 +19,7 @@ class Product::FinderNoEntity < Trailblazer::Finder
 end
 
 class Product::FinderWithEntity < Trailblazer::Finder
-  adapters ActiveRecord
+  adapter "ActiveRecord"
 
   entity { Product }
 

@@ -9,7 +9,6 @@ require_relative "process_filters"
 module Trailblazer
   class Finder
     module Activities
-      # Process Activity
       class Process < Trailblazer::Activity::Railway
         step Subprocess(ProcessAdapters)
         step Subprocess(ProcessPredicates)
