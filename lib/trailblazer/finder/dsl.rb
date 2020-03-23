@@ -33,10 +33,12 @@ module Trailblazer
         config[:filters][filter_name][:block] = block || nil
       end
 
-      def adapters(*adapters)
-        adapters.each do |adapter|
-          config[:adapters].push adapter.to_s.split("::").last.gsub("}>", "") if config[:adapters]
-        end
+      def adapter(adapter)
+        config[:adapter] = adapter.to_s
+      end
+
+      def paginator(paginator)
+        config[:paginator] = paginator.to_s
       end
 
       def apply_config(options, **)

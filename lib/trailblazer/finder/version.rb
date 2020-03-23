@@ -2,6 +2,6 @@
 
 module Trailblazer
   class Finder
-    VERSION = "0.10.3".freeze
+    VERSION = "0.50.0".freeze
   end
 end
