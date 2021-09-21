@@ -4,7 +4,9 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "pry-byebug"
+gem "pry-byebug", platform: :mri
+gem "sqlite3", platform: :mri
+gem 'jdbc-sqlite3', :platform => :jruby
 
 # Had to add this for a bit, since none of the latest changes have been pushed to gems yet
 # gem "trailblazer", github: "trailblazer/trailblazer"

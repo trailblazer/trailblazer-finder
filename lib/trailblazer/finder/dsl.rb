@@ -13,7 +13,7 @@ module Trailblazer
         config[:entity] = block
       end
 
-      def paging(options, **)
+      def paging(**options)
         config[:paging][:per_page] = options[:per_page] || 25
         config[:paging][:min_per_page] = options[:min_per_page] || 10
         config[:paging][:max_per_page] = options[:max_per_page] || 100
