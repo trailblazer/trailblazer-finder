@@ -32,7 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rspec"
   spec.add_development_dependency "sequel"
   spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "trailblazer", "~> 2.1.0"
   spec.add_development_dependency "will_paginate"
   spec.add_development_dependency "trailblazer-developer"
