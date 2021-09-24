@@ -12,7 +12,7 @@ Trailblazer::Operation.instance_eval do
   end
 
   class Finder
-    def call(ctx, options, **)
+    def call(ctx, **options)
       builder                = Finder::Builder.new
       ctx[:finder]           = finder = builder.call(options, options[:params])
       ctx[:model]            = finder # Don't like it, but somehow it's needed if contracts are loaded
