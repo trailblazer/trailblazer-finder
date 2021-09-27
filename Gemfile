@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "debug", platform: :mri
 gem "sqlite3", platform: :mri
 gem 'jdbc-sqlite3', :platform => :jruby
 
