@@ -1,3 +1,6 @@
+# 0.60.0
+* Support Ruby 3.0
+
 # 0.50.0
 * Breaking change: Use adapter and paginator configs instead of mixing them in adapters config.
 
