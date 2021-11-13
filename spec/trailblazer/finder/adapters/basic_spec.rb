@@ -173,7 +173,10 @@ module Trailblazer
           end
 
           it "accepts per_page as a parameter" do
-            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"}, {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}]
+            entity = [
+              {id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"},
+              {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}
+            ]
             finder = new_finder entity, page: 2, per_page: 4 do
               paging per_page: 5, min_per_page: 2, max_per_page: 8
             end
@@ -183,7 +186,10 @@ module Trailblazer
           end
 
           it "uses max_per_page in finder as maximum per_page" do
-            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"}, {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}]
+            entity = [
+              {id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"},
+              {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}
+            ]
             finder = new_finder entity, page: 2, per_page: 9 do
               paging per_page: 5, min_per_page: 2, max_per_page: 8
             end
@@ -193,7 +199,10 @@ module Trailblazer
           end
 
           it "uses min_per_page in finder as minimum per_page" do
-            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"}, {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}]
+            entity = [
+              {id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"},
+              {id: 5, value: "Test 5"}, {id: 6, value: "Test 6"}, {id: 7, value: "Test 7"}, {id: 8, value: "Test 8"}, {id: 9, value: "Test 9"}, {id: 10, value: "Test 10"}
+            ]
             finder = new_finder entity, page: 2, per_page: 1 do
               paging per_page: 5, min_per_page: 2, max_per_page: 8
             end

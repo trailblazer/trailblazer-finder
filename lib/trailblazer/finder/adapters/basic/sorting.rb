@@ -10,7 +10,7 @@ module Trailblazer
           module_function
 
           def set_sorting_handler
-            lambda do |sort_attributes, entity|
+            ->(sort_attributes, entity) do
               sort_attributes.delete(:handler)
               attributes = []
               sort_attributes.each do |attr|

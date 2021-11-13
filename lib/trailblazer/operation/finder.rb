@@ -18,7 +18,6 @@ Trailblazer::Operation.instance_eval do
       ctx[:model]            = finder # Don't like it, but somehow it's needed if contracts are loaded
       ctx[:"result.finder"]  = Trailblazer::Operation::Result.new(!finder.nil?, {})
 
-
       ctx[:"result.finder"].success?
     end
 
@@ -49,6 +48,7 @@ Trailblazer::Operation.instance_eval do
 
       def apply_id(params)
         return if params[:id].nil?
+
         params[:id_eq] = params[:id]
       end
     end

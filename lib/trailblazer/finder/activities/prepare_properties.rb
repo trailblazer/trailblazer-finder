@@ -18,11 +18,7 @@ module Trailblazer
           return true if properties.empty?
 
           properties.each do |key, _value|
-            if LEGACY_DRY_TYPES
-              return properties[key][:type].class.ancestors.include?(::Dry::Types::Definition)
-            else
-              return properties[key][:type].class.ancestors.include?(::Dry::Types::Nominal)
-            end
+            return properties[key][:type].class.ancestors.include?(::Dry::Types::Nominal)
           end
         end
 

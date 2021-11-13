@@ -6,8 +6,7 @@ module Trailblazer
       class Find < Trailblazer::Activity::Railway
         PREDICATES = %w[eq not_eq blank not_blank lt lte gt gte sw not_sw ew not_ew cont not_cont].freeze
 
-
-        def process_params(ctx, params:,  **)
+        def process_params(ctx, params:, **)
           params.each do |attribute, value|
             result = {}
             filter_attribute = attribute.to_sym
@@ -31,23 +30,24 @@ module Trailblazer
         step :set_finder
 
         private
-          def fetch_filters(ctx, result, attribute)
-            filter_attribute = ctx[:filters][attribute]
-            result[:filter] = {}
-            result[:name] = attribute
-            result[:filter][:handler] = filter_attribute[:with] || filter_attribute[:block]
-          end
 
-          def fetch_properties(result, attribute, value, properties)
-            splitter = Utils::Splitter.new attribute, value
-            PREDICATES.each do |predicate|
-              next unless splitter.split_key predicate
-              next unless properties.include?(splitter.field.to_sym)
+        def fetch_filters(ctx, result, attribute)
+          filter_attribute = ctx[:filters][attribute]
+          result[:filter] = {}
+          result[:name] = attribute
+          result[:filter][:handler] = filter_attribute[:with] || filter_attribute[:block]
+        end
 
-              result[:name] = splitter.field
-              result[:predicate] = predicate
-            end
+        def fetch_properties(result, attribute, value, properties)
+          splitter = Utils::Splitter.new attribute, value
+          PREDICATES.each do |predicate|
+            next unless splitter.split_key predicate
+            next unless properties.include?(splitter.field.to_sym)
+
+            result[:name] = splitter.field
+            result[:predicate] = predicate
           end
+        end
       end
     end
   end

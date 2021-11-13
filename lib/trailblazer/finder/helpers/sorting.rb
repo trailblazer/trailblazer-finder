@@ -31,7 +31,10 @@ module Trailblazer
           if sorting.nil?
             params.merge! sort: "#{attribute} #{sort_direction_for(attribute)}"
           elsif sorting.include?(attribute.to_s)
-            params.merge! sort: sorting.gsub(/#{attribute} #{sort_direction_for(attribute)}/, "#{attribute} #{reverse_sort_direction_for(attribute)}")
+            params.merge! sort: sorting.gsub(
+              /#{attribute} #{sort_direction_for(attribute)}/,
+              "#{attribute} #{reverse_sort_direction_for(attribute)}"
+            )
           else
             params.merge! sort: "#{sorting}, #{attribute} #{sort_direction_for(attribute)}"
           end

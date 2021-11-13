@@ -33,14 +33,8 @@ require "trailblazer/operation/finder"
 
 module Trailblazer
   class Finder
-    DRY_TYPES_VERSION = Gem::Version.new(Dry::Types::VERSION)
-    LEGACY_DRY_TYPES = DRY_TYPES_VERSION <= Gem::Version.new('1')
     module Types
-      if LEGACY_DRY_TYPES
-        include Dry::Types.module
-      else
-        include Dry.Types(default: :nominal)
-      end
+      include Dry.Types(default: :nominal)
     end
 
     include Base

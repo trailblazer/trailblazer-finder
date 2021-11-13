@@ -5,7 +5,7 @@ module Trailblazer
     module Activities
       class PrepareEntity < Trailblazer::Activity::Railway
         def validate_entity(ctx, **)
-          ctx.dig(:options,:entity) || ctx.dig(:config,:entity)
+          ctx.dig(:options, :entity) || ctx.dig(:config, :entity)
         end
 
         def invalid_entity_error(ctx, **)
@@ -13,7 +13,7 @@ module Trailblazer
         end
 
         def set_entity(ctx, **)
-          ctx[:entity] = ctx.dig(:options,:entity) || instance_eval(&ctx[:config][:entity])
+          ctx[:entity] = ctx.dig(:options, :entity) || instance_eval(&ctx[:config][:entity])
         end
 
         step :validate_entity
