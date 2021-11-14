@@ -132,7 +132,7 @@ module Trailblazer
 
           it "sets the property and works with sw predicate" do
             5.times { |i| Product.create name: "product_#{i}" }
-            1.times { |i| Product.create name: "predicate_#{i}" }
+            Product.create name: "predicate_0"
             4.times { |i| Product.create name: "none_#{i}" }
             finder = new_finder name_sw: "pr" do
               property :name, type: Types::String
@@ -144,7 +144,7 @@ module Trailblazer
 
           it "sets the property and works with not_sw predicate" do
             5.times { |i| Product.create name: "product_#{i}" }
-            1.times { |i| Product.create name: "predicate_#{i}" }
+            Product.create name: "predicate_0"
             4.times { |i| Product.create name: "none_#{i}" }
             finder = new_finder name_not_sw: "pr" do
               property :name, type: Types::String
@@ -156,7 +156,7 @@ module Trailblazer
 
           it "sets the property and works with ew predicate" do
             5.times { |i| Product.create name: "product_#{i}_end" }
-            1.times { |i| Product.create name: "predicate_#{i}_endwow" }
+            Product.create name: "predicate_0_endwow"
             4.times { |i| Product.create name: "none_#{i}" }
             finder = new_finder name_ew: "end" do
               property :name, type: Types::String
@@ -168,7 +168,7 @@ module Trailblazer
 
           it "sets the property and works with not_ew predicate" do
             5.times { |i| Product.create name: "product_#{i}_end" }
-            1.times { |i| Product.create name: "predicate_#{i}_endwow" }
+            Product.create name: "predicate_0_endwow"
             4.times { |i| Product.create name: "none_#{i}" }
             finder = new_finder name_not_ew: "end" do
               property :name, type: Types::String

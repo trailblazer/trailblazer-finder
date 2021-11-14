@@ -4,7 +4,7 @@ module Trailblazer
   class Finder
     module Activities
       class ProcessAdapters < Trailblazer::Activity::Railway
-        def set_adapter((ctx, flow_options), **)
+        def set_adapter((ctx, _flow_options), **)
           adapter = ctx[:adapter]
           ctx[:orm] = {}
           ctx[:orm][:adapter] = adapter
@@ -19,12 +19,18 @@ module Trailblazer
           return true unless paginator
           return false unless ORM_ADAPTERS.include?(ctx[:orm][:adapter])
           return false unless PAGING_ADAPTERS.include?(paginator)
+
           ctx[:orm][:paging] = "Trailblazer::Finder::Adapters::#{paginator}::Paging"
           true
         end
 
         def invalid_paginator_error(ctx, **)
-          (ctx[:errors] ||= []) << {paginator: "Can't use paginator #{ctx.dig(:config, :paginator)} without using an ORM like ActiveRecord or Sequel"}
+          (ctx[:errors] ||= []) << {
+            paginator: "Can't use paginator #{ctx.dig(
+              :config,
+              :paginator
+            )} without using an ORM like ActiveRecord or Sequel"
+          }
         end
 
         step :set_adapter, fast_track: true

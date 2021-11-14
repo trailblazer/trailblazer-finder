@@ -9,7 +9,7 @@ module Trailblazer
           module_function
 
           def set_paging_handler
-            lambda do |current_page, per_page, entity|
+            ->(current_page, per_page, entity) do
               entity.paginate per_page: per_page, page: current_page.zero? ? nil : current_page
             end
           end

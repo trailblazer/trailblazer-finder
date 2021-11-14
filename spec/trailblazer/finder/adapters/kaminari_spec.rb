@@ -59,7 +59,7 @@ module Trailblazer
           it "accepts per_page as a parameter" do
             10.times { |i| Product.create name: "product_#{i}" }
             finder = new_finder page: 2, per_page: 4 do
-               adapter "ActiveRecord"
+              adapter "ActiveRecord"
               paginator "Kaminari"
               paging per_page: 5, min_per_page: 2, max_per_page: 8
             end

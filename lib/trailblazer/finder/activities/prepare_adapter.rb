@@ -4,7 +4,6 @@ module Trailblazer
   class Finder
     module Activities
       class PrepareAdapter < Trailblazer::Activity::Railway
-
         def set_adapter(ctx, **)
           ctx[:adapter] = ctx.dig(:config, :adapter) || "Basic"
         end
@@ -13,13 +12,13 @@ module Trailblazer
           (ORM_ADAPTERS + ["Basic"]).include? adapter.to_s
         end
 
-        def is_invalid?((ctx, _flow_options), **_circuit_options)
+        def invalid?((ctx, _flow_options), **_circuit_options)
           (ctx[:errors] ||= []) << {adapter: "The specified adapter are invalid"}
         end
 
         step :set_adapter
         step :validate_adapter
-        fail :is_invalid?
+        fail :invalid?
       end
     end
   end

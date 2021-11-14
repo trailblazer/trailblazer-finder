@@ -10,7 +10,7 @@ module Trailblazer
           module_function
 
           def set_eq_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               return if Utils::String.blank?(value.to_s)
 
               entity.where(attribute => value)
@@ -18,7 +18,7 @@ module Trailblazer
           end
 
           def set_not_eq_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               return if Utils::String.blank?(value.to_s)
 
               entity.where.not(attribute => value)
@@ -26,73 +26,73 @@ module Trailblazer
           end
 
           def set_blank_handler
-            lambda do |entity, attribute, _value|
+            ->(entity, attribute, _value) do
               entity.where(attribute.to_sym => [nil, ""])
             end
           end
 
           def set_not_blank_handler
-            lambda do |entity, attribute, _value|
+            ->(entity, attribute, _value) do
               entity.where.not(attribute.to_sym => [nil, ""])
             end
           end
 
           def set_gt_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} > ?", value.to_f)
             end
           end
 
           def set_gte_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} >= ?", value.to_f)
             end
           end
 
           def set_lt_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} < ?", value.to_f)
             end
           end
 
           def set_lte_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} <= ?", value.to_f)
             end
           end
 
           def set_cont_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} LIKE ?", "%#{value}%")
             end
           end
 
           def set_not_cont_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} NOT LIKE ?", "%#{value}%")
             end
           end
 
           def set_sw_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} LIKE ?", "#{value}%")
             end
           end
 
           def set_not_sw_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} NOT LIKE ?", "#{value}%")
             end
           end
 
           def set_ew_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} LIKE ?", "%#{value}")
             end
           end
 
           def set_not_ew_handler
-            lambda do |entity, attribute, value|
+            ->(entity, attribute, value) do
               entity.where("#{attribute} NOT LIKE ?", "%#{value}")
             end
           end
