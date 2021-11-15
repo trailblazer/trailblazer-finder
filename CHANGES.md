@@ -1,3 +1,6 @@
+# 0.70.0
+* Drop Support Legacy Dry-types
+
 # 0.60.0
 * Support Ruby 3.0
 
