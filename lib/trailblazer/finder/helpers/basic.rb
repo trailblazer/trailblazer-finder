@@ -8,7 +8,6 @@ module Trailblazer
           return if @errors.any?
           return if @find.paging.empty?
 
-          result = Utils::Hash.remove_keys_from_hash(@find.paging, %i[handler max_per_page min_per_page])
           result[:page] = result[:page] || result.delete(:current_page) || result[:current_page]
           result
         end
