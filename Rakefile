@@ -16,10 +16,5 @@ end
 
 RuboCop::RakeTask.new(:rubocop)
 
-desc "Build the gem"
-task :gem do
-  `gem build trailblazer-finder.gemspec`
-end
-
 desc "Running Tests"
 task default: %i[spec]
