@@ -1,3 +1,6 @@
+# 0.80.1
+* Fix release error of 0.80.0
+
 # 0.80.0
 * Lock trailblazer-activity to below 0.13
 
