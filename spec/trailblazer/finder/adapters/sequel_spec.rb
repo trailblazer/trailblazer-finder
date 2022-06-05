@@ -5,7 +5,7 @@ require "spec_helper_sequel"
 module Trailblazer
   class Finder
     module Adapters
-      describe Sequel do
+      RSpec.describe Sequel do
         after do
           SProduct.order(:id).delete
           DB.run "update sqlite_sequence set seq = 0 where name = 's_products';"

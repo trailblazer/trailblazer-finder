@@ -5,7 +5,7 @@ require "spec_helper"
 module Trailblazer
   class Finder
     module Utils
-      describe Splitter do
+      RSpec.describe Splitter do
         describe ".initialize" do
           it "sets key and value" do
             splitter = described_class.new "attribute_eq", "value"

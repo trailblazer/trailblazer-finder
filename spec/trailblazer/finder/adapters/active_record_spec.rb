@@ -5,7 +5,7 @@ require "spec_helper_active_record"
 module Trailblazer
   class Finder
     module Adapters
-      describe ActiveRecord do
+      RSpec.describe ActiveRecord do
         after do
           Product.delete_all
           Product.reset_pk_sequence

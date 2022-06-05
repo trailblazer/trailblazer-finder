@@ -50,7 +50,7 @@ class Product::ShowNoEntity < Trailblazer::Operation
   step Finder(Product::FinderWithEntity, :single)
 end
 
-describe "Trailblazer::Operation - Finder Macro" do
+RSpec.describe "Trailblazer::Operation - Finder Macro" do
   before do
     Product.destroy_all
     Product.reset_pk_sequence

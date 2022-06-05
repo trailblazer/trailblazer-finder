@@ -2,13 +2,13 @@
 Trailblazer::Operation.instance_eval do
   def self.Finder(finder_class, action = nil, entity = nil)
     task = Trailblazer::Activity::TaskBuilder::Binary(Finder.new)
-    injection = Trailblazer::Activity::TaskWrap::Inject::Defaults::Extension(
+    injections = [
       :"finder.class"  => finder_class,
       :"finder.entity" => entity,
       :"finder.action" => action
-    )
+    ]
 
-    {task: task, id: "finder.build", extensions: [injection]}
+    {task: task, id: "finder.build", inject: injections}
   end
 
   class Finder
