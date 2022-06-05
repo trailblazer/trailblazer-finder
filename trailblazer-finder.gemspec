@@ -10,15 +10,16 @@ Gem::Specification.new do |spec|
   spec.description    = "Trailblazer Finder Objects"
   spec.summary        = "Trailblazer based finder objects. It is designed to be used on its own as a separate gem. It was influenced by popular Ransack gem, but in addition to ActiveRecord, it can be used with Sequel, Hash objects, and RomRB."
   spec.authors        = ["Nick Sutterer", "Marc Tich", "Abdelkader Boudih"]
-  spec.email          = ["apotonick@gmail.com", "marc@mudsu.com", "terminale@gmail.com"]
+  spec.email          = %w[apotonick@gmail.com marc@mudsu.com terminale@gmail.com]
   spec.homepage       = "http://trailblazer.to"
   spec.license        = "LGPL-3.0"
-  spec.files          = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  spec.files          = Dir.glob("lib/**/*")
+  spec.files          =+ 'trailblazer-finder.gemspec'
   spec.test_files     = spec.files.grep(%r{^(test)/})
   spec.require_paths  = ["lib"]
 
   spec.add_dependency "dry-types", ">= 1.0.0"
-  spec.add_dependency "trailblazer-activity", ">= 0.10.0"
+  spec.add_dependency "trailblazer-activity", ">= 0.10.0", "< 0.13.0"
 
   spec.add_development_dependency "activerecord"
   spec.add_development_dependency "bundler"
