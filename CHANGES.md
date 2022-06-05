@@ -1,3 +1,6 @@
+# 0.80.0
+* Lock trailblazer-activity to below 0.13
+
 # 0.70.0
 * Drop Support Legacy Dry-types
 
