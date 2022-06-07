@@ -5,7 +5,7 @@ require "spec_helper"
 module Trailblazer
   class Finder
     module Adapters
-      describe Basic do
+      RSpec.describe Basic do
         def define_finder_class(&block)
           Class.new(Trailblazer::Finder) do
             class_eval(&block)

@@ -7,7 +7,7 @@ require "kaminari/activerecord"
 module Trailblazer
   class Finder
     module Adapters
-      describe Kaminari do
+      RSpec.describe Kaminari do
         after do
           Product.delete_all
           Product.reset_pk_sequence

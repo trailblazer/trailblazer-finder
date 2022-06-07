@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Trailblazer
   class Finder # rubocop:disable Metrics/ClassLength
-    describe Dsl do
+    RSpec.describe Dsl do
       def define_finder_class(&block)
         Class.new(Trailblazer::Finder) do
           class_eval(&block)

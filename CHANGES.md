@@ -1,3 +1,6 @@
+# 0.90.0
+* Use inject dsl api 
+
 # 0.80.1
 * Fix release error of 0.80.0
 

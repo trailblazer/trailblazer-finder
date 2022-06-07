@@ -5,7 +5,7 @@ require "spec_helper"
 module Trailblazer
   class Finder
     module Utils
-      describe Hash do
+      RSpec.describe Hash do
         let(:hash) do
           [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: ""}, {id: 4, value: "Test 4"}]
         end

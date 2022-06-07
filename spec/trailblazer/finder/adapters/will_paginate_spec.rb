@@ -10,7 +10,7 @@ require "spec_helper_will_paginate"
 module Trailblazer
   class Finder
     module Adapters
-      describe WillPaginate do
+      RSpec.describe WillPaginate do
         after do
           Product.delete_all
           Product.reset_pk_sequence

@@ -5,7 +5,7 @@ require "spec_helper"
 module Trailblazer
   class Finder
     module Utils
-      describe String do
+      RSpec.describe String do
         describe ".blank?" do
           it "checks if value is blank or nil" do
             expect(described_class.blank?("")).to eq true
