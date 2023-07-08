@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path("lib", __dir__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "trailblazer/finder/version"
+require_relative "lib/trailblazer/finder/version"
 
 Gem::Specification.new do |spec|
   spec.name           = "trailblazer-finder"
@@ -14,9 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage       = "http://trailblazer.to"
   spec.license        = "LGPL-3.0"
   spec.files          = Dir.glob("lib/**/*")
-  spec.files << ["trailblazer-finder.gemspec"]
-  spec.test_files     = spec.files.grep(%r{^(test)/})
-  spec.require_paths  = ["lib"]
+  spec.require_paths = ["lib"]
 
   spec.add_dependency "dry-types", ">= 1.0.0"
   spec.add_dependency "trailblazer-activity", ">= 0.13.0"
@@ -36,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "will_paginate"
 
   spec.required_ruby_version = ">= 2.5.0"
+  spec.metadata = {"rubygems_mfa_required" => "true"}
 end
