@@ -5,8 +5,11 @@ source "https://rubygems.org"
 gemspec
 
 gem "debug", platform: :mri
-gem "jdbc-sqlite3", :platform => :jruby
-gem "sqlite3", platform: :mri
+platforms :jruby do
+  gem "activerecord-jdbcsqlite3-adapter", ">= 70.1"
+  gem "jdbc-sqlite3", "<3.42" # version 3.42.0 is broken
+end
+gem "sqlite3", platform: [:mri, :truffleruby]
 
 # Had to add this for a bit, since none of the latest changes have been pushed to gems yet
 # gem "trailblazer", github: "trailblazer/trailblazer"
