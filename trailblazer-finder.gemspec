@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "kaminari"
   spec.add_development_dependency "kaminari-activerecord"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "maxitest"
   spec.add_development_dependency "rspec", "~> 3.5"
   spec.add_development_dependency "rspec_junit_formatter"
   spec.add_development_dependency "rspec-mocks", "~> 3.5"
