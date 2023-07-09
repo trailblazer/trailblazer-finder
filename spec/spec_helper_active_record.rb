@@ -3,7 +3,10 @@
 require_relative "spec_helper"
 require "active_record"
 
-ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
+puts "Using RUBY_ENGINE=#{RUBY_ENGINE} with ActiveRecord #{ActiveRecord.gem_version}"
+database_adapter = RUBY_ENGINE == "jruby" ? "jdbcsqlite3" : "sqlite3"
+puts "Using #{database_adapter} with RUBY_ENGINE=#{RUBY_ENGINE}"
+ActiveRecord::Base.establish_connection adapter: database_adapter, database: ":memory:"
 
 ActiveRecord::Schema.define do
   self.verbose = false

@@ -4,7 +4,11 @@ require_relative "spec_helper"
 require "sequel"
 Sequel::Model.plugin :timestamps
 
-DB = Sequel.sqlite
+DB = if RUBY_ENGINE == "jruby"
+       Sequel.connect("jdbc:sqlite::memory:")
+     else
+       Sequel.sqlite
+     end
 
 DB.create_table :s_products do
   primary_key :id
