@@ -9,6 +9,8 @@ jobs:
       fail-fast: false
       matrix:
         ruby: [jruby, jruby-head]
+    env:
+      AR_VERSION: 7.0.0
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
