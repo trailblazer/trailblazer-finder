@@ -11,6 +11,7 @@ platforms :jruby do
 end
 gem "sqlite3", platform: [:mri, :truffleruby]
 
+gem 'activerecord', "~> #{ENV['AR_VERSION'] || '7.1.0'}"
 # Had to add this for a bit, since none of the latest changes have been pushed to gems yet
 # gem "trailblazer", github: "trailblazer/trailblazer"
 # gem "trailblazer-operation", github: "trailblazer/trailblazer-operation"
