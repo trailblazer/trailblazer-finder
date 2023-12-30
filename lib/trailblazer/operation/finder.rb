@@ -1,7 +1,7 @@
 module Trailblazer
   class Operation
     def self.Finder(finder_class, action = nil, entity = nil)
-      task = Trailblazer::Activity::TaskBuilder::Binary(Finder.new)
+      task = Trailblazer::Activity::Circuit::TaskAdapter.for_step(Finder.new, binary: true)
       injections = [
         :params,
         {:"finder.class" => ->(*) { finder_class }},
