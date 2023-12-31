@@ -36,6 +36,9 @@ module Trailblazer
     module Types
       include Dry.Types(default: :nominal)
     end
+    EXT_ORM_ADAPTERS = Types::Strict::String.enum("ActiveRecord", "Sequel")
+    ORM_ADAPTERS = EXT_ORM_ADAPTERS | Types::Strict::String.enum("Basic")
+    PAGING_ADAPTERS = Types::Strict::String.enum("Kaminari", "WillPaginate")
 
     include Base
   end
