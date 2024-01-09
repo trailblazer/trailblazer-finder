@@ -2,54 +2,52 @@
 
 require 'test_helper'
 module Trailblazer
-  class Finder
-    module Utils
-      class StringTest < Minitest::Test
-        def test_blank
-          assert_equal true, String.blank?('')
-          assert_equal true, String.blank?(nil)
-          assert_equal false, String.blank?('what')
-          assert_equal false, String.blank?(1)
-        end
+  module Finder::Utils
+    class StringTest < Minitest::Test
+      def test_blank
+        assert String.blank?('')
+        assert String.blank?(nil)
+        refute String.blank?('what')
+        refute String.blank?(1)
+      end
 
-        def test_numeric
-          assert_equal false, String.numeric?('')
-          assert_equal false, String.numeric?(nil)
-          assert_equal true, String.numeric?(1)
-          assert_equal true, String.numeric?(0)
-          assert_equal true, String.numeric?(1.00000)
-          assert_equal true, String.numeric?('1')
-        end
+      def test_numeric
+        refute String.numeric?('')
+        refute String.numeric?(nil)
+        assert String.numeric?(1)
+        assert String.numeric?(0)
+        assert String.numeric?(1.00000)
+        assert String.numeric?('1')
+      end
 
-        def test_date
-          assert_equal true, String.date?('2024-01-01')
-          assert_equal false, String.date?(nil)
-          assert_equal false, String.date?('random')
-          assert_equal false, String.date?(1)
-          assert_equal true, String.date?('2024/01/01')
-          assert_equal true, String.date?('2024.01.01')
-          assert_equal true, String.date?('21-12-2024')
-          assert_equal false, String.date?('0fae2de1-6537-4d36-9cdb-30edf1e37990')
-        end
+      def test_date
+        assert String.date?('2024-01-01')
+        refute String.date?(nil)
+        refute String.date?('random')
+        refute String.date?(1)
+        assert String.date?('2024/01/01')
+        assert String.date?('2024.01.01')
+        assert String.date?('21-12-2024')
+        refute String.date?('0fae2de1-6537-4d36-9cdb-30edf1e37990')
+      end
 
-        def test_to_date
-          assert_equal '2024-09-28', String.to_date('28/09/2024')
-          assert_equal '2024-09-28', String.to_date('2024/09/28')
-          assert_equal '2024-09-28', String.to_date('28 september 2024')
-          assert_nil String.to_date('third month of this year')
-        end
+      def test_to_date
+        assert_equal String.to_date('28/09/2024'), '2024-09-28'
+        assert_equal String.to_date('2024/09/28'), '2024-09-28'
+        assert_equal String.to_date('28 september 2024'), '2024-09-28'
+        assert_nil String.to_date('third month of this year')
+      end
 
-        def test_camelize
-          assert_equal 'Paging', String.camelize(:paging)
-          assert_equal 'SomeRandomTest', String.camelize(:some_random_test)
-        end
+      def test_camelize
+        assert_equal String.camelize(:paging), 'Paging'
+        assert_equal String.camelize(:some_random_test), 'SomeRandomTest'
+      end
 
-        def test_underscore
-          assert_equal 'very_popular', String.underscore(:veryPopular)
-          assert_equal 'very_popular', String.underscore(:VeryPopular)
-          assert_equal 'somethingvery_popular_but_random', String.underscore(:SomethingveryPopularButRandom)
-          assert_equal 'very_popular', String.underscore('Very Popular')
-        end
+      def test_underscore
+        assert_equal String.underscore(:veryPopular), 'very_popular'
+        assert_equal String.underscore(:VeryPopular), 'very_popular'
+        assert_equal String.underscore(:SomethingveryPopularButRandom), 'somethingvery_popular_but_random'
+        assert_equal String.underscore('Very Popular'), 'very_popular'
       end
     end
   end
