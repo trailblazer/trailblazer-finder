@@ -2,8 +2,6 @@
 
 module Trailblazer
   class Finder
-    ORM_ADAPTERS = %w[ActiveRecord Sequel].freeze
-    PAGING_ADAPTERS = %w[Kaminari WillPaginate].freeze
 
     module Base
       def self.included(base)

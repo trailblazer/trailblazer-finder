@@ -17,8 +17,8 @@ module Trailblazer
         def set_paginator(ctx, **)
           paginator = ctx.dig(:config, :paginator)
           return true unless paginator
-          return false unless ORM_ADAPTERS.include?(ctx[:orm][:adapter])
-          return false unless PAGING_ADAPTERS.include?(paginator)
+          return false unless EXT_ORM_ADAPTERS.(ctx[:orm][:adapter])
+          return false unless PAGING_ADAPTERS.(paginator)
 
           ctx[:orm][:paging] = "Trailblazer::Finder::Adapters::#{paginator}::Paging"
           true
@@ -33,9 +33,15 @@ module Trailblazer
           }
         end
 
+        def invalid_paginator_handler(_e, (ctx, _flow_options), **)
+          invalid_paginator_error(ctx)
+        end
+
         step :set_adapter, fast_track: true
-        step :set_paginator
-        fail :invalid_paginator_error
+        step Rescue(Dry::Types::ConstraintError, handler: :invalid_paginator_handler) {
+          step :set_paginator
+          fail :invalid_paginator_error
+        }
       end
     end
   end
