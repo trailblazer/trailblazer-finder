@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary        = "Trailblazer based finder objects. It is designed to be used on its own as a separate gem. It was influenced by popular Ransack gem, but in addition to ActiveRecord, it can be used with Sequel, Hash objects, and RomRB."
   spec.authors        = ["Nick Sutterer", "Marc Tich", "Abdelkader Boudih"]
   spec.email          = %w[apotonick@gmail.com marc@mudsu.com terminale@gmail.com]
-  spec.homepage       = "http://trailblazer.to"
+  spec.homepage       = "https://trailblazer.to"
   spec.license        = "LGPL-3.0"
   spec.files          = Dir.glob("lib/**/*")
   spec.require_paths = ["lib"]
