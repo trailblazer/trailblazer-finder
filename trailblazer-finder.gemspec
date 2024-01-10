@@ -14,6 +14,9 @@ Gem::Specification.new do |spec|
   spec.files          = Dir.glob("lib/**/*")
   spec.require_paths = ["lib"]
 
+  spec.metadata['source_code_uri'] = 'https://github.com/trailblazer/trailblazer-finder'
+  spec.metadata['changelog_uri'] = 'https://github.com/trailblazer/trailblazer-finder/blob/master/CHANGELOG.md'
+
   spec.add_dependency "dry-types", ">= 1.0.0"
   spec.add_dependency "trailblazer-activity", ">= 0.13.0"
 

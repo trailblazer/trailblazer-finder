@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: ruby
+          package-name: trailblazer-finder
+          bump-minor-pre-major: true
+          version-file: "lib/trailblazer/finder/version.rb"
