@@ -2,6 +2,8 @@
 
 require_relative "spec_helper"
 require "active_record"
+require_relative '../test/support/models'
+require_relative '../test/support/operations'
 
 puts "Using RUBY_ENGINE=#{RUBY_ENGINE} with ActiveRecord #{ActiveRecord.gem_version}"
 database_adapter = RUBY_ENGINE == "jruby" ? "jdbcsqlite3" : "sqlite3"
@@ -26,13 +28,6 @@ ActiveRecord::Schema.define do
 
     t.timestamps null: true
   end
-end
-
-class Product < ActiveRecord::Base
-  belongs_to :category
-end
-
-class Category < ActiveRecord::Base
 end
 
 module ActiveRecord
