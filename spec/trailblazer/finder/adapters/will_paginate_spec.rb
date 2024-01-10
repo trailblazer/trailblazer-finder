@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spec_helper_active_record"
+require_relative "../../../../test/support/operations"
 
 require "will_paginate"
 require "will_paginate/active_record"

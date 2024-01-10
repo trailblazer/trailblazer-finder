@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
+require 'test_helper'
 
 module Trailblazer
-  class Finder::BaseTest < Minitest::Test
+  class Finder::BaseTest < Minitest::TrailblazerTest
     attr_reader :finder_class
 
     def setup

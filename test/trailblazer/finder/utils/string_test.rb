@@ -3,7 +3,7 @@
 require 'test_helper'
 module Trailblazer
   module Finder::Utils
-    class StringTest < Minitest::Test
+    class StringTest < Minitest::TrailblazerTest
       def test_blank
         assert String.blank?('')
         assert String.blank?(nil)

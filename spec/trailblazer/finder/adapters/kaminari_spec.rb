@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require "spec_helper_active_record"
+require "spec_helper"
+require_relative "../../../../test/support/operations"
 require "kaminari"
 require "kaminari/activerecord"
 

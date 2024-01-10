@@ -4,7 +4,7 @@ require 'test_helper'
 
 module Trailblazer
   module Finder::Utils
-    class HashTest < Minitest::Test
+    class HashTest < Minitest::TrailblazerTest
       def setup
         @hash = [{ id: 1, value: 'Test 1' }, { id: 2, value: 'Test 2' }, { id: 3, value: '' },
                  { id: 4, value: 'Test 4' }]
