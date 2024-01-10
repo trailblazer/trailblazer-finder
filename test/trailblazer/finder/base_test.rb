@@ -53,19 +53,19 @@ module Trailblazer
     end
 
     def test_can_have_multiple_subclasses
-      finder_1 = new_finder_class([1, 2, 3], { filter: 1 }) do
+      finder1 = new_finder_class([1, 2, 3], { filter: 1 }) do
         filter_by :filter do |entity, _attribute, value|
           entity.select { |v| v == value }
         end
       end
 
-      finder_2 = new_finder_class([1, 2, 3], { other_filter: 1 }) do
+      finder2 = new_finder_class([1, 2, 3], { other_filter: 1 }) do
         filter_by :other_filter do |entity, _attribute, value|
           entity.reject { |v| v == value }
         end
       end
 
-      refute_equal finder_1.result, finder_2.result
+      refute_equal finder1.result, finder2.result
     end
 
     def test_result_returns_only_filtered_finder_results
