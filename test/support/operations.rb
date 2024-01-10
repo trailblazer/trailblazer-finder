@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'models'
+
 module Product::Finders
   class FinderNoEntity < Trailblazer::Finder
     adapter 'ActiveRecord'

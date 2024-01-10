@@ -4,7 +4,7 @@ require 'test_helper'
 
 module Trailblazer
   module Finder::Utils
-    class SplitterTest < Minitest::Test
+    class SplitterTest < Minitest::TrailblazerTest
       def test_initialize
         splitter = Splitter.new 'attribute_eq', 'value'
 
