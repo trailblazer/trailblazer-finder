@@ -4,20 +4,20 @@ module Trailblazer
   class Finder
     module Activities
       class PrepareSorting < Trailblazer::Activity::Railway
-        def check_sorting(ctx, **)
-          sorting = ctx[:config][:sorting] || nil
-          return true unless ctx[:config][:sorting].empty? || sorting.nil?
+        def check_sorting(_ctx, config:, **)
+          sorting = config.sorting
+          return true unless sorting.empty? || sorting.nil?
         end
 
-        def set_sorting(ctx, **)
+        def set_sorting(ctx, config:, **)
           return true if ctx[:params][:sort].nil?
 
           sorting = ctx[:params][:sort]
-          config = ctx[:config][:sorting]
+          sorting_config = config.sorting
           ctx[:sorting] = ctx[:sorting] || {}
           sorting.split(",").each do |sorter|
             spt = sorter.split
-            ctx[:sorting][spt[0]] = fetch_sort_direction(config[spt[0].to_sym], spt[1]) if config.include?(spt[0].to_sym)
+            ctx[:sorting][spt[0]] = fetch_sort_direction(sorting_config[spt[0].to_sym], spt[1]) if sorting_config.include?(spt[0].to_sym)
           end
         end
 

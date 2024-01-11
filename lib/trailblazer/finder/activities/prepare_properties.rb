@@ -4,8 +4,8 @@ module Trailblazer
   class Finder
     module Activities
       class PrepareProperties < Trailblazer::Activity::Railway
-        def check_property_types(ctx, **)
-          properties = ctx[:config][:properties] || {}
+        def check_property_types(_ctx, config:, **)
+          properties = config.properties
           return true if properties.empty?
 
           properties.each do |key, _value|
@@ -13,8 +13,8 @@ module Trailblazer
           end
         end
 
-        def validate_property_types(ctx, **)
-          properties = ctx[:config][:properties] || {}
+        def validate_property_types(_ctx, config:, **)
+          properties = config.properties
           return true if properties.empty?
 
           properties.each do |key, _value|
@@ -26,8 +26,8 @@ module Trailblazer
           (ctx[:errors] ||= []) << {properties: "One or more properties are missing a valid type"}
         end
 
-        def set_properties(ctx, **)
-          ctx[:properties] = ctx[:config][:properties]
+        def set_properties(ctx, config:, **)
+          ctx[:properties] = config.properties
         end
 
         step :check_property_types

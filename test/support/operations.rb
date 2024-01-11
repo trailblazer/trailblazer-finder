@@ -32,6 +32,18 @@ module Product::Finders
       entity.where 'lower(name) LIKE ?', "%#{value.downcase}%"
     end
   end
+
+  class FinderInherited < FinderWithEntity
+    property :raw_price, type: Types::Float, sortable: true
+    filter_by :price, with: :apply_price
+    paginator 'Kaminari'
+
+    def apply_price(entity, _attribute, value)
+      return if value.blank?
+
+      entity.where 'price < ?', value
+    end
+  end
 end
 
 module Product::Operations

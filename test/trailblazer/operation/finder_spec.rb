@@ -4,7 +4,7 @@ require 'test_helper'
 require 'support/operations'
 
 module Trailblazer
-  class Operation::FinderTest < Minitest::TrailblazerSpec
+  class Operation::FinderSpec < Minitest::TrailblazerSpec
     before do
       Product.destroy_all
       Product.reset_pk_sequence
@@ -71,6 +71,20 @@ module Trailblazer
 
       assert_equal result[:finder].result.count, 11
       assert_equal result[:finder].result.last.name, 'product_19'
+    end
+
+
+    it 'can inherit finders' do
+      assert_equal Product::Finders::FinderWithEntity.current_adapter, 'ActiveRecord'
+      assert_nil Product::Finders::FinderWithEntity.current_paginator
+      ## the parent class has 1 filter and 2 properties and not being overwritten by the child class
+      assert_equal Product::Finders::FinderWithEntity.properties_count, 2
+      assert_equal Product::Finders::FinderWithEntity.filters_count, 1
+
+      assert_equal Product::Finders::FinderInherited.current_adapter, 'ActiveRecord'
+      assert_equal Product::Finders::FinderInherited.current_paginator, 'Kaminari'
+      assert_equal Product::Finders::FinderInherited.properties_count, 3
+      assert_equal Product::Finders::FinderInherited.filters_count, 2
     end
   end
 end

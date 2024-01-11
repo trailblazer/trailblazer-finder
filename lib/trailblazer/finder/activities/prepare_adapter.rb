@@ -5,7 +5,7 @@ module Trailblazer
     module Activities
       class PrepareAdapter < Trailblazer::Activity::Railway
         def set_adapter(ctx, **)
-          ctx[:adapter] = ctx.dig(:config, :adapter) || "Basic"
+          ctx[:adapter] = ctx[:config].adapter
         end
 
         def validate_adapter(_ctx, adapter:, **)

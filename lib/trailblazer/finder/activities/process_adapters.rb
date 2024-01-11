@@ -15,7 +15,7 @@ module Trailblazer
         end
 
         def set_paginator(ctx, **)
-          paginator = ctx.dig(:config, :paginator)
+          paginator = ctx[:config].paginator
           return true unless paginator
           return false unless EXT_ORM_ADAPTERS.(ctx[:orm][:adapter])
           return false unless PAGING_ADAPTERS.(paginator)
@@ -26,10 +26,7 @@ module Trailblazer
 
         def invalid_paginator_error(ctx, **)
           (ctx[:errors] ||= []) << {
-            paginator: "Can't use paginator #{ctx.dig(
-              :config,
-              :paginator
-            )} without using an ORM like ActiveRecord or Sequel"
+            paginator: "Can't use paginator #{ctx[:config].paginator} without using an ORM like ActiveRecord or Sequel"
           }
         end
 

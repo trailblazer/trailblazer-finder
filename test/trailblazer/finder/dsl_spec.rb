@@ -5,7 +5,7 @@ require 'support/operations'
 
 module Trailblazer
   class Finder
-    class DslTest < Minitest::TrailblazerSpec
+    class DslSpec < Minitest::TrailblazerSpec
       def define_finder_class(&block)
         Class.new(Trailblazer::Finder) do
           class_eval(&block)
