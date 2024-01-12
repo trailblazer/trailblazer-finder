@@ -4,15 +4,15 @@ module Trailblazer
   class Finder
     module Activities
       class PreparePaging < Trailblazer::Activity::Railway
-        def check_paging(ctx, **)
-          paging = ctx[:config][:paging] || nil
-          return false if ctx[:config][:paging].empty? || paging.nil?
+        def check_paging(_ctx, config:, **)
+          paging = config.paging
+          return false if config.paging.empty? || paging.nil?
 
           true
         end
 
-        def set_paging(ctx, **)
-          ctx[:paging] = ctx.dig(:config, :paging) || {}
+        def set_paging(ctx, config:, **)
+          ctx[:paging] = config.paging
           ctx[:paging][:current_page] = ctx.dig(:params, :page) || 1
           return true unless ctx[:params][:per_page]
 
