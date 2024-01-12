@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.100.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.92.0...v0.100.0) (2024-01-12)
+
+
+### Features
+
+* use zeitwrek as autoloader ([#49](https://github.com/trailblazer/trailblazer-finder/issues/49)) ([a0be743](https://github.com/trailblazer/trailblazer-finder/commit/a0be74324c126df20fc7598f6453e2d97a403d5b))
+
 ## [0.92.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.91.0...v0.92.0) (2024-01-12)
 
 
