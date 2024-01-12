@@ -7,7 +7,7 @@ module Trailblazer
       def self.included(base)
         base.include Helpers::Basic
         base.include Helpers::Sorting
-        base.extend Finder::Dsl
+        base.extend Dsl
       end
 
       attr_reader :signal, :errors

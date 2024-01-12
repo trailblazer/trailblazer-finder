@@ -1,13 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "prepare_adapter"
-require_relative "prepare_entity"
-require_relative "prepare_properties"
-require_relative "prepare_filters"
-require_relative "prepare_params"
-require_relative "prepare_paging"
-require_relative "prepare_sorting"
-
 module Trailblazer
   class Finder
     module Activities
