@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.92.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.91.0...v0.92.0) (2024-01-12)
+
+
+### Features
+
+* allow finders to be inherited ([#47](https://github.com/trailblazer/trailblazer-finder/issues/47)) ([1869055](https://github.com/trailblazer/trailblazer-finder/commit/186905596d74aa6fe180ce709cf7da79b8a9aa2c))
+* change configuration from hash to configuration object ([1869055](https://github.com/trailblazer/trailblazer-finder/commit/186905596d74aa6fe180ce709cf7da79b8a9aa2c))
+
 ## [0.91.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.90.0...v0.91.0) (2024-01-10)
 
 
