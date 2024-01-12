@@ -1,7 +1,7 @@
 module Trailblazer
   class Operation
     def self.Finder(finder_class, action = nil, entity = nil)
-      task = Trailblazer::Activity::Circuit::TaskAdapter.for_step(Finder.new, binary: true)
+      task = Activity::Circuit::TaskAdapter.for_step(Finder.new, binary: true)
       injections = [
         :params,
         {:"finder.class" => ->(*) { finder_class }},
@@ -17,7 +17,7 @@ module Trailblazer
         builder = Finder::Builder.new
         ctx[:finder] = finder = builder.call(options, options[:params])
         ctx[:model] = finder # Don't like it, but somehow it's needed if contracts are loaded
-        ctx[:"result.finder"] = Trailblazer::Operation::Result.new(!finder.nil?, {})
+        ctx[:"result.finder"] = Result.new(!finder.nil?, {})
 
         ctx[:"result.finder"].success?
       end

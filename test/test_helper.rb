@@ -2,9 +2,8 @@
 
 require 'bundler/setup'
 require 'trailblazer/developer'
-require 'trailblazer/activity'
 require 'trailblazer/activity/testing'
-require 'trailblazer/finder'
+require 'trailblazer-finder'
 require 'minitest-trailblazer'
 require 'minitest/trailblazer_spec'
 
