@@ -37,7 +37,7 @@ module Trailblazer
         step :set_adapter, fast_track: true
         step Rescue(Dry::Types::ConstraintError, handler: :invalid_paginator_handler) {
           step :set_paginator
-          fail :invalid_paginator_error
+          left :invalid_paginator_error
         }
       end
     end

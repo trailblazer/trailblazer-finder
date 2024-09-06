@@ -21,7 +21,7 @@ module Trailblazer
         end
 
         step :validate_filters
-        fail :invalid_filters_error
+        left :invalid_filters_error
         step :set_filters
       end
     end

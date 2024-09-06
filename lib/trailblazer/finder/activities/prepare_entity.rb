@@ -17,7 +17,7 @@ module Trailblazer
         end
 
         step :validate_entity
-        fail :invalid_entity_error
+        left :invalid_entity_error
         step :set_entity
       end
     end
