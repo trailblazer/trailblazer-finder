@@ -32,7 +32,7 @@ module Trailblazer
 
         step :check_property_types
         step :validate_property_types
-        fail :invalid_properties_error
+        left :invalid_properties_error
         step :set_properties
       end
     end

@@ -19,7 +19,7 @@ module Trailblazer
         end
 
         step :validate_params
-        fail :invalid_params_error
+        left :invalid_params_error
         step :set_params
       end
     end
