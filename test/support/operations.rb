@@ -24,7 +24,7 @@ module Product::Finders
 
     property :id, type: Types::Integer
     property :name, type: Types::String, sortable: true
-    filter_by :escaped_name, with: :apply_escaped_name
+    filter_by :escaped_name, with: :apply_escaped_name, type: :string
 
     def apply_escaped_name(entity, _attribute, value)
       return if value.blank?
