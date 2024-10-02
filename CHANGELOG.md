@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.101.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.100.0...v0.101.0) (2024-10-02)
+
+
+### Features
+
+* remove casting from the finder ([#53](https://github.com/trailblazer/trailblazer-finder/issues/53)) ([a16a106](https://github.com/trailblazer/trailblazer-finder/commit/a16a1067e330f3913e93ed2a25468554da5b5473))
+
+
+### Bug Fixes
+
+* use left instead of fail internally ([#51](https://github.com/trailblazer/trailblazer-finder/issues/51)) ([271b141](https://github.com/trailblazer/trailblazer-finder/commit/271b141b487ca178b4d4ed371b360f79e262b671))
+
 ## [0.100.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.92.0...v0.100.0) (2024-01-12)
 
 
