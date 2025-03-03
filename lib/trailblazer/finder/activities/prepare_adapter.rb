@@ -18,7 +18,7 @@ module Trailblazer
           end
         end
 
-        pass :set_adapter
+        step :set_adapter
         step :validate_adapter
       end
     end
