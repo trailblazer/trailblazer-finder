@@ -13,7 +13,7 @@ module Trailblazer
         end
 
         def invalid?(_e, (ctx, _flow_options), **_circuit_options)
-          (ctx[:errors] ||= []) << {adapter: "The specified adapter are invalid"}
+          (ctx[:errors] ||= []) << {adapter: "The specified adapter is invalid"}
         end
 
         step :set_adapter
