@@ -12,14 +12,15 @@ module Trailblazer
           ORM_ADAPTERS.(adapter.to_s)
         end
 
-        def invalid?(_e, (ctx, _flow_options), **_circuit_options)
-          (ctx[:errors] ||= []) << {adapter: "The specified adapter are invalid"}
+        def invalid?(exception, (ctx, _flow_options), **_circuit_options)
+          (ctx[:errors] ||= []) << {adapter: "The specified adapter is invalid"}
+          true # Make sure to return true to indicate the handler handled the error
         end
 
-        step :set_adapter
+        pass :set_adapter
         step Rescue(Dry::Types::ConstraintError, handler: :invalid?) {
           step :validate_adapter
-        }
+        }, Output(:failure) => End(:failure)
       end
     end
   end

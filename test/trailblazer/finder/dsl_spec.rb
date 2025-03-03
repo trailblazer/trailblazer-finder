@@ -31,8 +31,7 @@ module Trailblazer
             adapter :NonExisting
           end
 
-          # expect(finder.errors).to eq [{adapter: "The specified adapter are invalid"}]
-          assert_equal finder.errors, [{ adapter: 'The specified adapter are invalid' }]
+          assert_equal finder.errors, [{ adapter: 'The specified adapter is invalid' }]
         end
 
         it 'sets the adapter in the config' do
