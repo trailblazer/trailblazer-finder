@@ -16,13 +16,25 @@ module Trailblazer
       def clone
         new_config = Configuration.new
         new_config.entity = entity
-        new_config.paging = paging.clone
-        new_config.properties = properties.clone
-        new_config.sorting = sorting.clone
-        new_config.filters = filters.clone
+        new_config.paging = deep_copy(paging)
+        new_config.properties = deep_copy(properties)
+        new_config.sorting = deep_copy(sorting)
+        new_config.filters = deep_copy(filters)
         new_config.adapter = adapter
         new_config.paginator = paginator
         new_config
+      end
+
+      private
+
+      def deep_copy(obj)
+        return obj unless obj.is_a?(Hash)
+
+        result = {}
+        obj.each do |key, value|
+          result[key] = value.is_a?(Hash) ? deep_copy(value) : value
+        end
+        result
       end
     end
 
