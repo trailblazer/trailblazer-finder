@@ -1,40 +1,82 @@
 module Trailblazer
   class Finder
     class Configuration
-      attr_accessor :entity, :paging, :properties, :sorting,
-                    :filters, :adapter, :paginator
+      attr_reader :state
 
       def initialize
-        @paging = {}
-        @properties = {}
-        @sorting = {}
-        @filters = {}
-        @paginator = nil
-        @adapter = "Basic"
+        @state = Trailblazer::Declarative::State(
+          entity: [nil, {}],
+          paging: [{}, {}],
+          properties: [{}, {}],
+          sorting: [{}, {}],
+          filters: [{}, {}],
+          adapter: ["Basic", {}],
+          paginator: [nil, {}]
+        )
       end
 
+      # Accessors that delegate to the state
+      def entity
+        state.get(:entity)
+      end
+
+      def entity=(value)
+        state.set!(:entity, value)
+      end
+
+      def paging
+        state.get(:paging)
+      end
+
+      def paging=(value)
+        state.set!(:paging, value)
+      end
+
+      def properties
+        state.get(:properties)
+      end
+
+      def properties=(value)
+        state.set!(:properties, value)
+      end
+
+      def sorting
+        state.get(:sorting)
+      end
+
+      def sorting=(value)
+        state.set!(:sorting, value)
+      end
+
+      def filters
+        state.get(:filters)
+      end
+
+      def filters=(value)
+        state.set!(:filters, value)
+      end
+
+      def adapter
+        state.get(:adapter)
+      end
+
+      def adapter=(value)
+        state.set!(:adapter, value)
+      end
+
+      def paginator
+        state.get(:paginator)
+      end
+
+      def paginator=(value)
+        state.set!(:paginator, value)
+      end
+
+      # Clone the configuration by copying the state
       def clone
         new_config = Configuration.new
-        new_config.entity = entity
-        new_config.paging = deep_copy(paging)
-        new_config.properties = deep_copy(properties)
-        new_config.sorting = deep_copy(sorting)
-        new_config.filters = deep_copy(filters)
-        new_config.adapter = adapter
-        new_config.paginator = paginator
+        new_config.instance_variable_set(:@state, @state.copy)
         new_config
-      end
-
-      private
-
-      def deep_copy(obj)
-        return obj unless obj.is_a?(Hash)
-
-        result = {}
-        obj.each do |key, value|
-          result[key] = value.is_a?(Hash) ? deep_copy(value) : value
-        end
-        result
       end
     end
 
@@ -43,9 +85,8 @@ module Trailblazer
         @config ||= Configuration.new
       end
 
-
       def inherited(base)
-        ## We don't want to inherit the config from Trailblazer::Finder
+        # Skip inheritance for the base Trailblazer::Finder class
         return if name == 'Trailblazer::Finder'
 
         base.config = config.clone
@@ -56,23 +97,21 @@ module Trailblazer
       end
 
       def paging(per_page: 25, min_per_page: 10, max_per_page: 100)
-        config.paging[:per_page] = per_page
-        config.paging[:min_per_page] = min_per_page
-        config.paging[:max_per_page] = max_per_page
+        config.state.update!(:paging) do |paging|
+          paging.merge(per_page: per_page, min_per_page: min_per_page, max_per_page: max_per_page)
+        end
       end
 
       def property(name, options = {})
-        config.properties[name] = options
-        config.properties[name][:type] = options[:type] || Types::String
-        config.sorting[name] = options[:sort_direction] || :desc if options[:sortable]
+        config.state.update!(:properties) { |props| props.merge(name => options.merge(type: options[:type] || Types::String)) }
+        config.state.update!(:sorting) { |sort| sort.merge(name => (options[:sort_direction] || :desc)) } if options[:sortable]
       end
 
       def filter_by(name, options = {}, &block)
         filter_name = name.to_sym
-        config.filters[filter_name] = {}
-        config.filters[filter_name][:name] = name
-        config.filters[filter_name][:with] = options[:with] if options.include?(:with)
-        config.filters[filter_name][:block] = block || nil
+        config.state.update!(:filters) do |filters|
+          filters.merge(filter_name => { name: name, with: options[:with], block: block }.compact)
+        end
       end
 
       def adapter(adapter_name)
