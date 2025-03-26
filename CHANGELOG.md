@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.201.0](https://github.com/trailblazer/trailblazer-finder/compare/trailblazer-finder-v0.200.0...trailblazer-finder/v0.201.0) (2025-03-26)
+
+
+### Features
+
+* allow finders to be inherited ([#47](https://github.com/trailblazer/trailblazer-finder/issues/47)) ([1869055](https://github.com/trailblazer/trailblazer-finder/commit/186905596d74aa6fe180ce709cf7da79b8a9aa2c))
+* change configuration from hash to configuration object ([1869055](https://github.com/trailblazer/trailblazer-finder/commit/186905596d74aa6fe180ce709cf7da79b8a9aa2c))
+* fix version required for trailblazer-activity ([#35](https://github.com/trailblazer/trailblazer-finder/issues/35)) ([d11e951](https://github.com/trailblazer/trailblazer-finder/commit/d11e95145843a1393f392b397110afb00f41b28f))
+* init minitest migration ([#39](https://github.com/trailblazer/trailblazer-finder/issues/39)) ([dc6fdb0](https://github.com/trailblazer/trailblazer-finder/commit/dc6fdb05cd492a8d60ed9c9e882537bacf3d3f1e))
+* remove casting from the finder ([#53](https://github.com/trailblazer/trailblazer-finder/issues/53)) ([a16a106](https://github.com/trailblazer/trailblazer-finder/commit/a16a1067e330f3913e93ed2a25468554da5b5473))
+* use dry-types for adapter and paginator ([#42](https://github.com/trailblazer/trailblazer-finder/issues/42)) ([8575e26](https://github.com/trailblazer/trailblazer-finder/commit/8575e266aa1ae069bfd023970a2e427a8124dec8))
+* use zeitwrek as autoloader ([#49](https://github.com/trailblazer/trailblazer-finder/issues/49)) ([a0be743](https://github.com/trailblazer/trailblazer-finder/commit/a0be74324c126df20fc7598f6453e2d97a403d5b))
+
+
+### Bug Fixes
+
+* Configuration Inheritance Fix ([#56](https://github.com/trailblazer/trailblazer-finder/issues/56)) ([abb748e](https://github.com/trailblazer/trailblazer-finder/commit/abb748e624a89cea29c0c3d44667970ccb6da568))
+* release version is wrong ([68552b6](https://github.com/trailblazer/trailblazer-finder/commit/68552b62c52abcd4c592ee63b2ac2e1ce1180a9e))
+* remove deprecated usage of Trailblazer::Activity::TaskBuilder::Binary ([#41](https://github.com/trailblazer/trailblazer-finder/issues/41)) ([b8965ff](https://github.com/trailblazer/trailblazer-finder/commit/b8965ff9f0549f927409e90cc2d8a227267c13d9))
+* test with ruby 3.4 ([#54](https://github.com/trailblazer/trailblazer-finder/issues/54)) ([c80c15e](https://github.com/trailblazer/trailblazer-finder/commit/c80c15e75c8597e400037365496b76b8045bb99f))
+* update config ([85e6b5e](https://github.com/trailblazer/trailblazer-finder/commit/85e6b5e8111d109a12a9a74b2e9f2eec9b94f60a))
+* update gemspec ([#37](https://github.com/trailblazer/trailblazer-finder/issues/37)) ([7cf064f](https://github.com/trailblazer/trailblazer-finder/commit/7cf064f8e6e33b863a169041e2ee59ebd5152fd1))
+* update version ([1c6fecb](https://github.com/trailblazer/trailblazer-finder/commit/1c6fecb6a73af6ea9db6623c1992cecc5d09f196))
+* use left instead of fail internally ([#51](https://github.com/trailblazer/trailblazer-finder/issues/51)) ([271b141](https://github.com/trailblazer/trailblazer-finder/commit/271b141b487ca178b4d4ed371b360f79e262b671))
+
 ## [0.201.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.101.0...v0.201.0) (2025-03-26)
 
 
