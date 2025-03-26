@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.201.1](https://github.com/trailblazer/trailblazer-finder/compare/v0.201.0...v0.201.1) (2025-03-26)
+
+
+### Bug Fixes
+
+* update version ([1c6fecb](https://github.com/trailblazer/trailblazer-finder/commit/1c6fecb6a73af6ea9db6623c1992cecc5d09f196))
+
 ## [0.201.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.101.0...v0.201.0) (2025-03-26)
 
 
