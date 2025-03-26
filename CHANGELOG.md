@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.201.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.101.0...v0.201.0) (2025-03-26)
+
+
+### Bug Fixes
+
+* Configuration Inheritance Fix ([#56](https://github.com/trailblazer/trailblazer-finder/issues/56)) ([abb748e](https://github.com/trailblazer/trailblazer-finder/commit/abb748e624a89cea29c0c3d44667970ccb6da568))
+* release version is wrong ([68552b6](https://github.com/trailblazer/trailblazer-finder/commit/68552b62c52abcd4c592ee63b2ac2e1ce1180a9e))
+
 ## [0.101.0](https://github.com/trailblazer/trailblazer-finder/compare/v0.100.0...v0.101.0) (2025-03-03)
 
 
