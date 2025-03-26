@@ -1,0 +1,8 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "ruby",
+      "package-name": "trailblazer-finder"
+    }
+  }
+}
