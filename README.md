@@ -2,8 +2,6 @@
 
 Provides DSL for creating [Trailblazer](https://github.com/trailblazer/trailblazer) based Finder Objects. But it is designed to be used on its own as a separate gem. It was influenced by popular [Ransack](https://github.com/activerecord-hackery/ransack) gem, but in addition to [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord), it can be used with [DataMapper](https://github.com/datamapper) or [Sequel](https://github.com/jeremyevans/sequel). It also integrates with [Kaminari](https://github.com/kaminari/kaminari) or [Will Paginate](https://github.com/mislav/will_paginate), as well as [FriendlyId](https://github.com/norman/friendly_id)
 
-[![Gitter Chat](https://badges.gitter.im/trailblazer/chat.svg)](https://gitter.im/trailblazer/chat) 
-[![Build Status](https://secure.travis-ci.org/trailblazer/trailblazer-finder.svg)](https://travis-ci.org/trailblazer/trailblazer-finder)
 [![Gem Version](https://badge.fury.io/rb/trailblazer-finder.svg)](http://badge.fury.io/rb/trailblazer-finder)
 
 ## Table of Contents
