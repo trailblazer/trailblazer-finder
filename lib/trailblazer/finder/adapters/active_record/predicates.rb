@@ -96,6 +96,57 @@ module Trailblazer
               entity.where("#{attribute} NOT LIKE ?", "%#{value}")
             end
           end
+
+          def set_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              entity.where(attribute => value)
+            end
+          end
+
+          def set_not_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              entity.where.not(attribute => value)
+            end
+          end
+
+          def set_between_handler
+            ->(entity, attribute, value) do
+              return unless value.is_a?(Range) || (value.is_a?(Array) && value.size == 2)
+
+              range = value.is_a?(Range) ? value : (value[0]..value[1])
+              entity.where(attribute => range)
+            end
+          end
+
+          def set_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s)
+
+              # Use ILIKE for case-insensitive matching on PostgreSQL
+              if entity.connection.adapter_name.downcase.include?("postgresql")
+                entity.where("#{attribute} ILIKE ?", value)
+              else
+                entity.where("LOWER(#{attribute}) LIKE LOWER(?)", value)
+              end
+            end
+          end
+
+          def set_not_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s)
+
+              # Use ILIKE for case-insensitive matching on PostgreSQL
+              if entity.connection.adapter_name.downcase.include?("postgresql")
+                entity.where("#{attribute} NOT ILIKE ?", value)
+              else
+                entity.where("LOWER(#{attribute}) NOT LIKE LOWER(?)", value)
+              end
+            end
+          end
         end
       end
     end

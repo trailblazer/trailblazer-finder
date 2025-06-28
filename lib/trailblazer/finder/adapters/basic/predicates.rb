@@ -108,6 +108,53 @@ module Trailblazer
               Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !v.to_s.end_with?(value.to_s) && !v.nil? }, entity
             end
           end
+
+          def set_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              value_array = value.is_a?(Array) ? value : [value]
+              Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && value_array.include?(v) }, entity
+            end
+          end
+
+          def set_not_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              value_array = value.is_a?(Array) ? value : [value]
+              Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !value_array.include?(v) }, entity
+            end
+          end
+
+          def set_between_handler
+            ->(entity, attribute, value) do
+              return unless value.is_a?(Range) || (value.is_a?(Array) && value.size == 2)
+
+              range = value.is_a?(Range) ? value : (value[0]..value[1])
+              Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && range.cover?(v) }, entity
+            end
+          end
+
+          def set_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
+              pattern = value.to_s.gsub('%', '.*').gsub('_', '.')
+              regexp = Regexp.new("^#{pattern}$", Regexp::IGNORECASE)
+              Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && regexp.match?(v.to_s) }, entity
+            end
+          end
+
+          def set_not_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s) || Utils::String.blank?(attribute.to_s)
+
+              pattern = value.to_s.gsub('%', '.*').gsub('_', '.')
+              regexp = Regexp.new("^#{pattern}$", Regexp::IGNORECASE)
+              Utils::Hash.deep_locate ->(k, v, _) { k == attribute.to_sym && !regexp.match?(v.to_s) }, entity
+            end
+          end
         end
       end
     end

@@ -57,6 +57,11 @@ Or install it yourself as:
 * [Trailblazer-Activity](https://github.com/trailblazer/trailblazer-activity) - required
 * [Trailblazer](https://github.com/trailblazer/trailblazer) - [actually optional, but requires 2.1+](https://github.com/trailblazer/trailblazer-finder#usable-without-trailblazer)
 
+### Requirements
+* Ruby 3.2+ (tested with 3.2, 3.3, and 3.4)
+* Rails/ActiveRecord 7.1+ (only if using ActiveRecord adapter)
+* Fully compatible with Rails 8.0
+
 ## Usage
 
 ### Finder
@@ -227,6 +232,11 @@ At the moment we support:
 - not_sw: does not start with specified value
 - ew: end with specified value
 - not_ew: does not end with specified value
+- in: included in array/list
+- not_in: not included in array/list
+- between: value within range (inclusive)
+- matches: pattern matching with SQL wildcards (%, _)
+- not_matches: not matching pattern with SQL wildcards
 
 #### Predicates Example
 ```ruby
@@ -286,6 +296,37 @@ title_sw            # => title starts with
 title_not_sw        # => title does not start with
 title_ew            # => title ends with
 title_not_ew        # => title does not end with
+title_in            # => title included in array (e.g., title_in: ['Post 1', 'Post 2'])
+title_not_in        # => title not included in array
+title_between       # => title between range (e.g., title_between: ['A', 'M'] or title_between: 'A'..'M')
+title_matches       # => title matches pattern (e.g., title_matches: 'Post%' for "starts with Post")
+title_not_matches   # => title does not match pattern
+```
+
+#### Using the New Predicates
+```ruby
+# Find posts with specific IDs
+Post::Finder.new(params: { id_in: [1, 2, 3] })
+
+# Find posts excluding certain titles
+Post::Finder.new(params: { title_not_in: ['Draft', 'Archived'] })
+
+# Find posts created between dates (or any sortable field)
+Post::Finder.new(params: { created_at_between: ['2024-01-01', '2024-12-31'] })
+# Or using a Range
+Post::Finder.new(params: { created_at_between: Date.new(2024,1,1)..Date.new(2024,12,31) })
+
+# Pattern matching with SQL wildcards
+Post::Finder.new(params: { title_matches: 'Breaking%' })      # Titles starting with "Breaking"
+Post::Finder.new(params: { title_matches: '%News%' })         # Titles containing "News"
+Post::Finder.new(params: { title_matches: 'Report_%_2024' })  # e.g., "Report_Q1_2024", "Report_Q2_2024"
+
+# Combine predicates
+Post::Finder.new(params: { 
+  status_in: ['published', 'featured'],
+  created_at_between: [1.month.ago, Date.today],
+  title_not_matches: '%DRAFT%'
+})
 ```
 
 ### Paging

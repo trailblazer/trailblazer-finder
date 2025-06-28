@@ -177,6 +177,108 @@ module Trailblazer
             expect(finder.result.first.id).to eq 6
             expect(finder.result.count).to eq 5
           end
+
+          it "sets the property and works with in predicate" do
+            10.times { |i| SProduct.create name: "product_#{i}" }
+            finder = new_finder id_in: [2, 4, 6, 8] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 4
+            expect(finder.result.map(&:id)).to eq [2, 4, 6, 8]
+          end
+
+          it "sets the property and works with not_in predicate" do
+            5.times { |i| SProduct.create name: "product_#{i}" }
+            finder = new_finder id_not_in: [1, 3, 5] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 2
+            expect(finder.result.map(&:id)).to eq [2, 4]
+          end
+
+          it "sets the property and works with between predicate using array" do
+            10.times { |i| SProduct.create name: "product_#{i}", price: i * 10.0 }
+            finder = new_finder price_between: [25.0, 65.0] do
+              property :price, type: Types::Float
+            end
+
+            expect(finder.result.count).to eq 5
+            expect(finder.result.map(&:price)).to eq [30.0, 40.0, 50.0, 60.0]
+          end
+
+          it "sets the property and works with between predicate using range" do
+            10.times { |i| SProduct.create name: "product_#{i}", price: i * 10.0 }
+            finder = new_finder price_between: 25.0..65.0 do
+              property :price, type: Types::Float
+            end
+
+            expect(finder.result.count).to eq 5
+            expect(finder.result.map(&:price)).to eq [30.0, 40.0, 50.0, 60.0]
+          end
+
+          it "sets the property and works with matches predicate" do
+            SProduct.create name: "Breaking News"
+            SProduct.create name: "Morning News"
+            SProduct.create name: "Evening Report"
+            SProduct.create name: "Breaking Report"
+            SProduct.create name: "Weather Update"
+            
+            finder = new_finder name_matches: "Breaking%" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.count).to eq 2
+            expect(finder.result.map(&:name).sort).to eq ["Breaking News", "Breaking Report"].sort
+          end
+
+          it "sets the property and works with matches predicate with wildcards" do
+            SProduct.create name: "Report_Q1_2024"
+            SProduct.create name: "Report_Q2_2024"
+            SProduct.create name: "Summary_Q1_2024"
+            SProduct.create name: "Report_Annual_2023"
+            
+            finder = new_finder name_matches: "Report_Q%_2024" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.count).to eq 2
+            expect(finder.result.map(&:name).sort).to eq ["Report_Q1_2024", "Report_Q2_2024"]
+          end
+
+          it "sets the property and works with not_matches predicate" do
+            SProduct.create name: "Breaking News"
+            SProduct.create name: "Morning News"
+            SProduct.create name: "Evening Report"
+            SProduct.create name: "Breaking Report"
+            SProduct.create name: "Weather Update"
+            
+            finder = new_finder name_not_matches: "%News%" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.count).to eq 3
+            expect(finder.result.map(&:name).sort).to eq ["Evening Report", "Breaking Report", "Weather Update"].sort
+          end
+
+          it "handles empty arrays for in predicate" do
+            5.times { |i| SProduct.create name: "product_#{i}" }
+            finder = new_finder id_in: [] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 5
+          end
+
+          it "handles nil values for between predicate" do
+            5.times { |i| SProduct.create name: "product_#{i}" }
+            finder = new_finder id_between: nil do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 5
+          end
         end
 
         describe "#paging" do

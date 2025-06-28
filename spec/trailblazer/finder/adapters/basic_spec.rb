@@ -159,6 +159,103 @@ module Trailblazer
 
             expect(finder.result.map { |n| n[:value] }).to eq ["ATest 3"]
           end
+
+          it "sets the property and works with in predicate" do
+            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"}]
+            finder = new_finder entity, id_in: [2, 4] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.map { |n| n[:id] }).to eq [2, 4]
+          end
+
+          it "sets the property and works with not_in predicate" do
+            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}, {id: 4, value: "Test 4"}]
+            finder = new_finder entity, id_not_in: [1, 3] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.map { |n| n[:id] }).to eq [2, 4]
+          end
+
+          it "sets the property and works with between predicate using array" do
+            entity = [{id: 1, price: 10.0}, {id: 2, price: 20.0}, {id: 3, price: 30.0}, {id: 4, price: 40.0}, {id: 5, price: 50.0}]
+            finder = new_finder entity, price_between: [15.0, 35.0] do
+              property :price, type: Types::Float
+            end
+
+            expect(finder.result.map { |n| n[:price] }).to eq [20.0, 30.0]
+          end
+
+          it "sets the property and works with between predicate using range" do
+            entity = [{id: 1, price: 10.0}, {id: 2, price: 20.0}, {id: 3, price: 30.0}, {id: 4, price: 40.0}, {id: 5, price: 50.0}]
+            finder = new_finder entity, price_between: 15.0..35.0 do
+              property :price, type: Types::Float
+            end
+
+            expect(finder.result.map { |n| n[:price] }).to eq [20.0, 30.0]
+          end
+
+          it "sets the property and works with matches predicate" do
+            entity = [
+              {id: 1, name: "Breaking News"},
+              {id: 2, name: "Morning News"},
+              {id: 3, name: "Evening Report"},
+              {id: 4, name: "Breaking Report"}
+            ]
+            finder = new_finder entity, name_matches: "Breaking%" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.map { |n| n[:name] }.sort).to eq ["Breaking News", "Breaking Report"].sort
+          end
+
+          it "sets the property and works with matches predicate with wildcards" do
+            entity = [
+              {id: 1, name: "Report_Q1_2024"},
+              {id: 2, name: "Report_Q2_2024"},
+              {id: 3, name: "Summary_Q1_2024"},
+              {id: 4, name: "Report_Annual_2023"}
+            ]
+            finder = new_finder entity, name_matches: "Report_Q%_2024" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.map { |n| n[:name] }.sort).to eq ["Report_Q1_2024", "Report_Q2_2024"]
+          end
+
+          it "sets the property and works with not_matches predicate" do
+            entity = [
+              {id: 1, name: "Breaking News"},
+              {id: 2, name: "Morning News"},
+              {id: 3, name: "Evening Report"},
+              {id: 4, name: "Breaking Report"},
+              {id: 5, name: "Weather Update"}
+            ]
+            finder = new_finder entity, name_not_matches: "%News%" do
+              property :name, type: Types::String
+            end
+
+            expect(finder.result.map { |n| n[:name] }.sort).to eq ["Evening Report", "Breaking Report", "Weather Update"].sort
+          end
+
+          it "handles empty arrays for in predicate" do
+            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}]
+            finder = new_finder entity, id_in: [] do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 3
+          end
+
+          it "handles nil values for between predicate" do
+            entity = [{id: 1, value: "Test 1"}, {id: 2, value: "Test 2"}, {id: 3, value: "Test 3"}]
+            finder = new_finder entity, id_between: nil do
+              property :id, type: Types::Integer
+            end
+
+            expect(finder.result.count).to eq 3
+          end
         end
 
         describe "#paging" do

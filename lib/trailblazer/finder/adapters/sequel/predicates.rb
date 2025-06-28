@@ -97,6 +97,47 @@ module Trailblazer
               entity.where(~::Sequel.like(attribute.to_sym, "%#{value}"))
             end
           end
+
+          def set_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              entity.where(attribute.to_sym => value)
+            end
+          end
+
+          def set_not_in_handler
+            ->(entity, attribute, value) do
+              return if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+
+              entity.exclude(attribute.to_sym => value)
+            end
+          end
+
+          def set_between_handler
+            ->(entity, attribute, value) do
+              return unless value.is_a?(Range) || (value.is_a?(Array) && value.size == 2)
+
+              range = value.is_a?(Range) ? value : (value[0]..value[1])
+              entity.where(attribute.to_sym => range)
+            end
+          end
+
+          def set_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s)
+
+              entity.where(::Sequel.ilike(attribute.to_sym, value))
+            end
+          end
+
+          def set_not_matches_handler
+            ->(entity, attribute, value) do
+              return if Utils::String.blank?(value.to_s)
+
+              entity.where(~::Sequel.ilike(attribute.to_sym, value))
+            end
+          end
         end
       end
     end
