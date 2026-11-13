@@ -5,16 +5,15 @@ source "https://rubygems.org"
 gemspec
 
 gem "debug", platform: :mri
-platforms :jruby do
-  gem "activerecord-jdbcsqlite3-adapter", ">= 70.1"
-  gem "jdbc-sqlite3", "<3.42" # version 3.42.0 is broken
-end
-gem "sqlite3", platform: [:mri, :truffleruby]
+gem "sqlite3"
 
-gem 'activerecord', "~> #{ENV['AR_VERSION'] || '7.1.0'}"
-# Had to add this for a bit, since none of the latest changes have been pushed to gems yet
-# gem "trailblazer", github: "trailblazer/trailblazer"
-# gem "trailblazer-operation", github: "trailblazer/trailblazer-operation"
-# gem "trailblazer-activity", github: "trailblazer/trailblazer-activity"
-# gem "trailblazer-macro", github: "trailblazer/trailblazer-macro"
-# gem "trailblazer-macro-contract", github: "trailblazer/trailblazer-macro-contract"
+gem "activerecord", "~> #{ENV['AR_VERSION'] || '8.0'}"
+
+# The Trailblazer 3.0 line is not released to Rubygems yet.
+gem "trailblazer-circuit", github: "trailblazer/trailblazer-circuit"
+gem "trailblazer-core-utils", github: "trailblazer/trailblazer-core-utils"
+gem "trailblazer-activity", github: "trailblazer/trailblazer-activity"
+gem "trailblazer-activity-dsl", github: "trailblazer/trailblazer-activity-dsl"
+gem "trailblazer-activity-variable-mapping", github: "trailblazer/trailblazer-activity-variable-mapping"
+gem "trailblazer-developer", github: "trailblazer/trailblazer-developer"
+gem "trailblazer-operation", github: "trailblazer/trailblazer-operation"

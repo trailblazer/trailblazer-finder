@@ -18,9 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/trailblazer/trailblazer-finder/blob/master/CHANGELOG.md'
 
   spec.add_dependency "dry-types", ">= 1.0.0"
-  spec.add_dependency "trailblazer-macro", ">= 2.1.15"
-  spec.add_dependency "trailblazer-activity", ">= 0.13.0"
-  spec.add_dependency "trailblazer-activity-dsl-linear", ">= 1.2.5"
+  spec.add_dependency "trailblazer-operation", ">= 0.12.0"
   spec.add_dependency "zeitwerk", ">= 2.6.0"
 
   spec.add_development_dependency "activerecord"
@@ -31,11 +29,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "maxitest"
   spec.add_development_dependency "sequel"
   spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "trailblazer", "~> 2.1.0"
   spec.add_development_dependency "trailblazer-developer"
   spec.add_development_dependency "will_paginate"
   spec.add_development_dependency 'minitest-trailblazer'
 
-  spec.required_ruby_version = ">= 2.5.0"
+  spec.required_ruby_version = ">= 3.3.0"
   spec.metadata = {"rubygems_mfa_required" => "true"}
 end

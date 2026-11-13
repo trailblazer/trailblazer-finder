@@ -13,12 +13,11 @@ module Trailblazer
       attr_reader :signal, :errors
 
       def initialize(options = {}) # rubocop:disable Style/OptionHash
-        config = self.class.config
-        ctx = {config: config, options: options}
-        @signal, (ctx, *) = Activities::Find.call([ctx, {}])
+        result = Activities::Find.(config: self.class.config, options: options)
+        @signal = result.terminus
         @options = options
-        @errors = ctx[:errors] || {}
-        @find = ctx[:finder]
+        @errors = result[:errors] || {}
+        @find = result[:finder]
       end
 
       def fetch_result

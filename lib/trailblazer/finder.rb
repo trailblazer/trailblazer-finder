@@ -2,10 +2,8 @@
 
 require 'forwardable'
 require 'dry-types'
-require 'ostruct'
 require 'zeitwerk'
 require 'trailblazer/operation'
-require 'trailblazer/macro'
 
 loader = Zeitwerk::Loader.for_gem_extension(Trailblazer)
 adapters = "#{__dir__}/finder/adapters"
