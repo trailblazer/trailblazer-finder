@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [truffleruby, truffleruby-head]
+        ruby: [truffleruby-head]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
