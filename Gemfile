@@ -8,6 +8,7 @@ gem "debug", platform: :mri
 gem "sqlite3"
 
 gem "activerecord", "~> #{ENV['AR_VERSION'] || '8.0'}"
+gem "actionpack", "~> #{ENV['AR_VERSION'] || '8.0'}"
 
 # The Trailblazer 3.0 line is not released to Rubygems yet.
 gem "trailblazer-circuit", github: "trailblazer/trailblazer-circuit"

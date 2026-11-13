@@ -89,6 +89,14 @@ module Trailblazer
       assert_equal finder.result, [5, 7]
     end
 
+    def test_accepts_action_controller_parameters
+      require "action_controller"
+      params = ActionController::Parameters.new(value: 2, invalid: "filter_by")
+      finder = new_finder_class([1, 2, 3], params)
+
+      assert_equal finder.result, [2]
+    end
+
     def test_ignore_invalid_filters
       finder = new_finder_class([1, 2, 3], { invalid: 'filter_by' })
 

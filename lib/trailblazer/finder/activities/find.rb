@@ -52,7 +52,9 @@ module Trailblazer
         end
 
         def set_params(ctx, options:, **)
-          ctx[:params] = options[:params] || {}
+          params = options[:params] || {}
+          # ActionController::Parameters has none of the Hash enumeration the pipeline relies on.
+          ctx[:params] = params.respond_to?(:to_unsafe_h) ? params.to_unsafe_h : params
         end
 
         def set_paging(ctx, config:, params:, **)
