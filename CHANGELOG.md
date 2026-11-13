@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/trailblazer/trailblazer-finder/compare/trailblazer-finder/v0.201.0...trailblazer-finder/v1.0.0) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* port to Trailblazer 3.0, require Ruby 3.3 and Rails 8
+
+### Features
+
+* port to Trailblazer 3.0, require Ruby 3.3 and Rails 8 ([0c178ad](https://github.com/trailblazer/trailblazer-finder/commit/0c178ad397bde89f8a3e53e8d4936c9f39bfe8b9))
+
+
+### Bug Fixes
+
+* accept ActionController::Parameters as finder params ([#61](https://github.com/trailblazer/trailblazer-finder/issues/61)) ([53232d9](https://github.com/trailblazer/trailblazer-finder/commit/53232d908b645971e7056c118ddb17a11edfe1f9))
+
 ## [0.201.0](https://github.com/trailblazer/trailblazer-finder/compare/trailblazer-finder-v0.200.0...trailblazer-finder/v0.201.0) (2025-03-26)
 
 

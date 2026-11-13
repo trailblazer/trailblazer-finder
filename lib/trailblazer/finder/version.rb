@@ -2,6 +2,6 @@
 
 module Trailblazer
   class Finder
-    VERSION = "0.201.0"
+    VERSION = "1.0.0"
   end
 end
